@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import DocLogin from './src/Screens/Doctor-Login/DocLogin'
+import 'react-native-gesture-handler';
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import React from 'react';
+import Root from './src/Navigation/Root';
 
-const App = () => {
+export default function App() {
   return (
-    <DocLogin/>
-  )
+    <View style={styles.container}>
+      {/* <StatusBar barStyle={'light-content'} backgroundColor='black' /> */}
+      <Root />
+    </View>
+  );
 }
 
-export default App
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
