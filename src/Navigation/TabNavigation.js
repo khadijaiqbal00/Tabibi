@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import WishListStack from './WishlistStack';
-import Categories from '../Screens/Categories';
+import Categories from '../Screens/Doctor/Categories';
 import HomeStack from './HomeStack';
 import ProfileStack from './ProfileStack';
 const Tab = createBottomTabNavigator();
