@@ -11,21 +11,24 @@ import React from 'react';
 // import {colors} from '../global/globalStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-
+import { colors } from '../global/globalstyles';
+import {IconButton} from 'react-native-paper';
 export default function ForgotPassword({navigation}) {
   return (
     <View style={styles.Container}>
       <ScrollView>
-        <Text style={styles.text}>Forgot Password?</Text>
+      <View style={{flex: 1}}>
+            <IconButton
+              icon="chevron-left"
+              size={30}
+              onPress={() => navigation.goBack()}
+            />
 
-        <Text
-          style={[
-            styles.text2,
-            {alignSelf: 'center', width: '80%', marginTop: '3%'},
-          ]}>
-          Don't worry! It occurs. Please enter the email address linked with
-          your account.
-        </Text>
+            <Text style={styles.text}>Log in as a Doctor </Text>
+            <Text style={styles.text1}>
+              Please fill in the information below to login to your account.
+            </Text>
+          </View>
         <View style={[styles.TextInput]}>
           <TextInput
             placeholderTextColor="grey"
@@ -64,16 +67,14 @@ export default function ForgotPassword({navigation}) {
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: colors.pageBackground,
   },
   text: {
-    fontSize: 26,
-    marginTop: '15%',
-    marginLeft: '10%',
-    width: '70%',
-
-    color: "black",
-    fontWeight: '700',
+    alignSelf: 'center',
+    fontSize: 20,
+    marginTop: '9%',
+    color: colors.black,
+    fontWeight: '900',
   },
   TextInput: {
     alignSelf: 'center',
@@ -89,6 +90,14 @@ const styles = StyleSheet.create({
     color: '#8391A1',
     fontWeight: '100',
     fontSize: 15,
+  },
+  text1: {
+    textAlign: 'center',
+    fontSize: 13,
+    color: colors.black,
+    fontWeight: '900',
+    marginHorizontal: '10%',
+    marginTop: 10,
   },
   text2: {
     fontFamily: 'Urbanist',
