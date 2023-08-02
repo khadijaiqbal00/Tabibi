@@ -8,57 +8,44 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-// import {colors} from '../global/globalStyles';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-import { colors } from '../../Global/globalstyles';
+import {colors} from '../../Global/globalstyles';
 import {IconButton} from 'react-native-paper';
 export default function ForgotPassword({navigation}) {
   return (
     <View style={styles.Container}>
       <ScrollView>
-      <View style={{flex: 1}}>
-            <IconButton
-              icon="chevron-left"
-              size={30}
-              onPress={() => navigation.goBack()}
-            />
+        <View style={{flex: 1}}>
+          <IconButton
+            icon="chevron-left"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
 
-            <Text style={styles.text}>Log in as a Doctor </Text>
-            <Text style={styles.text1}>
-              Please fill in the information below to login to your account.
-            </Text>
-          </View>
-        <View style={[styles.TextInput]}>
+          <Text style={styles.text}>Forgot your password</Text>
+          <Text style={styles.text1}>
+            Enter your email and we'll send you a code to reset your password.
+          </Text>
+        </View>
+        <View style={styles.box1}>
+          <Text style={styles.text6}>E-mail </Text>
           <TextInput
-            placeholderTextColor="grey"
             placeholder="Enter your email"
-            style={styles.text2}></TextInput>
+            style={styles.TextInput}></TextInput>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('CreatePassword');
-          }}>
-          <Text style={styles.text3}> Create new Password?</Text>
-        </TouchableOpacity>
 
+      
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('DocLogin');
-          }}
-          style={styles.btnShape}>
-          <Text style={styles.btnText}>Send Code</Text>
-        </TouchableOpacity>
+                onPress={() => {
+                  // navigation.navigate('DrawerNavigation');
+                }}
+                style={styles.btnShape}>
+                <Text style={styles.btnText}>Get Code</Text>
+              </TouchableOpacity>
 
-        <View style={styles.bottomLine}>
-          <Text style={[styles.text4, {fontSize: 15}]}>Remember Password?</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('DocLogin');
-            }}>
-            <Text style={styles.text5}>Login</Text>
-          </TouchableOpacity>
-        </View>
+      
       </ScrollView>
     </View>
   );
@@ -71,33 +58,41 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 24,
     marginTop: '9%',
     color: colors.black,
-    fontWeight: '900',
+    fontFamily: 'NunitoSans_7pt-Black',
+  },
+  text6: {
+    fontSize: 14,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    color: colors.black,
+    width: '87%',
+    alignSelf: 'center',
+    marginBottom: 5,
   },
   TextInput: {
     alignSelf: 'center',
-    width: '80%',
-    backgroundColor: '#F7F8F9',
-    borderRadius: 8,
-    marginTop: '15%',
-    height: 56,
+    width: '87%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    elevation:1, 
+    height: 47,
     paddingLeft: 20,
     paddingTop: 5,
-
-    fontFamily: 'Urbanist',
-    color: '#8391A1',
-    fontWeight: '100',
+    borderBottomWidth: 0,
+    color: 'rgba(26, 69, 99, 1)',
+    fontWeight: '900',
     fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text1: {
     textAlign: 'center',
     fontSize: 13,
     color: colors.black,
-    fontWeight: '900',
     marginHorizontal: '10%',
     marginTop: 10,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text2: {
     fontFamily: 'Urbanist',
@@ -114,24 +109,29 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   btnShape: {
-    backgroundColor: "black",
-    height: 50,
-    width: '80%',
+
+    height: 47,
+    width: '87%',
     alignSelf: 'center',
-    marginTop: '15%',
+    marginTop: '5%',
     borderRadius: 8,
+    backgroundColor: colors.btnclr,
   },
   btnText: {
     alignSelf: 'center',
-    fontSize: 18,
-    marginTop: 13,
-    color: "white",
-    fontWeight: '400',
+    fontSize: 17,
+    marginTop: 10,
+    color: colors.white,
+    fontWeight: '900',
   },
   bottomLine: {
     flexDirection: 'row',
     alignSelf: 'center',
     marginTop: '25%',
+  },
+  box1: {
+    width: '100%',
+    marginTop: '15%',
   },
   text4: {
     fontWeight: '500',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   text5: {
     fontWeight: '700',
-    color: "black",
+    color: 'black',
     marginLeft: 5,
     fontFamily: 'Urbanist',
     fontSize: 14,
