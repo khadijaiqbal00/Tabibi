@@ -6,12 +6,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import DrawerNavigation from './DrawerNavigation';
 import TabNavigation from "./TabNavigation"
-import DocLogin from '../Screens/DocLogin';
-import DocSignUp from '../Screens/DocSignUp';
-import ForgotPassword from '../Screens/ForgotPassword';
-import SplashScreen from '../Screens/SplashScreen';
-import CreatePassword from '../Screens/CreatePassword';
-import LoginSuccess from '../Screens/LoginSuccess';
+import DocLogin from '../Screens/Doctor/DocLogin';
+import DocSignUp from '../Screens/Doctor/DocSignUp';
+import ForgotPassword from '../Screens/Doctor/ForgotPassword';
+import SplashScreen from '../Screens/Doctor/SplashScreen';
+import CreatePassword from '../Screens/Doctor/CreatePassword';
+import LoginSuccess from '../Screens/Doctor/LoginSuccess';
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
