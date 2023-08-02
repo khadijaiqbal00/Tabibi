@@ -8,25 +8,38 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {colors} from '../global/globalstyles';
+import {colors} from '../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
 export default function LogIn({navigation}) {
   return (
+<<<<<<< HEAD
     <View style={styles.Container}>
       <ScrollView>
+=======
+    <ScrollView>
+      <View style={styles.Container}>
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
         <View style={{flex: 1}}>
           <IconButton
             icon="chevron-left"
             size={30}
             onPress={() => navigation.goBack()}
           />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
           <Text style={styles.text}>Log in as a Doctor </Text>
           <Text style={styles.text1}>
             Please fill in the information below to login to your account.
           </Text>
         </View>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
         <View style={styles.container2}>
           <View style={styles.inside}>
             <View style={styles.box1}>
@@ -76,13 +89,14 @@ export default function LogIn({navigation}) {
               <Text style={styles.text4}>Don’t have an account?</Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('SignUp');
+                  navigation.navigate('DocSignUp');
                 }}>
                 <Text style={styles.text5}>Register Now</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.line}>
               <View style={styles.line2}></View>
+<<<<<<< HEAD
             </View>
             <View>
               <Text style={styles.text7}>Or Continue With</Text>
@@ -97,11 +111,21 @@ export default function LogIn({navigation}) {
             </View>
             <Text style={styles.text9}>Select Language</Text>
             
+=======
+            </View>
+
+            <View style={{marginBottom: '20%'}}></View>
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
           </View>
        
         </View>
+<<<<<<< HEAD
       </ScrollView>
     </View>
+=======
+      </View>
+    </ScrollView>
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
   );
 }
 

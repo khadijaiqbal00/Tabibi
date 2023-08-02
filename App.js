@@ -8,10 +8,16 @@ import DocSignUp from './src/Screens/DocSignUp';
 export default function App() {
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       {/* <StatusBar barStyle={'light-content'} backgroundColor='black' /> */}
       <Root />
       {/* <DocLogin/> */}
       {/* <DocSignUp/> */}
+=======
+      <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
+       <Root />
+      {/* <DocLogin/> */}
+>>>>>>> 74e5b92236e6a65e37b43fcc1417fdfd6f62bb88
     </View>
   );
 }
