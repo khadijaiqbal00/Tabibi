@@ -255,8 +255,8 @@ const styles = StyleSheet.create({
   },
   btnText: {
     alignSelf: 'center',
-    fontSize: 17,
-    marginTop: 10,
+    fontSize: 15,
+    marginTop: 13,
     color: colors.white,
     fontWeight: '900',
   },

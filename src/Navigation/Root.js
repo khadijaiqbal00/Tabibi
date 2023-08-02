@@ -12,6 +12,7 @@ import ForgotPassword from '../Screens/Doctor/ForgotPassword';
 import SplashScreen from '../Screens/Doctor/SplashScreen';
 import CreatePassword from '../Screens/Doctor/CreatePassword';
 import LoginSuccess from '../Screens/Doctor/LoginSuccess';
+import VerifyCode from '../Screens/Doctor/VerifyCode';
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
@@ -48,6 +49,13 @@ const Root = () => {
         <Stack.Screen
           name="ForgotPassword"
           component={ForgotPassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="VerifyCode"
+          component={VerifyCode}
           options={{
             headerShown: false,
           }}

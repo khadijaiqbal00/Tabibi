@@ -39,7 +39,7 @@ export default function ForgotPassword({navigation}) {
       
         <TouchableOpacity
                 onPress={() => {
-                  // navigation.navigate('DrawerNavigation');
+                  navigation.navigate('VerifyCode');
                 }}
                 style={styles.btnShape}>
                 <Text style={styles.btnText}>Get Code</Text>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '87%',
     backgroundColor: colors.white,
-    borderRadius: 5,
+    borderRadius: 4,
     elevation:1, 
     height: 47,
     paddingLeft: 20,
@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     width: '87%',
     alignSelf: 'center',
     marginTop: '5%',
-    borderRadius: 8,
+    borderRadius: 4,
     backgroundColor: colors.btnclr,
   },
   btnText: {
     alignSelf: 'center',
-    fontSize: 17,
-    marginTop: 10,
+    fontSize: 15,
+    marginTop: 13,
     color: colors.white,
     fontWeight: '900',
   },
