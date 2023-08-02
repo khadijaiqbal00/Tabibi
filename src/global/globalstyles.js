@@ -6,6 +6,7 @@ export const colors = {
   darkblue: 'rgba(0, 96, 247, 1)',
   black2: '#4B4B4B',
   black3: '#061023',
+  btnclr:'rgba(26, 69, 99, 1)',
   pageBackground: '#DCEDF9',
   statusbar: '#282931',
   headerText: 'white',

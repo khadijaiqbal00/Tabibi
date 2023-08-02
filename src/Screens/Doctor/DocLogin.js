@@ -13,15 +13,15 @@ import { colors } from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
-import { Google } from '../../assets/icons';
-import {Fb} from '../../assets/icons';
-import { Language } from '../../assets/icons';
-import {Apple} from '../../assets/icons';
+import { Google } from '../../Assets/icons';
+import {Fb} from '../../Assets/icons';
+import { Language } from '../../Assets/icons';
+import {Apple} from '../../Assets/icons';
 export default function LogIn({navigation}) {
   return (
     <View style={{flex:1, backgroundColor:'white'}}>
  <ImageBackground
-    source={require('../../assets/Images/Background.png')}
+    source={require('../../Assets/Images/Background.png')}
       style={{ 
         // flex: 1, resizeMode: 'contain'
         height:'97%'
