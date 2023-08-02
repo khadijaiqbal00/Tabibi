@@ -12,7 +12,7 @@ import {IconButton} from 'react-native-paper';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-import { colors } from '../Global/globalstyles';
+import { colors } from '../global/globalstyles';
 
 export default function DocSignUp({navigation}) {
   return (
