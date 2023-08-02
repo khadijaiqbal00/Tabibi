@@ -12,31 +12,22 @@ import {colors} from '../global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
-import {color} from 'react-native-reanimated';
-import {red100} from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 export default function LogIn({navigation}) {
   return (
     <View style={styles.Container}>
-<ScrollView>
-
-<View style={{ flex: 1,
-  }}> 
-<IconButton
-        icon="chevron-left"
-        size={30}
-        onPress={() => navigation.goBack()}
-      />
-
-      
-        <Text style={styles.text}>Log in as a Doctor </Text>
-        <Text style={styles.text1}>
-          Please fill in the information below to login to your account.
-        </Text>
-</View>
-
-
-  
-<View style={styles.container2}>
+      <ScrollView>
+        <View style={{flex: 1}}>
+          <IconButton
+            icon="chevron-left"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
+          <Text style={styles.text}>Log in as a Doctor </Text>
+          <Text style={styles.text1}>
+            Please fill in the information below to login to your account.
+          </Text>
+        </View>
+        <View style={styles.container2}>
           <View style={styles.inside}>
             <View style={styles.box1}>
               <Text style={styles.text6}>E-mail </Text>
@@ -65,7 +56,7 @@ export default function LogIn({navigation}) {
                 </Animatable.View>
               </View>
             </View>
-            
+
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('ForgotPassword');
@@ -81,8 +72,6 @@ export default function LogIn({navigation}) {
               <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
 
-
-
             <View style={styles.bottomLine}>
               <Text style={styles.text4}>Don’t have an account?</Text>
               <TouchableOpacity
@@ -93,18 +82,25 @@ export default function LogIn({navigation}) {
               </TouchableOpacity>
             </View>
             <View style={styles.line}>
-            <View style={styles.line2}>
+              <View style={styles.line2}></View>
             </View>
+            <View>
+              <Text style={styles.text7}>Or Continue With</Text>
             </View>
 
-            <View style={{marginBottom:'20%'}} >
+            <View style={styles.container}>
+              <View style={styles.row}>
+                <View style={styles.box}></View>
+                <View style={styles.box} />
+                <View style={styles.box} />
+              </View>
             </View>
+            <Text style={styles.text9}>Select Language</Text>
+            
           </View>
+       
         </View>
-      
-
-   
-</ScrollView>
+      </ScrollView>
     </View>
   );
 }
@@ -113,6 +109,34 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: colors.pageBackground,
+  },
+  text9:{ 
+    fontSize:15, 
+    color:'#757F8E',
+    fontWeight:'700',
+    textAlign:'center',
+    marginBottom:10,
+  
+  },
+
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  row: {
+    width: '95%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  box: {
+    width: '30%',
+    height: 70,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#B3BAC6',
   },
   container2: {
     borderWidth: 1,
@@ -124,7 +148,7 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: 'center',
     fontSize: 20,
-    marginTop: '20%',
+    marginTop: '9%',
     color: colors.black,
     fontWeight: '900',
   },
@@ -136,8 +160,8 @@ const styles = StyleSheet.create({
   },
   line2: {
     height: 3,
-    marginTop:-1,
-    borderRadius:10,
+    marginTop: -1,
+    borderRadius: 10,
     width: '37%',
     alignSelf: 'center',
     backgroundColor: 'rgba(0, 96, 247, 1)',
@@ -150,9 +174,17 @@ const styles = StyleSheet.create({
     marginHorizontal: '10%',
     marginTop: 10,
   },
+  text7: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: colors.black,
+    fontWeight: '900',
+    marginHorizontal: '10%',
+    marginTop: 10,
+  },
   box1: {
     width: '100%',
-    marginTop: '15%',
+    marginTop: '10%',
   },
   box2: {
     width: '100%',
@@ -166,15 +198,15 @@ const styles = StyleSheet.create({
     height: 47,
     paddingLeft: 20,
     paddingTop: 5,
-    fontFamily: 'Urbanist',
-    color: '#8391A1',
-    fontWeight: '100',
+    borderBottomWidth: 0,
+    color: 'rgba(26, 69, 99, 1)',
+    fontWeight: '900',
     fontSize: 15,
   },
   text2: {
     fontFamily: 'Urbanist',
-    color: '#8391A1',
-    fontWeight: '100',
+    color: 'rgba(26, 69, 99, 1)',
+    fontWeight: '900',
     fontSize: 15,
   },
   text3: {
@@ -205,8 +237,8 @@ const styles = StyleSheet.create({
   bottomLine: {
     flexDirection: 'row',
     alignSelf: 'center',
-   marginTop:'3%',
-   marginBottom:'10%'
+    marginTop: '3%',
+    marginBottom: '10%',
   },
   text4: {
     fontWeight: '900',
