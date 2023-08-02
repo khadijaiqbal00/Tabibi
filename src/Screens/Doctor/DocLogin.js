@@ -9,21 +9,19 @@ import {
   ImageBackground
 } from 'react-native';
 import React from 'react';
-import {colors, fonts} from '../../Global/globalstyles';
-import {colors} from '../global/globalstyles';
+import { colors } from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
-import {Google} from '../assets/icons';
-import {Fb} from '../assets/icons';
-import { Language } from '../assets/icons';
-import {Apple} from '../assets/icons';
-import Background from '../Components/Background';
+import { Google } from '../../assets/icons';
+import {Fb} from '../../assets/icons';
+import { Language } from '../../assets/icons';
+import {Apple} from '../../assets/icons';
 export default function LogIn({navigation}) {
   return (
     <View style={{flex:1, backgroundColor:'white'}}>
  <ImageBackground
-    source={require('../assets/Images/Background.png')}
+    source={require('../../assets/Images/Background.png')}
       style={{ 
         // flex: 1, resizeMode: 'contain'
         height:'97%'
@@ -142,6 +140,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: 'NunitoSans_7pt-Black',
   },
 
   container: {
@@ -205,9 +204,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     color: colors.black,
-    fontWeight: '900',
     marginHorizontal: '10%',
     marginTop: 10,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   box1: {
     width: '100%',
@@ -229,9 +228,10 @@ const styles = StyleSheet.create({
     color: 'rgba(26, 69, 99, 1)',
     fontWeight: '900',
     fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text2: {
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: 'rgba(26, 69, 99, 1)',
     fontWeight: '900',
     fontSize: 15,
@@ -242,8 +242,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '2%',
     color: colors.blue,
-    fontFamily: 'Urbanist',
-    fontWeight: '900',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   btnShape: {
     backgroundColor: colors.black1,
@@ -270,19 +269,19 @@ const styles = StyleSheet.create({
   text4: {
     fontWeight: '900',
     color: '#757F8E',
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     fontSize: 13,
   },
   text5: {
     fontWeight: '900',
     color: '#0060F7',
     marginLeft: 5,
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     fontSize: 14,
   },
   text6: {
     fontSize: 14,
-    fontWeight: '900',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: colors.black,
     width: '87%',
     alignSelf: 'center',
