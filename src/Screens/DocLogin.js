@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {colors} from '../global/globalstyles';
+import {colors} from '../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
@@ -16,27 +16,22 @@ import {color} from 'react-native-reanimated';
 import {red100} from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 export default function LogIn({navigation}) {
   return (
-    <View style={styles.Container}>
-<ScrollView>
+    <ScrollView>
+      <View style={styles.Container}>
+        <View style={{flex: 1}}>
+          <IconButton
+            icon="chevron-left"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
 
-<View style={{ flex: 1,
-  }}> 
-<IconButton
-        icon="chevron-left"
-        size={30}
-        onPress={() => navigation.goBack()}
-      />
+          <Text style={styles.text}>Log in as a Doctor </Text>
+          <Text style={styles.text1}>
+            Please fill in the information below to login to your account.
+          </Text>
+        </View>
 
-      
-        <Text style={styles.text}>Log in as a Doctor </Text>
-        <Text style={styles.text1}>
-          Please fill in the information below to login to your account.
-        </Text>
-</View>
-
-
-  
-<View style={styles.container2}>
+        <View style={styles.container2}>
           <View style={styles.inside}>
             <View style={styles.box1}>
               <Text style={styles.text6}>E-mail </Text>
@@ -65,7 +60,7 @@ export default function LogIn({navigation}) {
                 </Animatable.View>
               </View>
             </View>
-            
+
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('ForgotPassword');
@@ -81,31 +76,24 @@ export default function LogIn({navigation}) {
               <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
 
-
-
             <View style={styles.bottomLine}>
               <Text style={styles.text4}>Don’t have an account?</Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('SignUp');
+                  navigation.navigate('DocSignUp');
                 }}>
                 <Text style={styles.text5}>Register Now</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.line}>
-            <View style={styles.line2}>
-            </View>
+              <View style={styles.line2}></View>
             </View>
 
-            <View style={{marginBottom:'20%'}} >
-            </View>
+            <View style={{marginBottom: '20%'}}></View>
           </View>
         </View>
-      
-
-   
-</ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 

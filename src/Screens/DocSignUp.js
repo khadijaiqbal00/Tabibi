@@ -10,12 +10,17 @@ import {
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import { colors } from '../Global/globalstyles';
 
 export default function DocSignUp({navigation}) {
   return (
     <View style={styles.Container}>
       <ScrollView>
-        <Text style={styles.text}>Hello! Register to get started</Text>
+        <Text style={styles.text}>Create a new account</Text>
+        <Text style={styles.subText}>
+          Please fill in the information below to create your new account.
+        </Text>
+
         <View style={[styles.TextInput]}>
           <TextInput
             placeholderTextColor="grey"
@@ -92,15 +97,27 @@ export default function DocSignUp({navigation}) {
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: colors.pageBackground,
   },
   text: {
-    fontSize: 26,
+    fontSize: 20,
     marginTop: '15%',
-    marginLeft: '10%',
-    width: '70%',
-    color: "black",
+    width: '80%',
+    marginLeft :"20%",
+    color: colors.contentColor,
     fontWeight: '700',
+    alignSelf:"center",
+    fontWeight:"bold",
+  },
+  subText: {
+    fontSize: 12,
+    marginTop:20,
+    width: '70%',
+    color: colors.contentColor,
+    fontWeight: '700',
+    alignSelf:"center",
+    textAlign :"center",
+
   },
   TextInput: {
     alignSelf: 'center',

@@ -14,16 +14,16 @@ const Stack = createNativeStackNavigator();
 const Root = () => {
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Doclogin">
+      <Stack.Navigator initialRouteName="DocLogin">
         <Stack.Screen
-          name="Doclogin"
+          name="DocLogin"
           component={DocLogin}
           options={{
             headerShown: false,
           }}
         />
         <Stack.Screen
-          name="Docsignup"
+          name="DocSignUp"
           component={DocSignUp}
           options={{
             headerShown: false,

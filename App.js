@@ -7,9 +7,9 @@ import DocLogin from './src/Screens/DocLogin';
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <StatusBar barStyle={'light-content'} backgroundColor='black' /> */}
-      {/* <Root /> */}
-      <DocLogin/>
+      <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
+       <Root />
+      {/* <DocLogin/> */}
     </View>
   );
 }
