@@ -13,7 +13,7 @@ import {
   import * as Animatable from 'react-native-animatable';
   import {colors} from '../../Global/globalstyles';
   import {IconButton} from 'react-native-paper';
-  export default function VerifyCode({navigation}) {
+  export default function ResetPassword({navigation}) {
     return (
       <View style={styles.Container}>
         <ScrollView>
@@ -24,39 +24,33 @@ import {
               onPress={() => navigation.goBack()}
             />
   
-            <Text style={styles.text}>Verification code</Text>
+            <Text style={styles.text}>Reset password</Text>
             <Text style={styles.text1}>
-            Enter the security code we sent to your email address 
-            </Text>
-            <Text style={styles.text2}>
-            mouh@mouh.com
+              Please complete the form below to reset your password.
             </Text>
           </View>
           <View style={styles.box1}>
-            <Text style={styles.text6}>Code</Text>
+            <Text style={styles.text6}>New Password </Text>
             <TextInput
-              placeholder="Enter Code"
-              keyboardType='numeric'
+            //   placeholder="Enter New Password"
+              style={styles.TextInput}></TextInput>
+          </View>
+          <View style={styles.box2}>
+            <Text style={styles.text6}>Confirm the New Password </Text>
+            <TextInput
+            //   placeholder="Enter Confirm Password"
               style={styles.TextInput}></TextInput>
           </View>
   
         
           <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('ResetPassword');
+                    navigation.navigate('VerifyCode');
                   }}
                   style={styles.btnShape}>
-                  <Text style={styles.btnText}>Verify</Text>
+                  <Text style={styles.btnText}>Reset</Text>
                 </TouchableOpacity>
-                <View style={styles.bottomLine}>
-                <Text style={styles.text4}>Didn't receive a code ? </Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('DocSignUp');
-                  }}>
-                  <Text style={styles.text5}>Resend</Text>
-                </TouchableOpacity>
-              </View>
+  
         
         </ScrollView>
       </View>
@@ -75,11 +69,14 @@ import {
       color: colors.black,
       fontFamily: 'NunitoSans_7pt-Black',
     },
-    bottomLine: {
-        flexDirection: 'row',
-        alignSelf: 'center',
-        marginTop: '15%',
-      },
+    text6: {
+      fontSize: 14,
+      fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+      color: colors.black,
+      width: '87%',
+      alignSelf: 'center',
+      marginBottom: 5,
+    },
     TextInput: {
       alignSelf: 'center',
       width: '87%',
@@ -97,32 +94,28 @@ import {
     },
     text1: {
       textAlign: 'center',
-      fontSize: 15,
+      fontSize: 13,
       color: colors.black,
-      marginHorizontal: '12%',
+      marginHorizontal: '15%',
       marginTop: 10,
       fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     },
     text2: {
-     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-      color: colors.darkblue,
-      textAlign: 'center',
-      fontSize:15,
+      fontFamily: 'Urbanist',
+      color: '#8391A1',
+      fontWeight: '100',
+      fontSize: 15,
     },
-    text4: {
-        fontWeight: '500',
-        color: '#757F8E',
-        fontFamily: 'NunitoSans_7pt-Black',
-        fontSize: 13,
-      },
-      text5: {
-        fontWeight: '700',
-        color: colors.darkblue,
-        marginLeft: 5,
-        fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-        fontSize: 14,
-      },
+    text3: {
+      alignSelf: 'flex-end',
+      marginRight: '10%',
+      marginTop: '2%',
+      color: '#6A707C',
+      fontFamily: 'Urbanist',
+      fontWeight: '600',
+    },
     btnShape: {
+  
       height: 47,
       width: '87%',
       alignSelf: 'center',
@@ -137,17 +130,31 @@ import {
       color: colors.white,
       fontWeight: '900',
     },
+    bottomLine: {
+      flexDirection: 'row',
+      alignSelf: 'center',
+      marginTop: '25%',
+    },
     box1: {
       width: '100%',
-      marginTop: '12%',
+      marginTop: '15%',
     },
-    text6: {
-        fontSize: 14,
-        fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-        color: colors.black,
-        width: '87%',
-        alignSelf: 'center',
-        marginBottom: 5,
+    box2: {
+        width: '100%',
+        marginTop: '5%',
       },
+    text4: {
+      fontWeight: '500',
+      color: '#1E232C',
+      fontFamily: 'Urbanist',
+      fontSize: 13,
+    },
+    text5: {
+      fontWeight: '700',
+      color: 'black',
+      marginLeft: 5,
+      fontFamily: 'Urbanist',
+      fontSize: 14,
+    },
   });
   
