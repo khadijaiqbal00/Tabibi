@@ -6,120 +6,135 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ImageBackground
 } from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../../Global/globalstyles';
+import {colors} from '../global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
+import {Google} from '../assets/icons';
+import {Fb} from '../assets/icons';
+import { Language } from '../assets/icons';
+import {Apple} from '../assets/icons';
+import Background from '../Components/Background';
 export default function LogIn({navigation}) {
   return (
+    <View style={{flex:1, backgroundColor:'white'}}>
+ <ImageBackground
+    source={require('../assets/Images/Background.png')}
+      style={{ 
+        // flex: 1, resizeMode: 'contain'
+        height:'97%'
+       }}
+      >
+      <ScrollView>
+        <View style={styles.Container}>
+          <View style={{flex: 1}}>
+            <IconButton
+              icon="chevron-left"
+              size={30}
+              onPress={() => navigation.goBack()}
+            />
 
-    <View style={styles.Container}>
-    
-    <ScrollView>
-      <View style={styles.Container}>
-
-        <View style={{flex: 1}}>
-          <IconButton
-            icon="chevron-left"
-            size={30}
-            onPress={() => navigation.goBack()}
-          />
-
-          <Text style={styles.text}>Log in as a Doctor </Text>
-          <Text style={styles.text1}>
-            Please fill in the information below to login to your account.
-          </Text>
-        </View>
-        <View style={styles.container2}>
-          <View style={styles.inside}>
-            <View style={styles.box1}>
-              <Text style={styles.text6}>E-mail </Text>
-              <TextInput
-                placeholder="Enter your email"
-                style={styles.TextInput}></TextInput>
-            </View>
-            <View style={styles.box2}>
-              <Text style={styles.text6}>Password </Text>
-              <View style={[styles.TextInput]}>
+            <Text style={styles.text}>Log in as a Doctor </Text>
+            <Text style={styles.text1}>
+              Please fill in the information below to login to your account.
+            </Text>
+          </View>
+          <View style={styles.container2}>
+            <View style={styles.inside}>
+              <View style={styles.box1}>
+                <Text style={styles.text6}>E-mail </Text>
                 <TextInput
-                  style={styles.text2}
-                  placeholder="Enter your password"
-                  secureTextEntry={true}></TextInput>
-                <Animatable.View animation={'fadeInDown'} duration={400}>
-                  <MaterialIcons
-                    name="visibility-off"
-                    style={{
-                      color: 'grey',
-                      alignSelf: 'flex-end',
-                      marginRight: '5%',
-                      marginTop: -30,
-                    }}
-                    size={20}
-                  />
-                </Animatable.View>
+                  placeholder="Enter your email"
+                  style={styles.TextInput}></TextInput>
               </View>
-            </View>
+              <View style={styles.box2}>
+                <Text style={styles.text6}>Password </Text>
+                <View style={[styles.TextInput]}>
+                  <TextInput
+                    style={styles.text2}
+                    placeholder="Enter your password"
+                    secureTextEntry={true}></TextInput>
+                  <Animatable.View animation={'fadeInDown'} duration={400}>
+                    <MaterialIcons
+                      name="visibility-off"
+                      style={{
+                        color: 'grey',
+                        alignSelf: 'flex-end',
+                        marginRight: '5%',
+                        marginTop: -30,
+                      }}
+                      size={20}
+                    />
+                  </Animatable.View>
+                </View>
+              </View>
 
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('ForgotPassword');
-              }}>
-              <Text style={styles.text3}> Forgot Password?</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => {
-                // navigation.navigate('DrawerNavigation');
-              }}
-              style={styles.btnShape}>
-              <Text style={styles.btnText}>Login</Text>
-            </TouchableOpacity>
-
-            <View style={styles.bottomLine}>
-              <Text style={styles.text4}>Don’t have an account?</Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('DocSignUp');
+                  navigation.navigate('ForgotPassword');
                 }}>
-                <Text style={styles.text5}>Register Now</Text>
+                <Text style={styles.text3}> Forgot Password?</Text>
               </TouchableOpacity>
-            </View>
-            <View style={styles.line}>
-              <View style={styles.line2}></View>
 
-            </View>
-            <View>
-              <Text style={styles.text7}>Or Continue With</Text>
-            </View>
+              <TouchableOpacity
+                onPress={() => {
+                  // navigation.navigate('DrawerNavigation');
+                }}
+                style={styles.btnShape}>
+                <Text style={styles.btnText}>Login</Text>
+              </TouchableOpacity>
 
-            <View style={styles.container}>
-              <View style={styles.row}>
-                <View style={styles.box}></View>
-                <View style={styles.box} />
-                <View style={styles.box} />
+              <View style={styles.bottomLine}>
+                <Text style={styles.text4}>Don’t have an account?</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('DocSignUp');
+                  }}>
+                  <Text style={styles.text5}>Register Now</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.line}>
+                <View style={styles.line2}></View>
+              </View>
+              <View>
+                <Text style={styles.text7}>Or Continue With</Text>
+              </View>
+
+              <View style={styles.container}>
+                <View style={styles.row}>
+                  <View style={styles.box}>
+                    <Google width={30} height={30} style={{marginTop: 15}} />
+                  </View>
+                  <View style={styles.box}>
+                    <Fb width={34} height={34} style={{marginTop: 12}} />
+                  </View>
+                  <View style={styles.box}>
+                    <Apple width={30} height={30} style={{marginTop: 12}} />
+                  </View>
+                </View>
+              </View>
+              <View style={{flexDirection:'row', alignSelf:'center'}}>
+                <Text style={styles.text9}>Select Language</Text>
+                <Language width={30} height={30} style={{marginLeft: 12, marginBottom:10}} />
               </View>
             </View>
-            <Text style={styles.text9}>Select Language</Text>
-            
-
-            </View>
           </View>
-       
         </View>
-
       </ScrollView>
+      </ImageBackground>
     </View>
-
-      
+   
   );
 }
 
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: colors.pageBackground,
+    // backgroundColor: colors.pageBackground,
   },
   text9: {
     fontSize: 15,
@@ -142,10 +157,11 @@ const styles = StyleSheet.create({
   },
   box: {
     width: '30%',
-    height: 70,
+    height: 60,
     backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 10,
+    alignItems: 'center',
     borderColor: '#B3BAC6',
   },
   container2: {
