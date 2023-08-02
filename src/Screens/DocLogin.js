@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ImageBackground
 } from 'react-native';
 import React from 'react';
 import {colors} from '../global/globalstyles';
@@ -19,7 +20,14 @@ import {Apple} from '../assets/icons';
 import Background from '../Components/Background';
 export default function LogIn({navigation}) {
   return (
-    <Background>
+    <View style={{flex:1, backgroundColor:'white'}}>
+ <ImageBackground
+    source={require('../assets/Images/Background.png')}
+      style={{ 
+        // flex: 1, resizeMode: 'contain'
+        height:'97%'
+       }}
+      >
       <ScrollView>
         <View style={styles.Container}>
           <View style={{flex: 1}}>
@@ -116,14 +124,16 @@ export default function LogIn({navigation}) {
           </View>
         </View>
       </ScrollView>
-      </Background>
+      </ImageBackground>
+    </View>
+   
   );
 }
 
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: colors.pageBackground,
+    // backgroundColor: colors.pageBackground,
   },
   text9: {
     fontSize: 15,
