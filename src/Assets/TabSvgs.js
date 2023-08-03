@@ -169,3 +169,7 @@ export const dotsIcon = `<svg width="21" height="21" viewBox="0 0 21 21" fill="n
 <path d="M17.8333 10.8932C17.8333 11.2614 17.5348 11.5599 17.1666 11.5599C16.7984 11.5599 16.5 11.2614 16.5 10.8932C16.5 10.525 16.7984 10.2266 17.1666 10.2266C17.5348 10.2266 17.8333 10.525 17.8333 10.8932Z" stroke="white" stroke-opacity="0.62" stroke-width="2"/>
 </svg>
 `;
+export const activePaitentIcon = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10.9883" cy="10.9883" r="8.69906" fill="#008A5E" stroke="white" stroke-width="4.57845"/>
+</svg>
+`;
