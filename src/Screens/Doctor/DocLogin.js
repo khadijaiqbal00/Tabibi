@@ -23,7 +23,6 @@ export default function LogIn({navigation}) {
       <ImageBackground
         source={require('../../Assets/Images/Background.png')}
         style={{
-          // flex: 1, resizeMode: 'contain'
           height: '97%',
         }}>
         <ScrollView>
@@ -34,7 +33,6 @@ export default function LogIn({navigation}) {
                 size={30}
                 onPress={() => navigation.goBack()}
               />
-
               <Text style={styles.text}>Log in as a Doctor </Text>
               <Text style={styles.text1}>
                 Please fill in the information below to login to your account.
@@ -222,20 +220,19 @@ const styles = StyleSheet.create({
     width: '87%',
     backgroundColor: colors.white,
     borderRadius: 5,
+    borderRadius: 4,
     elevation: 1,
     height: 47,
     paddingLeft: 20,
     paddingTop: 5,
-    borderBottomWidth: 0,
     color: 'rgba(26, 69, 99, 1)',
-    fontWeight: '900',
     fontSize: 15,
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text2: {
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: 'rgba(26, 69, 99, 1)',
-    fontWeight: '900',
+
     fontSize: 15,
   },
   text3: {
@@ -252,13 +249,13 @@ const styles = StyleSheet.create({
     width: '87%',
     alignSelf: 'center',
     marginTop: '10%',
-    borderRadius: 8,
+    borderRadius: 4,
     backgroundColor: colors.darkblue,
   },
   btnText: {
     alignSelf: 'center',
-    fontSize: 17,
-    marginTop: 10,
+    fontSize: 15,
+    marginTop: 13,
     color: colors.white,
     fontWeight: '900',
   },

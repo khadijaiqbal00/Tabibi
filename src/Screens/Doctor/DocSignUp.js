@@ -24,7 +24,7 @@ export default function DocSignUp({navigation}) {
       />
       <Text style={styles.text}>Create a new account</Text>
       <Text style={styles.subText}>
-        Please fill in the information below to create your new account.
+      Veuillez remplir les informations ci-dessous pour créer votre nouveau compte.
       </Text>
       <Text style={styles.Label}>Name</Text>
       <View style={[styles.TextInput]}>
@@ -87,14 +87,16 @@ export default function DocSignUp({navigation}) {
         style={{
           flexDirection: 'row',
           alignSelf: 'center',
-          marginTop: 10,
+          marginTop: 16,
           marginLeft: '10%',
         }}>
         <Text
           style={{
             color: 'black',
             marginTop: 10,
-            fontWeight: '900',
+            fontSize:14,
+            fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+            
           }}>
           Accept terms and conditions
         </Text>
@@ -111,7 +113,7 @@ export default function DocSignUp({navigation}) {
           navigation.navigate('TabNavigation');
         }}
         style={styles.btnShape}>
-        <Text style={styles.btnText}>Register</Text>
+        <Text style={styles.btnText}>Signup</Text>
       </TouchableOpacity>
 
       <View style={styles.bottomLine}>
@@ -133,48 +135,48 @@ const styles = StyleSheet.create({
     backgroundColor: colors.pageBackground,
   },
   text: {
+    marginTop: '5%',
     fontSize: 20,
     width: '60%',
     color: colors.contentColor,
-    fontWeight: '700',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     alignSelf: 'center',
-    fontWeight: 'bold',
   },
   Label: {
     fontSize: 15,
     marginTop: 10,
     width: '80%',
     color: colors.contentColor,
-    alignSelf: 'center',
     fontWeight: '900',
+    marginLeft:"7%",
   },
   subText: {
     fontSize: 12,
-    marginTop: 20,
+    marginTop: 7,
+    marginBottom: 5,
     width: '70%',
     color: colors.contentColor,
-    fontWeight: '700',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     alignSelf: 'center',
     textAlign: 'center',
   },
   TextInput: {
     alignSelf: 'center',
-    width: '80%',
-    backgroundColor: '#F7F8F9',
+    width: '87%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
     borderRadius: 4,
-    marginTop: '1%',
-    height: 46,
+    elevation: 1,
+    height: 47,
     paddingLeft: 20,
     paddingTop: 5,
-    fontFamily: 'Urbanist',
     color: 'rgba(26, 69, 99, 1)',
-    fontWeight: '100',
     fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text2: {
-    fontFamily: 'Urbanist',
-    color: '#8391A1',
-    fontWeight: '100',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    color: 'rgba(26, 69, 99, 1)',
     fontSize: 15,
   },
   text3: {
@@ -186,19 +188,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   btnShape: {
-    backgroundColor: 'rgba(26, 69, 99, 1)',
-    height: 50,
+    height: 47,
     width: '80%',
     alignSelf: 'center',
-    marginTop: '2%',
-    borderRadius: 8,
+    borderRadius: 4,
+    backgroundColor: colors.btnclr,
+    marginTop: -10,
   },
   btnText: {
     alignSelf: 'center',
-    fontSize: 18,
+    fontSize: 15,
     marginTop: 13,
-    color: 'white',
-    fontWeight: '400',
+    color: colors.white,
+    fontWeight: '900',
   },
   bottomLine: {
     flexDirection: 'row',
@@ -208,15 +210,15 @@ const styles = StyleSheet.create({
   text4: {
     fontWeight: '500',
     color: 'rgba(117, 127, 142, 1)',
-    fontWeight: '900',
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+
     fontSize: 13,
   },
   text5: {
-    fontWeight: 'bold',
     color: 'rgba(0, 96, 247, 1)',
     marginLeft: 5,
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+
     fontSize: 14,
   },
 });

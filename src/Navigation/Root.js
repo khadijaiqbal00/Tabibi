@@ -12,6 +12,8 @@ import ForgotPassword from '../Screens/Doctor/ForgotPassword';
 import SplashScreen from '../Screens/Doctor/SplashScreen';
 import CreatePassword from '../Screens/Doctor/CreatePassword';
 import LoginSuccess from '../Screens/Doctor/LoginSuccess';
+import VerifyCode from '../Screens/Doctor/VerifyCode';
+import ResetPassword from '../Screens/Doctor/ResetPassword';
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
@@ -23,7 +25,7 @@ const Root = () => {
   }, []);
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="TabNavigation">
+      <Stack.Navigator initialRouteName="SplashScreen">
         {showSplash ? (
           <Stack.Screen
             name="SplashScreen"
@@ -53,8 +55,22 @@ const Root = () => {
           }}
         />
         <Stack.Screen
+          name="VerifyCode"
+          component={VerifyCode}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="CreatePassword"
           component={CreatePassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
           options={{
             headerShown: false,
           }}
