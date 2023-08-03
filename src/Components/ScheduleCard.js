@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,Image} from 'react-native';
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
 import {dotsIcon} from '../Assets/TabSvgs';
 import {activePaitentIcon} from '../Assets/TabSvgs';
-const ScheduleCard = () => {
+const ScheduleCard = ({name,image,symptom,time}) => {
   return (
     <View
       style={{
@@ -23,28 +23,39 @@ const ScheduleCard = () => {
           borderRadius: 20,
           marginLeft: '5%',
           marginTop: 30,
-        }}></View>
+        }}>
+        <Image
+          style={{
+            width: 50,
+            height: 50,
+            marginLeft: 10,
+            borderRadius: 50,
+            marginTop: 10,
+          }}
+          source={{uri: image}}
+        />
+      </View>
       <View style={{marginLeft: '6%', marginTop: '10%'}}>
         <Text
           style={{
             fontFamily: 'NunitoSans_10pt-Light',
             fontSize: 14,
           }}>
-          09:30 AM
+          {time}{' '}
         </Text>
         <Text
           style={{
             fontFamily: 'NunitoSans_10pt-Bold',
             fontSize: 16,
           }}>
-          Amani Maroof
+          {name}
         </Text>
         <Text
           style={{
             fontFamily: 'NunitoSans_10pt-Light',
             fontSize: 14,
           }}>
-          Acnee Problem
+          {symptom}
         </Text>
       </View>
       <View>

@@ -25,7 +25,7 @@ const Root = () => {
   }, []);
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="SplashScreen">
+      <Stack.Navigator initialRouteName="TabNavigation">
         {showSplash ? (
           <Stack.Screen
             name="SplashScreen"
@@ -68,7 +68,7 @@ const Root = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
           options={{

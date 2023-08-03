@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput} from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,FlatList,ScrollView} from 'react-native'
+import React,{useState,useEffect} from 'react'
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
 import { PharmacyIcon } from '../../Assets/PharmacyComp';
@@ -9,7 +9,20 @@ import { userIcon } from '../../Assets/PharmacyComp';
 import { reportIcon } from '../../Assets/PharmacyComp';
 import AppointmentCard from '../../Components/AppointmentCard';
 import { dotsIcon } from '../../Assets/TabSvgs';
+import { appointmentData } from '../../Global/Data';
+import {useIsFocused} from '@react-navigation/native';
+
 const Home = () => {
+    const isfocussed = useIsFocused();
+    const [List, setList] = useState([{}]);
+    useEffect(() => {
+      console.log()
+      setList(appointmentData);
+      console.log(">>>",List);
+
+    });
+
+
 
 return (
   <View style={styles.Container}>
@@ -114,7 +127,35 @@ return (
       }}>
       Upcoming appointment
     </Text>
-    <AppointmentCard />
+    {/* <ScrollView>
+      {List.map(item => (
+        <AppointmentCard
+          id={item.id}
+          date={item.date}
+          day={item.day}
+          time={item.time}
+          name={item.name}
+          disease={item.disease}
+        />
+      ))}
+    </ScrollView> */}
+
+    <FlatList
+      keyboardShouldPersistTaps="handled"
+      showsHorizontalScrollIndicator={false}
+      data={List}
+      keyExtractor={item => item.id}
+      renderItem={({item}) => (
+        <AppointmentCard
+          id={item.id}
+          date={item.date}
+          day={item.day}
+          time={item.time}
+          name={item.name}
+          disease={item.disease}
+        />
+      )}
+    />
   </View>
 );
 }

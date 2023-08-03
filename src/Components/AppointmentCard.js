@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {SvgXml} from 'react-native-svg';
 import { dotsIcon } from '../Assets/TabSvgs';
-const AppointmentCard = () => {
+const AppointmentCard = ({id,date, day ,time ,name , disease}) => {
   return (
     <View
       style={{
@@ -30,7 +30,7 @@ const AppointmentCard = () => {
             fontSize: 22,
             marginTop: 20,
           }}>
-          12
+          {date}
         </Text>
         <Text
           style={{
@@ -38,7 +38,7 @@ const AppointmentCard = () => {
             alignSelf: 'center',
             fontSize: 16,
           }}>
-          Tue
+          {day}
         </Text>
       </View>
       <View style = {{marginLeft:"6%", marginTop:"10%"}}>
@@ -47,21 +47,21 @@ const AppointmentCard = () => {
             fontFamily: 'NunitoSans_10pt-Light',
             fontSize: 14,
           }}>
-          09:30 AM
+          {time}
         </Text>
         <Text
           style={{
             fontFamily: 'NunitoSans_10pt-Bold',
             fontSize: 16,
           }}>
-          Amani Maroof
+          {name}
         </Text>
         <Text
           style={{
             fontFamily: 'NunitoSans_10pt-Light',
             fontSize: 14,
           }}>
-          Acnee Problem
+          {disease}
         </Text>
       </View>
       <View>

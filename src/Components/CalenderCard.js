@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
 import {dotsIcon} from '../Assets/TabSvgs';
-const CalenderCard = () => {
+const CalenderCard = ({date,day}) => {
   return (
     <View>
       <View
@@ -22,7 +22,7 @@ const CalenderCard = () => {
             color: 'rgba(255, 255, 255, 1)',
             marginTop: 20,
           }}>
-          12
+          {date}
         </Text>
         <Text
           style={{
@@ -31,7 +31,7 @@ const CalenderCard = () => {
             fontSize: 16,
             color: 'rgba(255, 255, 255, 1)',
           }}>
-          Tue
+          {day}
         </Text>
       </View>
     </View>

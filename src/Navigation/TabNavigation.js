@@ -41,6 +41,7 @@ export default function TabNavigation() {
           marginBottom: 3,
         },
         tabBarShowLabel: false,
+      
       }}>
       <Tab.Screen
         name="HomeStack"

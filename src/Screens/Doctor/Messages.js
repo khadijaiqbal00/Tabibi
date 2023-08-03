@@ -5,14 +5,22 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  FlatList
 } from 'react-native';
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
 import {searchIcon} from '../../Assets/PharmacyComp';
 import {filterIcon} from '../../Assets/PharmacyComp';
 import PatientCard from '../../Components/PatientCard';
+import {chatData} from '../../Global/Data';
 const Messages = () => {
+   const [List, setList] = useState([{}]);
+   useEffect(() => {
+     console.log();
+     setList(chatData);
+     console.log('>>>', List);
+   });
   return (
     <View style={styles.Container}>
       <Text
@@ -41,7 +49,12 @@ const Messages = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', width:"90%"}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          width: '90%',
+        }}>
         <Text
           style={{
             marginLeft: '9%',
@@ -63,9 +76,20 @@ const Messages = () => {
           See all
         </Text>
       </View>
-      <PatientCard />
-      <PatientCard />
-      <PatientCard />
+      <FlatList
+        keyboardShouldPersistTaps="handled"
+        showsHorizontalScrollIndicator={false}
+        data={List}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <PatientCard
+            id={item.id}
+            image = {item.image}
+            name = {item.name}
+            message={item.message}
+          />
+        )}
+      />
     </View>
   );
 };

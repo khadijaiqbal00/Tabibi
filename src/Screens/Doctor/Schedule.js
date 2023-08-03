@@ -6,16 +6,28 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  FlatList
 } from 'react-native';
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
 import {searchIcon} from '../../Assets/PharmacyComp';
 import {filterIcon} from '../../Assets/PharmacyComp';
 import ScheduleCard from '../../Components/ScheduleCard';
 import CalenderCard from '../../Components/CalenderCard';
+import { scheduleData } from '../../Global/Data';
+import { CalenderData } from '../../Global/Data';
 
 const Schedule = () => {
+   const [List, setList] = useState([{}]);
+   const [List2, setList2] = useState([{}]);
+   useEffect(() => {
+     console.log();
+     setList(scheduleData);
+     setList2(CalenderData);
+
+     console.log('>>>', List);
+   });
   return (
     <View style={styles.Container}>
       <Text
@@ -28,26 +40,19 @@ const Schedule = () => {
         }}>
         Calender
       </Text>
-      {/* <FlatList
-        keyboardShouldPersistTaps="handled"
-        showsHorizontalScrollIndicator={false}
-        renderItem={({item, index}) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ProductDetails', {id: index})}>
-              <CalenderCard
-              />
-          </TouchableOpacity>
-        )}
-        horizontal={true}
-      /> */}
-      <View  style = {{flexDirection:"row", marginLeft:"5%"}}>
-        <CalenderCard />
-        <CalenderCard />
-        <CalenderCard />
-        <CalenderCard />
-        <CalenderCard />
-        <CalenderCard />
+      <View>
+        <FlatList
+          // horizontal = {true}
+          keyboardShouldPersistTaps="handled"
+          showsHorizontalScrollIndicator={false}
+          data={List2}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <CalenderCard id={item.id} day={item.day} date={item.date} />
+          )}
+        />
       </View>
+      <View style={{flexDirection: 'row', marginLeft: '5%'}}></View>
 
       <View style={{marginTop: '6%'}}>
         <TextInput
@@ -91,9 +96,21 @@ const Schedule = () => {
           See all
         </Text>
       </View>
-      <ScheduleCard />
-      <ScheduleCard />
-      <ScheduleCard />
+      <FlatList
+        keyboardShouldPersistTaps="handled"
+        showsHorizontalScrollIndicator={false}
+        data={List}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <ScheduleCard
+            id={item.id}
+            image={item.image}
+            name={item.name}
+            time={item.time}
+            symptom={item.symptom}
+          />
+        )}
+      />
     </View>
   );
 };

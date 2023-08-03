@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,Image} from 'react-native';
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
 import {dotsIcon} from '../Assets/TabSvgs';
 import { activePaitentIcon } from '../Assets/TabSvgs';
-const PatientCard = () => {
+const PatientCard = ({image,name ,message}) => {
   return (
     <View
       style={{
@@ -24,9 +24,18 @@ const PatientCard = () => {
           marginLeft: '5%',
           marginTop: 10,
         }}>
+         <Image
+                        style={{
+                          width: 80,
+                          height: 80,
+                          marginLeft: 10,
+                          borderRadius: 50,
+                          marginTop: 10,
+                        }}
+                        source={{uri: image}}/>
         <SvgXml
           xml={activePaitentIcon}
-          style={{marginTop: -1, marginLeft: '80%'}}></SvgXml>
+          style={{marginTop: -90, marginLeft: '80%'}}></SvgXml>
       </View>
       <View
         style={{
@@ -40,7 +49,7 @@ const PatientCard = () => {
             fontSize: 16,
             color: 'rgba(14, 16, 18, 1)',
           }}>
-          Name
+          {name}
         </Text>
         <Text
           style={{
@@ -49,7 +58,7 @@ const PatientCard = () => {
             marginTop: 20,
             color: 'background: rgba(74, 121, 253, 1);',
           }}>
-          Any random description
+          {message}
         </Text>
       </View>
     </View>
