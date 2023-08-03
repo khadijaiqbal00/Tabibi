@@ -18,6 +18,7 @@ export default function DocSignUp({navigation}) {
    const [showcPass, setShowcPass] = useState(false);
    const [email, setEmail] = useState('');
    const [pass, setPass] = useState('');
+   const [passC, setPassC] = useState('');
   return (
     <View style={styles.Container}>
       <IconButton
@@ -113,8 +114,8 @@ export default function DocSignUp({navigation}) {
             onPress={() => setShowcPass(!showcPass)}
           />
         }
-        value={pass}
-        onChangeText={setPass}
+        value={passC}
+        onChangeText={setPassC}
       />
       <View
         style={{

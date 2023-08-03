@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 5,
     height: 47,
-    paddingLeft: 20,
+    paddingLeft: 5,
     paddingTop: 5,
     color: 'rgba(26, 69, 99, 1)',
     fontSize: 15,

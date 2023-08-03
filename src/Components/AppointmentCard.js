@@ -18,7 +18,7 @@ const AppointmentCard = ({id,date, day ,time ,name , disease}) => {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.14)',
           height: 100,
-          width: 80,
+          width: "32%",
           borderRadius: 31,
           marginLeft: '5%',
           marginTop: 10,

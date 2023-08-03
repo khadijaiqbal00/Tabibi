@@ -28,9 +28,9 @@ const ScheduleCard = ({name,image,symptom,time}) => {
           style={{
             width: 50,
             height: 50,
-            marginLeft: 10,
+            marginLeft: 7,
             borderRadius: 50,
-            marginTop: 10,
+            marginTop: 5,
           }}
           source={{uri: image}}
         />
