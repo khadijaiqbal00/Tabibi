@@ -2,26 +2,24 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Messages from '../Screens/Doctor/Messages';
 
 
-import Profile from '../Screens/Doctor/Profile';
 const Stack = createNativeStackNavigator();
 
-export default function ProfileStack() {
+export default function MessagesStack() {
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator
-        initialRouteName="Profile">
+        initialRouteName="Messages">
         <Stack.Screen
-          name="Profile"
-          component={Profile}
+          name="Messages"
+          component={Messages}
           options={{
             headerShown: false,
           }}
         />
-        
+       
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
