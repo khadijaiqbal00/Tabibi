@@ -4,17 +4,20 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
 } from 'react-native';
-import React from 'react';
-import {IconButton} from 'react-native-paper';
+import React,{useState} from 'react';
+import {Chip, IconButton, TextInput} from 'react-native-paper';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import { colors } from '../../Global/globalstyles';
 
 export default function DocSignUp({navigation}) {
+   const [showPass, setShowPass] = useState(false);
+   const [showcPass, setShowcPass] = useState(false);
+   const [email, setEmail] = useState('');
+   const [pass, setPass] = useState('');
   return (
     <View style={styles.Container}>
       <IconButton
@@ -24,65 +27,95 @@ export default function DocSignUp({navigation}) {
       />
       <Text style={styles.text}>Create a new account</Text>
       <Text style={styles.subText}>
-      Veuillez remplir les informations ci-dessous pour créer votre nouveau compte.
+        Veuillez remplir les informations ci-dessous pour créer votre nouveau
+        compte.
       </Text>
       <Text style={styles.Label}>Name</Text>
-      <View style={[styles.TextInput]}>
-        <TextInput
-          cursorColor={'rgba(26, 69, 99, 1)'}
-          style={styles.text2}></TextInput>
-      </View>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        outlineStyle={styles.border}
+      />
+   
       <Text style={styles.Label}>E-mail</Text>
-      <View style={[styles.TextInput, {marginTop: '2%'}]}>
-        <TextInput
-          cursorColor={'rgba(26, 69, 99, 1)'}
-          style={styles.text2}></TextInput>
-      </View>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+      />
+   
       <Text style={styles.Label}>Phone</Text>
-      <View style={[styles.TextInput, {marginTop: '2%'}]}>
-        <TextInput
-          cursorColor={'rgba(26, 69, 99, 1)'}
-          style={styles.text2}></TextInput>
-      </View>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        underlineColorAndroid="transparent"
+      />
+      
       <Text style={styles.Label}>Password</Text>
-      <View style={[styles.TextInput, {marginTop: '2%'}]}>
-        <TextInput
-          cursorColor={'rgba(26, 69, 99, 1)'}
-          style={styles.text2}
-          secureTextEntry={true}></TextInput>
-        <Animatable.View animation={'fadeInDown'} duration={400}>
-          <MaterialIcons
-            name="visibility-off"
-            style={{
-              color: 'grey',
-              alignSelf: 'flex-end',
-              marginRight: '5%',
-              marginTop: -33,
-            }}
-            size={20}
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        style={styles.TextInput}
+        secureTextEntry={!showPass}
+        underlineColor="transparent"
+        right={
+          <TextInput.Icon
+            style={{marginTop: 10}}
+            icon={showPass ? 'eye-off-outline' : 'eye-outline'}
+            onPress={() => setShowPass(!showPass)}
           />
-        </Animatable.View>
-      </View>
+        }
+        value={pass}
+        onChangeText={setPass}
+      />
+     
       <Text style={styles.Label}>Confirm Password</Text>
-
-      <View style={[styles.TextInput, {marginTop: '2%'}]}>
-        <TextInput
-          cursorColor={'rgba(26, 69, 99, 1)'}
-          style={styles.text2}
-          secureTextEntry={true}></TextInput>
-        <Animatable.View animation={'fadeInDown'} duration={400}>
-          <MaterialIcons
-            name="visibility-off"
-            style={{
-              color: 'grey',
-              alignSelf: 'flex-end',
-              marginRight: '5%',
-              marginTop: -33,
-            }}
-            size={20}
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        secureTextEntry={!showcPass}
+        right={
+          <TextInput.Icon
+            style={{marginTop: 10}}
+            icon={showcPass ? 'eye-off-outline' : 'eye-outline'}
+            onPress={() => setShowcPass(!showcPass)}
           />
-        </Animatable.View>
-      </View>
+        }
+        value={pass}
+        onChangeText={setPass}
+      />
       <View
         style={{
           flexDirection: 'row',
@@ -94,9 +127,8 @@ export default function DocSignUp({navigation}) {
           style={{
             color: 'black',
             marginTop: 10,
-            fontSize:14,
+            fontSize: 14,
             fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-            
           }}>
           Accept terms and conditions
         </Text>
@@ -166,10 +198,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 5,
     borderRadius: 4,
-    elevation: 1,
     height: 47,
-    paddingLeft: 20,
+    paddingLeft: 5,
     paddingTop: 5,
+    marginTop:5,
     color: 'rgba(26, 69, 99, 1)',
     fontSize: 15,
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
@@ -221,4 +253,7 @@ const styles = StyleSheet.create({
 
     fontSize: 14,
   },
+  border : {
+    borderBottomColor:"white",
+  }
 });

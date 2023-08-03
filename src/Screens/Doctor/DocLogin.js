@@ -4,20 +4,23 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import React from 'react';
+import {Chip, IconButton, TextInput} from 'react-native-paper';
+
+import React,{useState} from 'react';
 import {colors} from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-import {IconButton} from 'react-native-paper';
 import {Google} from '../../Assets/icons';
 import {Fb} from '../../Assets/icons';
 import {Language} from '../../Assets/icons';
 import {Apple} from '../../Assets/icons';
 export default function LogIn({navigation}) {
+      const [showPass, setShowPass] = useState(false);
+const [email, setEmail] = useState('');
+const [pass, setPass] = useState('');
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground
@@ -43,29 +46,38 @@ export default function LogIn({navigation}) {
                 <View style={styles.box1}>
                   <Text style={styles.text6}>E-mail </Text>
                   <TextInput
-                    placeholder="Enter your email"
+                    theme={{
+                      colors: {
+                        text: 'rgba(28, 107, 164, 1)',
+                        primary: 'rgba(28, 107, 164, 1)',
+                      },
+                    }}
+                    underlineColor="transparent"
                     style={styles.TextInput}></TextInput>
                 </View>
                 <View style={styles.box2}>
                   <Text style={styles.text6}>Password </Text>
-                  <View style={[styles.TextInput]}>
-                    <TextInput
-                      style={styles.text2}
-                      placeholder="Enter your password"
-                      secureTextEntry={true}></TextInput>
-                    <Animatable.View animation={'fadeInDown'} duration={400}>
-                      <MaterialIcons
-                        name="visibility-off"
-                        style={{
-                          color: 'grey',
-                          alignSelf: 'flex-end',
-                          marginRight: '5%',
-                          marginTop: -30,
-                        }}
-                        size={20}
+                  <TextInput
+                    theme={{
+                      colors: {
+                        text: 'rgba(28, 107, 164, 1)',
+                        primary: 'rgba(28, 107, 164, 1)',
+                      },
+                    }}
+                    underlineColor="transparent"
+                    style={styles.TextInput}
+                    secureTextEntry={!showPass}
+                    right={
+                      <TextInput.Icon
+                        style = {{marginTop:10}}
+                        icon={showPass ? 'eye-off-outline' : 'eye-outline'}
+                        onPress={() => setShowPass(!showPass)}
                       />
-                    </Animatable.View>
-                  </View>
+                    }
+                    value={pass}
+                    onChangeText={setPass}
+                  />
+                 
                 </View>
 
                 <TouchableOpacity
@@ -220,8 +232,6 @@ const styles = StyleSheet.create({
     width: '87%',
     backgroundColor: colors.white,
     borderRadius: 5,
-    borderRadius: 4,
-    elevation: 1,
     height: 47,
     paddingLeft: 20,
     paddingTop: 5,
