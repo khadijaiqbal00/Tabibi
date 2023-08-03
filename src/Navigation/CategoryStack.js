@@ -2,23 +2,19 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Wishlist from '../Screens/Doctor/WishList';
-
-
+import Categories from '../Screens/Doctor/Categories';
 const Stack = createNativeStackNavigator();
 
-export default function WishListStack() {
+export default function CategoryStack() {
   return (
-      <Stack.Navigator
-        initialRouteName="Wishlist">
+      <Stack.Navigator initialRouteName="Categories">
         <Stack.Screen
-          name="Wishlist"
-          component={Wishlist}
+          name="Categories"
+          component={Categories}
           options={{
             headerShown: false,
           }}
         />
-       
       </Stack.Navigator>
   );
 }

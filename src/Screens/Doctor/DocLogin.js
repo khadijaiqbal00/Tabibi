@@ -6,128 +6,128 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import React from 'react';
-import {colors, fonts} from '../../Global/globalstyles';
-import {colors} from '../global/globalstyles';
+import {colors} from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {IconButton} from 'react-native-paper';
-import {Google} from '../assets/icons';
-import {Fb} from '../assets/icons';
-import { Language } from '../assets/icons';
-import {Apple} from '../assets/icons';
-import Background from '../Components/Background';
+import {Google} from '../../Assets/icons';
+import {Fb} from '../../Assets/icons';
+import {Language} from '../../Assets/icons';
+import {Apple} from '../../Assets/icons';
 export default function LogIn({navigation}) {
   return (
-    <View style={{flex:1, backgroundColor:'white'}}>
- <ImageBackground
-    source={require('../assets/Images/Background.png')}
-      style={{ 
-        // flex: 1, resizeMode: 'contain'
-        height:'97%'
-       }}
-      >
-      <ScrollView>
-        <View style={styles.Container}>
-          <View style={{flex: 1}}>
-            <IconButton
-              icon="chevron-left"
-              size={30}
-              onPress={() => navigation.goBack()}
-            />
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <ImageBackground
+        source={require('../../Assets/Images/Background.png')}
+        style={{
+          // flex: 1, resizeMode: 'contain'
+          height: '97%',
+        }}>
+        <ScrollView>
+          <View style={styles.Container}>
+            <View style={{flex: 1}}>
+              <IconButton
+                icon="chevron-left"
+                size={30}
+                onPress={() => navigation.goBack()}
+              />
 
-            <Text style={styles.text}>Log in as a Doctor </Text>
-            <Text style={styles.text1}>
-              Please fill in the information below to login to your account.
-            </Text>
-          </View>
-          <View style={styles.container2}>
-            <View style={styles.inside}>
-              <View style={styles.box1}>
-                <Text style={styles.text6}>E-mail </Text>
-                <TextInput
-                  placeholder="Enter your email"
-                  style={styles.TextInput}></TextInput>
-              </View>
-              <View style={styles.box2}>
-                <Text style={styles.text6}>Password </Text>
-                <View style={[styles.TextInput]}>
+              <Text style={styles.text}>Log in as a Doctor </Text>
+              <Text style={styles.text1}>
+                Please fill in the information below to login to your account.
+              </Text>
+            </View>
+            <View style={styles.container2}>
+              <View style={styles.inside}>
+                <View style={styles.box1}>
+                  <Text style={styles.text6}>E-mail </Text>
                   <TextInput
-                    style={styles.text2}
-                    placeholder="Enter your password"
-                    secureTextEntry={true}></TextInput>
-                  <Animatable.View animation={'fadeInDown'} duration={400}>
-                    <MaterialIcons
-                      name="visibility-off"
-                      style={{
-                        color: 'grey',
-                        alignSelf: 'flex-end',
-                        marginRight: '5%',
-                        marginTop: -30,
-                      }}
-                      size={20}
-                    />
-                  </Animatable.View>
+                    placeholder="Enter your email"
+                    style={styles.TextInput}></TextInput>
                 </View>
-              </View>
+                <View style={styles.box2}>
+                  <Text style={styles.text6}>Password </Text>
+                  <View style={[styles.TextInput]}>
+                    <TextInput
+                      style={styles.text2}
+                      placeholder="Enter your password"
+                      secureTextEntry={true}></TextInput>
+                    <Animatable.View animation={'fadeInDown'} duration={400}>
+                      <MaterialIcons
+                        name="visibility-off"
+                        style={{
+                          color: 'grey',
+                          alignSelf: 'flex-end',
+                          marginRight: '5%',
+                          marginTop: -30,
+                        }}
+                        size={20}
+                      />
+                    </Animatable.View>
+                  </View>
+                </View>
 
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('ForgotPassword');
-                }}>
-                <Text style={styles.text3}> Forgot Password?</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => {
-                  // navigation.navigate('DrawerNavigation');
-                }}
-                style={styles.btnShape}>
-                <Text style={styles.btnText}>Login</Text>
-              </TouchableOpacity>
-
-              <View style={styles.bottomLine}>
-                <Text style={styles.text4}>Don’t have an account?</Text>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('DocSignUp');
+                    navigation.navigate('ForgotPassword');
                   }}>
-                  <Text style={styles.text5}>Register Now</Text>
+                  <Text style={styles.text3}> Forgot Password?</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={styles.line}>
-                <View style={styles.line2}></View>
-              </View>
-              <View>
-                <Text style={styles.text7}>Or Continue With</Text>
-              </View>
 
-              <View style={styles.container}>
-                <View style={styles.row}>
-                  <View style={styles.box}>
-                    <Google width={30} height={30} style={{marginTop: 15}} />
-                  </View>
-                  <View style={styles.box}>
-                    <Fb width={34} height={34} style={{marginTop: 12}} />
-                  </View>
-                  <View style={styles.box}>
-                    <Apple width={30} height={30} style={{marginTop: 12}} />
+                <TouchableOpacity
+                  onPress={() => {
+                    // navigation.navigate('DrawerNavigation');
+                  }}
+                  style={styles.btnShape}>
+                  <Text style={styles.btnText}>Login</Text>
+                </TouchableOpacity>
+
+                <View style={styles.bottomLine}>
+                  <Text style={styles.text4}>Don’t have an account?</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('DocSignUp');
+                    }}>
+                    <Text style={styles.text5}>Register Now</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.line}>
+                  <View style={styles.line2}></View>
+                </View>
+                <View>
+                  <Text style={styles.text7}>Or Continue With</Text>
+                </View>
+
+                <View style={styles.container}>
+                  <View style={styles.row}>
+                    <View style={styles.box}>
+                      <Google width={30} height={30} style={{marginTop: 15}} />
+                    </View>
+                    <View style={styles.box}>
+                      <Fb width={34} height={34} style={{marginTop: 12}} />
+                    </View>
+                    <View style={styles.box}>
+                      <Apple width={30} height={30} style={{marginTop: 12}} />
+                    </View>
                   </View>
                 </View>
-              </View>
-              <View style={{flexDirection:'row', alignSelf:'center'}}>
-                <Text style={styles.text9}>Select Language</Text>
-                <Language width={30} height={30} style={{marginLeft: 12, marginBottom:10}} />
+                <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+                  <Text style={styles.text9}>Select Language</Text>
+                  <Language
+                    width={30}
+                    height={30}
+                    style={{marginLeft: 12, marginBottom: 10}}
+                  />
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </ImageBackground>
     </View>
-   
   );
 }
 
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: 'NunitoSans_7pt-Black',
   },
 
   container: {
@@ -196,7 +197,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 13,
     color: colors.black,
-    // fontWeight: '900',
     marginHorizontal: '10%',
     marginTop: 10,
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
@@ -205,9 +205,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     color: colors.black,
-    fontWeight: '900',
     marginHorizontal: '10%',
     marginTop: 10,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   box1: {
     width: '100%',
@@ -221,7 +221,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '87%',
     backgroundColor: colors.white,
-    borderRadius: 8,
+    borderRadius: 5,
+    elevation: 1,
     height: 47,
     paddingLeft: 20,
     paddingTop: 5,
@@ -229,9 +230,10 @@ const styles = StyleSheet.create({
     color: 'rgba(26, 69, 99, 1)',
     fontWeight: '900',
     fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   text2: {
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: 'rgba(26, 69, 99, 1)',
     fontWeight: '900',
     fontSize: 15,
@@ -242,8 +244,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '2%',
     color: colors.blue,
-    fontFamily: 'Urbanist',
-    fontWeight: '900',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
   btnShape: {
     backgroundColor: colors.black1,
@@ -270,19 +271,19 @@ const styles = StyleSheet.create({
   text4: {
     fontWeight: '900',
     color: '#757F8E',
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     fontSize: 13,
   },
   text5: {
     fontWeight: '900',
     color: '#0060F7',
     marginLeft: 5,
-    fontFamily: 'Urbanist',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     fontSize: 14,
   },
   text6: {
     fontSize: 14,
-    fontWeight: '900',
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: colors.black,
     width: '87%',
     alignSelf: 'center',

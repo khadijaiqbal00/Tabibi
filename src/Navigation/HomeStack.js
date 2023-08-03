@@ -7,7 +7,6 @@ const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator
         initialRouteName="Home">
         <Stack.Screen
@@ -19,7 +18,6 @@ export default function HomeStack() {
         />
   
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
