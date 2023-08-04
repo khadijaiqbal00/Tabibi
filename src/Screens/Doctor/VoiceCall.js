@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Call, Mic, Video} from '../../Assets/icons';
 import LinearGradient from 'react-native-linear-gradient';
-const VideoCall1 = () => {
+const VoiceCall = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -13,9 +13,7 @@ const VideoCall1 = () => {
         <View style={styles.mainContent}>
           <Text>Main Content</Text>
         </View>
-        <View style={{width:'30%', height:'20%', backgroundColor:'white', borderRadius:30, alignSelf:'flex-end', marginRight:10, marginBottom:10}}>
 
-</View>
         <View style={styles.bottomElement}>
             
           <Text style={{color: 'white', fontSize: 16, marginBottom: 5}}>
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
-    height: '20%',
+    height: '18%',
     zIndex:999,
     width:'100%'
   },
@@ -83,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VideoCall1;
+export default VoiceCall;
