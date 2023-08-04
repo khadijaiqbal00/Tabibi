@@ -153,14 +153,18 @@ return (
             setIndexCheck2(item.id);
           }}>
         
-          <View style={{marginLeft: 20}}>
+          <View style={{
+            marginLeft: 20
+            }}>
             <View
               style={
                 indexCheck2 === item.id
                   ? {...styles.bigCardSelected}
                   : {...styles.bigCard}
               }>
-              <View style={{marginLeft: 30, flexDirection: 'row'}}>
+              <View style={{
+                marginLeft: 20, 
+                flexDirection: 'row'}}>
                   <View
                     style={
                       indexCheck2 === item.id
@@ -270,18 +274,18 @@ const styles = StyleSheet.create({
   },
 
   bigCard: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 28,
-    width: '90%',
+    width: '100%',
     height: 120,
     marginTop: 20,
   },
   bigCardSelected: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: 'rgba(28, 107, 164, 1)',
     borderRadius: 28,
-    width: '90%',
+    width: '100%',
     height: 120,
     marginTop: 20,
   },
@@ -320,11 +324,11 @@ const styles = StyleSheet.create({
   },
   dotIconSelected: {
     marginTop: 10,
-    marginLeft: '18%',
+    marginLeft: '5%',
   },
   dotIcon: {
     marginTop: 10,
-    marginLeft: '18%',
+    marginLeft: '5%',
     color: 'black',
   },
   dateValSelected: {
