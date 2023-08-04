@@ -18,12 +18,14 @@ import CalenderCard from '../../Components/CalenderCard';
 import { scheduleData } from '../../Global/Data';
 import { CalenderData } from '../../Global/Data';
 import { Calendar } from '../../Assets/icons';
+import {dotsIcon} from '../../Assets/TabSvgs';
 
 
 const Schedule = () => {
    const [List, setList] = useState([{}]);
    const [List2, setList2] = useState([{}]);
    const [indexCheck, setIndexCheck] = useState('0');
+   const [indexCheck2, setIndexCheck2] = useState('0');
 
    useEffect(() => {
      console.log();
@@ -66,14 +68,12 @@ const Schedule = () => {
               onPress={() => {
                 setIndexCheck(item.id);
               }}>
-              
               <View
                 style={
                   indexCheck === item.id
                     ? {...styles.smallCardSelected}
                     : {...styles.smallCard}
                 }>
-               
                 <View>
                   <Text
                     style={
@@ -105,15 +105,87 @@ const Schedule = () => {
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}
         data={List}
+        extraData={indexCheck2}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <ScheduleCard
-            id={item.id}
-            image={item.image}
-            name={item.name}
-            time={item.time}
-            symptom={item.symptom}
-          />
+          <Pressable
+            onPress={() => {
+              setIndexCheck2(item.id);
+            }}>
+            <View
+              style={
+                indexCheck2 === item.id
+                  ? {...styles.bigCardSelected}
+                  : {...styles.bigCard}
+              }>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  height: 60,
+                  width: 60,
+                  marginTop: 25,
+                  borderRadius: 22,
+                  marginHorizontal: 20,
+                }}>
+                <Image
+                  style={{
+                    width: 50,
+                    height: 50,
+                    margin: 5,
+                    borderRadius: 50,
+                    marginTop: 5,
+                  }}
+                  source={{uri: item.image}}
+                />
+              </View>
+
+              <View>
+                <View>
+                  <Text
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.bigCardTextSelected2}
+                        : {...styles.bigCardText2}
+                    }>
+                    {item.time}
+                  </Text>
+                </View>
+                <Text
+                  style={
+                    indexCheck2 === item.id
+                      ? {...styles.bigCardTextSelected}
+                      : {...styles.bigCardText}
+                  }>
+                  {item.name}
+                </Text>
+                <Text
+                  style={
+                    indexCheck2 === item.id
+                      ? {...styles.bigCardTextSelected3}
+                      : {...styles.bigCardText3}
+                  }>
+                  {item.symptom}
+                </Text>
+              </View>
+              <View>
+                {/* style={{marginTop: 10, marginLeft: '30%'}} */}
+                <SvgXml
+                  xml={dotsIcon}
+                  style={
+                    indexCheck2 === item.id
+                      ? {...styles.dotIconSelected}
+                      : {...styles.dotIcon}
+                  }></SvgXml>
+              </View>
+            </View>
+          </Pressable>
+          // <ScheduleCard
+          //   id={item.id}
+          //   image={item.image}
+          //   name={item.name}
+          //   time={item.time}
+          //   symptom={item.symptom}
+          // />
         )}
       />
     </View>
@@ -157,9 +229,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 1)',
     alignItems: 'center',
     width: 85,
-    marginLeft:10,    
+    marginLeft: 10,
     height: 100,
-    marginTop:10,
+    marginTop: 10,
   },
   smallCardSelected: {
     borderRadius: 31,
@@ -167,9 +239,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(28, 107, 164, 1)',
     alignItems: 'center',
     width: 85,
-    marginTop:10,
+    marginTop: 10,
     height: 100,
-    marginLeft:10,
+    marginLeft: 10,
   },
   smallCardTextSelected: {
     fontFamily: 'NunitoSans_10pt-Light',
@@ -194,5 +266,65 @@ const styles = StyleSheet.create({
     fontSize: 21,
     color: 'rgba(28, 107, 164, 1)',
     marginBottom: 7,
+  },
+  bigCard: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 28,
+    width: '90%',
+    height: 120,
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  bigCardSelected: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(28, 107, 164, 1)',
+    borderRadius: 28,
+    width: '90%',
+    height: 120,
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  bigCardTextSelected: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 1)',
+  },
+  bigCardTextSelected2: {
+    marginTop: 20,
+
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardTextSelected3: {
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardText: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 16,
+    color: 'rgba(14, 16, 18, 1)',
+  },
+  bigCardText2: {
+    marginTop: 20,
+    color: 'rgba(12, 17, 21, 1)',
+
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardText3: {
+    color: 'rgba(97, 100, 103, 1)',
+
+    fontFamily: 'NunitoSans_10pt-Medium',
+    fontSize: 16,
+  },
+  dotIconSelected: {
+    marginTop: 10,
+    marginLeft: '18%',
+  },
+  dotIcon: {
+    marginTop: 10,
+    marginLeft: '18%',
+    color:"red",
   },
 });
