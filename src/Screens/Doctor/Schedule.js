@@ -66,45 +66,14 @@ const Schedule = () => {
               onPress={() => {
                 setIndexCheck(item.id);
               }}>
-              {/* <View
-                style={{
-                  backgroundColor: 'rgba(28, 107, 164, 1)',
-                  height: 100,
-                  width: 80,
-                  borderRadius: 31,
-                  marginLeft: 20,
-                  marginTop: 10,
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'NunitoSans_10pt-Bold',
-                    alignSelf: 'center',
-                    fontSize: 22,
-                    color: 'rgba(255, 255, 255, 1)',
-                    marginTop: 20,
-                  }}>
-                  {date}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'NunitoSans_10pt-Medium',
-                    alignSelf: 'center',
-                    fontSize: 16,
-                    color: 'rgba(255, 255, 255, 1)',
-                  }}>
-                  {day}
-                </Text>
-              </View> */}
+              
               <View
                 style={
                   indexCheck === item.id
                     ? {...styles.smallCardSelected}
                     : {...styles.smallCard}
                 }>
-                {/* <Image
-                  style={{height: 60, width: 60, borderRadius: 30}}
-                  source={item.image}
-                /> */}
+               
                 <View>
                   <Text
                     style={
@@ -187,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 1)',
     alignItems: 'center',
-    width: 90,
+    width: 85,
     marginLeft:10,    
     height: 100,
     marginTop:10,
