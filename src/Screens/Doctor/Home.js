@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,ScrollView,FlatList} from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,ScrollView,FlatList,Pressable} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
@@ -14,6 +14,8 @@ import {useIsFocused} from '@react-navigation/native';
 // import { FlatList } from 'react-native-gesture-handler';
 
 const Home = () => {
+     const [indexCheck2, setIndexCheck2] = useState('0');
+
     const isfocussed = useIsFocused();
     const [List, setList] = useState([{}]);
     useEffect(() => {
@@ -141,20 +143,94 @@ return (
       ))}
     </ScrollView> */}
 
-   
-<FlatList
+    <FlatList
       horizontal
       data={List}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => (
-        <AppointmentCard
-          id={item.id}
-          date={item.date}
-          day={item.day}
-          time={item.time}
-          name={item.name}
-          disease={item.disease}
-        />
+      renderItem={({item}) => (
+        <Pressable 
+          onPress={() => {
+            setIndexCheck2(item.id);
+          }}>
+        
+          <View style={{marginLeft: 20}}>
+            <View
+              style={
+                indexCheck2 === item.id
+                  ? {...styles.bigCardSelected}
+                  : {...styles.bigCard}
+              }>
+              <View style={{marginLeft: 30, flexDirection: 'row'}}>
+                  <View
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.bgDateDaySelected}
+                        : {...styles.bgDateDay}
+                    }>
+                    <Text
+                      style={
+                        indexCheck2 === item.id
+                          ? {...styles.dateValSelected}
+                          : {...styles.dateVal}
+                      }>
+                      {item.date}
+                    </Text>
+                    <Text
+                      style={
+                        indexCheck2 === item.id
+                          ? {...styles.dayValSelected}
+                          : {...styles.dayVal}
+                      }>
+                      {item.day}
+                    </Text>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.bigCardTextSelected2}
+                        : {...styles.bigCardText2}
+                    }>
+                    {item.time}
+                  </Text>
+                  <Text
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.bigCardTextSelected}
+                        : {...styles.bigCardText}
+                    }>
+                    {item.name}
+                  </Text>
+                  <Text
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.bigCardTextSelected3}
+                        : {...styles.bigCardText3}
+                    }>
+                    {item.disease}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <SvgXml
+                  xml={dotsIcon}
+                  style={
+                    indexCheck2 === item.id
+                      ? {...styles.dotIconSelected}
+                      : {...styles.dotIcon}
+                  }></SvgXml>
+              </View>
+            </View>
+          </View>
+        </Pressable>
+        // <AppointmentCard
+        //   id={item.id}
+        //   date={item.date}
+        //   day={item.day}
+        //   time={item.time}
+        //   name={item.name}
+        //   disease={item.disease}
+        // />
       )}
     />
   </View>
@@ -191,5 +267,122 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     color: 'black',
     fontSize: 14,
+  },
+
+  bigCard: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 28,
+    width: '90%',
+    height: 120,
+    marginTop: 20,
+  },
+  bigCardSelected: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(28, 107, 164, 1)',
+    borderRadius: 28,
+    width: '90%',
+    height: 120,
+    marginTop: 20,
+  },
+  bigCardTextSelected: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 1)',
+  },
+  bigCardTextSelected2: {
+    marginTop: 20,
+
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardTextSelected3: {
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardText: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 16,
+    color: 'rgba(14, 16, 18, 1)',
+  },
+  bigCardText2: {
+    marginTop: 20,
+    color: 'rgba(12, 17, 21, 1)',
+
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 16,
+  },
+  bigCardText3: {
+    color: 'rgba(97, 100, 103, 1)',
+
+    fontFamily: 'NunitoSans_10pt-Medium',
+    fontSize: 16,
+  },
+  dotIconSelected: {
+    marginTop: 10,
+    marginLeft: '18%',
+  },
+  dotIcon: {
+    marginTop: 10,
+    marginLeft: '18%',
+    color: 'black',
+  },
+  dateValSelected: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    alignSelf: 'center',
+    fontSize: 22,
+    color: 'rgba(255, 255, 255, 1)',
+    marginTop: 20,
+    marginRight: '35%',
+    marginLeft: '50%',
+    width: 40,
+  },
+  dateVal: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    alignSelf: 'center',
+    fontSize: 22,
+    color: 'rgba(255, 255, 255, 1)',
+    marginTop: 20,
+    marginRight: '35%',
+    marginLeft: '50%',
+    width: 40,
+  },
+  dayValSelected: {
+    fontFamily: 'NunitoSans_10pt-Medium',
+    alignSelf: 'center',
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 1)',
+    marginTop: 7,
+    marginRight: '35%',
+    marginLeft: '50%',
+    width: 40,
+  },
+  dayVal: {
+    fontFamily: 'NunitoSans_10pt-Medium',
+    alignSelf: 'center',
+    fontSize: 14,
+    color: 'white',
+    marginTop: 7,
+    marginRight: '35%',
+    marginLeft: '50%',
+    width: 40,
+  },
+  bgDateDaySelected: {
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+    height: 100,
+    width: 80,
+    borderRadius: 31,
+    marginTop: 10,
+    marginRight: 20,
+    marginLeft: -10,
+  },
+  bgDateDay: {
+    backgroundColor: 'rgba(224, 159, 31, 1)',
+    height: 100,
+    width: 80,
+    borderRadius: 31,
+    marginTop: 10,
+    marginRight: 20,
+    marginLeft: -10,
   },
 });
