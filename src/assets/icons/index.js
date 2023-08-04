@@ -11,6 +11,12 @@ export {default as Weight} from './weight.svg';
 export {default as BlackDots} from './blackvertical.svg';
 export {default as Doc} from './doc.svg';
 export {default as Dotsv} from './dotsv.svg';
+export {default as Back} from './back.svg';
+export {default as DoctorImg} from './Doctorimg.svg';
+export {default as Clock} from './clock.svg';
+
+
+
 
 
 

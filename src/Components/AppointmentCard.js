@@ -2,6 +2,8 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {colors} from '../Global/globalstyles';
 
+
+
 const AppointmentCard = ({date, day, time, name, disease}) => {
   return (
     <View
