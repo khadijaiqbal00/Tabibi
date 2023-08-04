@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,FlatList,ScrollView} from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,ScrollView,FlatList} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
@@ -11,6 +11,7 @@ import AppointmentCard from '../../Components/AppointmentCard';
 import { dotsIcon } from '../../Assets/TabSvgs';
 import { appointmentData } from '../../Global/Data';
 import {useIsFocused} from '@react-navigation/native';
+// import { FlatList } from 'react-native-gesture-handler';
 
 const Home = () => {
     const isfocussed = useIsFocused();
@@ -141,6 +142,7 @@ return (
     </ScrollView> */}
 
     <FlatList
+     horizontal = {true}
       keyboardShouldPersistTaps="handled"
       showsHorizontalScrollIndicator={false}
       data={List}

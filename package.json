@@ -18,6 +18,8 @@
     "@rneui/themed": "^0.0.0-edge.2",
     "directory": "^0.1.0",
     "firebase": "^8.2.3",
+    "install": "^0.13.0",
+    "npm": "^9.8.1",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-animatable": "^1.3.3",
