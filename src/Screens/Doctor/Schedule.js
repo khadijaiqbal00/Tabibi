@@ -17,6 +17,8 @@ import ScheduleCard from '../../Components/ScheduleCard';
 import CalenderCard from '../../Components/CalenderCard';
 import { scheduleData } from '../../Global/Data';
 import { CalenderData } from '../../Global/Data';
+import { Calendar } from '../../Assets/icons';
+
 
 const Schedule = () => {
    const [List, setList] = useState([{}]);
@@ -30,16 +32,20 @@ const Schedule = () => {
    });
   return (
     <View style={styles.Container}>
+      <View style={{flexDirection:'row',marginTop: 30, justifyContent:'space-between', marginHorizontal:'5%'}}>
       <Text
         style={{
-          marginLeft: '10%',
-          fontSize: 17,
-          marginTop: 30,
+          
+          fontSize: 27,
           color: 'rgba(14, 16, 18, 1)',
           fontFamily: 'NunitoSans_10pt-Bold',
         }}>
         Calender
       </Text>
+        <Calendar style={{marginTop:5,}}/>
+      </View>
+     
+      
       <View>
         <FlatList
           // horizontal = {true}
@@ -54,48 +60,7 @@ const Schedule = () => {
       </View>
       <View style={{flexDirection: 'row', marginLeft: '5%'}}></View>
 
-      <View style={{marginTop: '6%'}}>
-        <TextInput
-          placeholderTextColor={'rgba(138, 160, 188, 1)'}
-          placeholder="Looking for a doctor..."
-          style={styles.TextInput}></TextInput>
-        <SvgXml
-          xml={searchIcon}
-          style={{marginTop: -40, marginLeft: '10%'}}></SvgXml>
-        <TouchableOpacity>
-          <SvgXml
-            xml={filterIcon}
-            style={{marginTop: -22, marginLeft: '80%'}}></SvgXml>
-        </TouchableOpacity>
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          width: '90%',
-        }}>
-        <Text
-          style={{
-            marginLeft: '9%',
-            fontSize: 17,
-            marginTop: 30,
-            color: 'rgba(14, 16, 18, 1)',
-            fontFamily: 'NunitoSans_10pt-SemiBold',
-          }}>
-          List of Patients
-        </Text>
-        <Text
-          style={{
-            marginLeft: '9%',
-            fontSize: 14,
-            marginTop: 30,
-            color: 'rgba(28, 107, 164, 1)',
-            fontFamily: 'NunitoSans_10pt-Light',
-          }}>
-          See all
-        </Text>
-      </View>
+     
       <FlatList
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}

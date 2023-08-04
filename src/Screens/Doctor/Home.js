@@ -140,12 +140,11 @@ return (
       ))}
     </ScrollView> */}
 
-    <FlatList
-      keyboardShouldPersistTaps="handled"
-      showsHorizontalScrollIndicator={false}
+<FlatList
+      horizontal
       data={List}
       keyExtractor={item => item.id}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <AppointmentCard
           id={item.id}
           date={item.date}
