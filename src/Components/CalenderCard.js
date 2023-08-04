@@ -9,9 +9,9 @@ const CalenderCard = ({date,day}) => {
         style={{
           backgroundColor: 'rgba(28, 107, 164, 1)',
           height: 100,
-          width: "24%",
+          width: 80,
           borderRadius: 31,
-          marginLeft: '5%',
+          marginLeft: 20,
           marginTop: 10,
         }}>
         <Text

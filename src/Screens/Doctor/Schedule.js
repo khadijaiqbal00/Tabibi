@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  FlatList
+  FlatList,Pressable,
 } from 'react-native';
 import React,{useEffect,useState} from 'react';
 import {colors} from '../../Global/globalstyles';
@@ -23,6 +23,8 @@ import { Calendar } from '../../Assets/icons';
 const Schedule = () => {
    const [List, setList] = useState([{}]);
    const [List2, setList2] = useState([{}]);
+   const [indexCheck, setIndexCheck] = useState('0');
+
    useEffect(() => {
      console.log();
      setList(scheduleData);
@@ -32,35 +34,104 @@ const Schedule = () => {
    });
   return (
     <View style={styles.Container}>
-      <View style={{flexDirection:'row',marginTop: 30, justifyContent:'space-between', marginHorizontal:'5%'}}>
-      <Text
+      <View
         style={{
-          
-          fontSize: 27,
-          color: 'rgba(14, 16, 18, 1)',
-          fontFamily: 'NunitoSans_10pt-Bold',
+          flexDirection: 'row',
+          marginTop: 30,
+          justifyContent: 'space-between',
+          marginHorizontal: '5%',
         }}>
-        Calender
-      </Text>
-        <Calendar style={{marginTop:5,}}/>
+        <Text
+          style={{
+            fontSize: 27,
+            color: 'rgba(14, 16, 18, 1)',
+            fontFamily: 'NunitoSans_10pt-Bold',
+          }}>
+          Calender
+        </Text>
+        <Calendar style={{marginTop: 5}} />
       </View>
-     
-      
-      <View>
+
+      <View style={{marginLeft: 10}}>
         <FlatList
-          // horizontal = {true}
+          horizontal
           keyboardShouldPersistTaps="handled"
           showsHorizontalScrollIndicator={false}
           data={List2}
+          extraData={indexCheck}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
-            <CalenderCard id={item.id} day={item.day} date={item.date} />
+            // <CalenderCard id={item.id} day={item.day} date={item.date} />
+            <Pressable
+              onPress={() => {
+                setIndexCheck(item.id);
+              }}>
+              {/* <View
+                style={{
+                  backgroundColor: 'rgba(28, 107, 164, 1)',
+                  height: 100,
+                  width: 80,
+                  borderRadius: 31,
+                  marginLeft: 20,
+                  marginTop: 10,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    alignSelf: 'center',
+                    fontSize: 22,
+                    color: 'rgba(255, 255, 255, 1)',
+                    marginTop: 20,
+                  }}>
+                  {date}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: 'NunitoSans_10pt-Medium',
+                    alignSelf: 'center',
+                    fontSize: 16,
+                    color: 'rgba(255, 255, 255, 1)',
+                  }}>
+                  {day}
+                </Text>
+              </View> */}
+              <View
+                style={
+                  indexCheck === item.id
+                    ? {...styles.smallCardSelected}
+                    : {...styles.smallCard}
+                }>
+                {/* <Image
+                  style={{height: 60, width: 60, borderRadius: 30}}
+                  source={item.image}
+                /> */}
+                <View>
+                  <Text
+                    style={
+                      indexCheck === item.id
+                        ? {...styles.smallCardTextSelectedDate}
+                        : {...styles.smallCardTextDate}
+                    }>
+                    {item.date}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={
+                      indexCheck === item.id
+                        ? {...styles.smallCardTextSelected}
+                        : {...styles.smallCardText}
+                    }>
+                    {item.day}
+                  </Text>
+                </View>
+              </View>
+            </Pressable>
           )}
         />
       </View>
       <View style={{flexDirection: 'row', marginLeft: '5%'}}></View>
 
-     
       <FlatList
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}
@@ -110,5 +181,49 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     color: 'black',
     fontSize: 14,
+  },
+  smallCard: {
+    borderRadius: 31,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    alignItems: 'center',
+    width: 90,
+    marginLeft:10,    
+    height: 100,
+    marginTop:10,
+  },
+  smallCardSelected: {
+    borderRadius: 31,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(28, 107, 164, 1)',
+    alignItems: 'center',
+    width: 85,
+    marginTop:10,
+    height: 100,
+    marginLeft:10,
+  },
+  smallCardTextSelected: {
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 18,
+    color: 'rgba(255, 255, 255, 1)',
+    marginBottom: 7,
+  },
+  smallCardTextSelectedDate: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 21,
+    color: 'rgba(255, 255, 255, 1)',
+    marginBottom: 7,
+  },
+  smallCardText: {
+    fontFamily: 'NunitoSans_10pt-Light',
+    fontSize: 18,
+    color: 'rgba(28, 107, 164, 1)',
+    marginBottom: 7,
+  },
+  smallCardTextDate: {
+    fontFamily: 'NunitoSans_10pt-Bold',
+    fontSize: 21,
+    color: 'rgba(28, 107, 164, 1)',
+    marginBottom: 7,
   },
 });

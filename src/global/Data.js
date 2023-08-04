@@ -123,18 +123,54 @@ export const CalenderData = [
 
     id: 0,
   },
-//   {
-//     day: 'Tue',
-//     date: '12',
+  {
+    day: 'Tue',
+    date: '12',
 
-//     id: 1,
-//   },
-//   {
-//     day: 'Tue',
-//     date: '12',
+    id: 1,
+  },
+  {
+    day: 'Tue',
+    date: '12',
 
-//     id: 2,
-//   },
+    id: 2,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 3,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 4,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 5,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 6,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 7,
+  },
+  {
+    day: 'Tue',
+    date: '12',
+
+    id: 8,
+  },
 ];
 export const menu = [
   {key: 1, title: 'BEEF'},
