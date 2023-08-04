@@ -165,7 +165,6 @@ export const CalenderData = [
     id: 8,
   },
 ];
-<<<<<<< HEAD
 // export const menu = [
 //   {key: 1, title: 'BEEF'},
 //   {key: 2, title: 'CHICKEN'},
@@ -176,7 +175,6 @@ export const CalenderData = [
 //   {key: 7, title: 'Sides'},
 //   {key: 8, title: 'Milkshakes'},
 // ];
-=======
 export const menu = [
   {key: 1, title: 'BEEF'},
   {key: 2, title: 'CHICKEN'},
@@ -207,4 +205,3 @@ export const AppointmentDocData = [
     time: '09.30 A.M',
   },
 ];
->>>>>>> cbb64075d4c91b4d6a7ff1c00cc880097778df0f
