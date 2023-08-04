@@ -4,7 +4,7 @@ export const appointmentData = [
     day: 'Tue',
     time: '09.30 A.M',
     name: 'Alan Walker',
-    disease:'Cancer',
+    disease: 'Cancer',
     id: 0,
   },
   {
@@ -12,8 +12,7 @@ export const appointmentData = [
     day: 'Tue',
     time: '09.30 A.M',
     name: 'Alan Walker',
-    disease:
-      'Cancer',
+    disease: 'Cancer',
 
     id: 1,
   },
@@ -30,9 +29,8 @@ export const appointmentData = [
     day: 'Tue',
     time: '09.30 A.M',
     name: 'Alan Walker',
-    
-    disease:
-      'Cancer',
+
+    disease: 'Cancer',
 
     id: 3,
   },
@@ -41,9 +39,8 @@ export const appointmentData = [
     day: 'Tue',
     time: '09.30 A.M',
     name: 'Alan Walker',
-    
-    disease:
-      'Cancer',
+
+    disease: 'Cancer',
 
     id: 4,
   },
@@ -52,14 +49,11 @@ export const appointmentData = [
     day: 'Tue',
     time: '09.30 A.M',
     name: 'Alan Walker',
-    
-    disease:
-      'Cancer',
+
+    disease: 'Cancer',
 
     id: 5,
   },
-
-  
 ];
 export const chatData = [
   {
@@ -85,7 +79,6 @@ export const chatData = [
     message: 'Some random message',
     id: 2,
   },
- 
 ];
 export const scheduleData = [
   {
@@ -181,4 +174,24 @@ export const menu = [
   {key: 6, title: 'Fries'},
   {key: 7, title: 'Sides'},
   {key: 8, title: 'Milkshakes'},
+];
+export const AppointmentDocData = [
+  {
+    time: '09.30 A.M',
+  },
+  {
+    time: '09.30 A.M',
+  },
+  {
+    time: '09.30 A.M',
+  },
+  {
+    time: '09.30 A.M',
+  },
+  {
+    time: '09.30 A.M',
+  },
+  {
+    time: '09.30 A.M',
+  },
 ];
