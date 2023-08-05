@@ -1,26 +1,25 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Call, Mic, Video} from '../../Assets/icons';
+import {Call, Mic, Video, Video2} from '../../Assets/icons';
 import LinearGradient from 'react-native-linear-gradient';
-const VideoCall1 = () => {
+const VoiceCall = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
         colors={['rgba(28, 107, 164, 0.00)', '#1C6BA4']}
         style={styles.background}
         start={{x: 0, y: 0}}
-        end={{x: 1, y: 1}}>
+        end={{x: 0.3, y: 0.8}}>
         <View style={styles.mainContent}>
-          <Text>Main Content</Text>
-        </View>
-        <View style={{width:'30%', height:'20%', backgroundColor:'white', borderRadius:30, alignSelf:'flex-end', marginRight:10, marginBottom:10}}>
-
-</View>
-        <View style={styles.bottomElement}>
-            
-          <Text style={{color: 'white', fontSize: 16, marginBottom: 5}}>
+        <Text style={{color: 'white', fontSize: 32, marginBottom: 5,  
+         fontFamily: 'NunitoSans_10pt-Medium',
+      }}>
             00:30:00
           </Text>
+        </View>
+
+        <View style={styles.bottomElement}>
+       
           <View style={{width: '50%', flexDirection: 'row'}}>
             <TouchableOpacity style={styles.button}>
               <Mic width={20} height={20} />
@@ -29,7 +28,7 @@ const VideoCall1 = () => {
               <Call width={40} height={40} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
-              <Video width={20} height={20} />
+              <Video2 width={20} height={20} />
             </TouchableOpacity>
           </View>
         </View>
@@ -42,6 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
+    backgroundColor:'black'
   },
   mainContent: {
     flex: 1,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
-    height: '20%',
+    height: '18%',
     zIndex:999,
     width:'100%'
   },
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VideoCall1;
+export default VoiceCall;
