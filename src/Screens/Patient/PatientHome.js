@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 
-const Home = () => {
+export default  PatientHome = () => {
   return (
     <View style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 80}}>
       <View style={{flexDirection: 'row', alignSelf: 'center'}}>
@@ -64,6 +64,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+
 
 const styles = StyleSheet.create({});

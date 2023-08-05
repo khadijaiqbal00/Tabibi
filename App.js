@@ -10,9 +10,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       {/* <Root /> */}
-      {/* <DocLogin/> */}
-      <VideoCall1/>
+       <Root />
+      {/* <DocLogin/>
+      <VideoCall1/> */}
     </View>
   );
 }

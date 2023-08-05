@@ -80,6 +80,36 @@ export const chatData = [
     id: 2,
   },
 ];
+export const pharmacyData = [
+  {
+    name: 'Talha',
+    image:
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    distance: 'Some random distance',
+
+    id: 0,
+    review: 0,
+    total_reviews: '123',
+  },
+  {
+    name: 'Talha',
+    image:
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    distance: 'Some random distance',
+    review: 0,
+    total_reviews: '123',
+    id: 1,
+  },
+  {
+    name: 'Talha',
+    image:
+      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    distance: 'Some random distance',
+    review: 0,
+    total_reviews: "123",
+    id: 2,
+  },
+];
 export const scheduleData = [
   {
     name: 'Talha',

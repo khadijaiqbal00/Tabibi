@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
 
-  const [route, setRoute] = useState('home');
+  const [route, setRoute] = useState('TabNavigation');
 
   return (
     <Tab.Navigator

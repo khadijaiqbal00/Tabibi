@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,ScrollView,FlatList,Pressable} from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity ,TextInput,ScrollView,FlatList,Pressable,Modal,TouchableHighlight} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
@@ -11,9 +11,18 @@ import AppointmentCard from '../../Components/AppointmentCard';
 import { dotsIcon } from '../../Assets/TabSvgs';
 import { appointmentData } from '../../Global/Data';
 import {useIsFocused} from '@react-navigation/native';
+import { backbgWhiteIcon } from '../../Assets/TabSvgs';
+import { locationIcon } from '../../Assets/TabSvgs';
+import { pharmacyData } from '../../Global/Data';
+import PharmacyCard from '../../Components/PharmacyCard';
+import { fileIcon } from '../../Assets/TabSvgs';
+import { sendZipIcon } from '../../Assets/TabSvgs';
 // import { FlatList } from 'react-native-gesture-handler';
 
 const Home = () => {
+     const [modalVisible, setModalVisible] = useState(false);
+   const [List2, setList2] = useState([{}]);
+
      const [indexCheck2, setIndexCheck2] = useState('0');
 
     const isfocussed = useIsFocused();
@@ -21,6 +30,7 @@ const Home = () => {
     useEffect(() => {
       console.log()
       setList(appointmentData);
+      setList2(pharmacyData);
       console.log(">>>",List);
 
     });
@@ -29,6 +39,179 @@ const Home = () => {
 
 return (
   <View style={styles.Container}>
+    <Modal animationType="fade" transparent={false} visible={modalVisible}>
+      <View
+        style={{
+          backgroundColor: 'rgba(220, 237, 249, 1)',
+          height: '100%',
+          width: '100%',
+        }}>
+        <View
+          style={{
+            backgroundColor: 'rgba(220, 237, 249, 1)',
+            height: 85,
+            width: '100%',
+            borderBottomLeftRadius: 25,
+            borderBottomRightRadius: 25,
+            flexDirection: 'row',
+            zIndex: 1,
+          }}>
+          <TouchableHighlight
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}>
+            <SvgXml
+              xml={backbgWhiteIcon}
+              style={{marginTop: 20, marginLeft: '10%'}}></SvgXml>
+          </TouchableHighlight>
+          <SvgXml
+            xml={locationIcon}
+            style={{marginTop: 30, marginLeft: '10%'}}></SvgXml>
+
+          <View>
+            <Text
+              style={{
+                color: 'black',
+                marginTop: 30,
+                marginLeft: 10,
+                fontSize: 16,
+                fontFamily: 'NunitoSans_10pt-Light',
+              }}>
+              Name Patient
+            </Text>
+          </View>
+        </View>
+
+        {/* Below portion */}
+        <View>
+          <Text
+            style={{
+              marginTop: 20,
+              alignSelf: 'center',
+              fontFamily: 'NunitoSans_10pt-Bold',
+              fontSize: 17,
+              color: 'rgba(14, 16, 18, 1)',
+            }}>
+            Nearby pharmacies
+          </Text>
+
+          <FlatList
+            horizontal
+            keyboardShouldPersistTaps="handled"
+            showsHorizontalScrollIndicator={false}
+            data={List2}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <TouchableOpacity>
+                <PharmacyCard
+                  id={item.id}
+                  image={item.image}
+                  name={item.name}
+                  distance={item.distance}
+                  review={item.review}
+                  total_reviews={item.total_reviews}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+
+        <Text
+          style={{
+            fontFamily: 'NunitoSans_10pt-Bold',
+            alignSelf: 'center',
+            fontSize: 24,
+            color: 'rgba(14, 16, 18, 1)',
+            marginTop: 7,
+          }}>
+          Send Prescription
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'NunitoSans_10pt-Light',
+            textAlign: 'center',
+            marginTop: 10,
+            width: '75%',
+            alignSelf: 'center',
+
+            fontSize: 14,
+            color: 'rgba(74, 84, 94, 1)',
+          }}>
+          We will show the pharmacies that have all the medicines you are
+          looking for
+        </Text>
+        <View
+          style={{
+            marginTop: 40,
+            width: '75%',
+            alignSelf: 'center',
+            height: 170,
+            fontSize: 14,
+            borderRadius: 24,
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '75%',
+              marginLeft: 35,
+              marginTop: 5,
+            }}>
+            <View
+              style={{
+                marginTop: 30,
+                width: 80,
+                height: 80,
+                fontSize: 14,
+                borderRadius: 24,
+                backgroundColor: 'rgba(107, 134, 179, 0.25)',
+              }}>
+              <SvgXml
+                xml={fileIcon}
+                style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
+            </View>
+
+            <View
+              style={{
+                marginTop: 30,
+                width: 80,
+                height: 80,
+                fontSize: 14,
+                borderRadius: 24,
+                backgroundColor: 'rgba(107, 134, 179, 0.25)',
+              }}>
+              <SvgXml
+                xml={sendZipIcon}
+                style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '65%',
+              marginLeft: 40,
+              marginTop: 5,
+            }}>
+            <Text
+              style={{
+                fontFamily: 'NunitoSans_10pt-Light',
+                color: 'rgba(14, 16, 18, 1)',
+              }}>
+              Share Link
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'NunitoSans_10pt-Light',
+                color: 'rgba(14, 16, 18, 1)',
+              }}>
+              Send
+            </Text>
+          </View>
+        </View>
+      </View>
+    </Modal>
     <View style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 80}}>
       <View
         style={{
@@ -116,7 +299,10 @@ return (
         </Text>
       </TouchableOpacity>
     </View>
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => {
+        setModalVisible(true);
+      }}>
       <SvgXml
         style={{alignSelf: 'center', marginTop: 10}}
         xml={PharmacyIcon}></SvgXml>
@@ -148,11 +334,10 @@ return (
       data={List}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
-        <Pressable 
+        <Pressable
           onPress={() => {
             setIndexCheck2(item.id);
           }}>
-        
           <View style={{marginLeft: 20}}>
             <View
               style={
@@ -161,28 +346,28 @@ return (
                   : {...styles.bigCard}
               }>
               <View style={{marginLeft: 30, flexDirection: 'row'}}>
-                  <View
+                <View
+                  style={
+                    indexCheck2 === item.id
+                      ? {...styles.bgDateDaySelected}
+                      : {...styles.bgDateDay}
+                  }>
+                  <Text
                     style={
                       indexCheck2 === item.id
-                        ? {...styles.bgDateDaySelected}
-                        : {...styles.bgDateDay}
+                        ? {...styles.dateValSelected}
+                        : {...styles.dateVal}
                     }>
-                    <Text
-                      style={
-                        indexCheck2 === item.id
-                          ? {...styles.dateValSelected}
-                          : {...styles.dateVal}
-                      }>
-                      {item.date}
-                    </Text>
-                    <Text
-                      style={
-                        indexCheck2 === item.id
-                          ? {...styles.dayValSelected}
-                          : {...styles.dayVal}
-                      }>
-                      {item.day}
-                    </Text>
+                    {item.date}
+                  </Text>
+                  <Text
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.dayValSelected}
+                        : {...styles.dayVal}
+                    }>
+                    {item.day}
+                  </Text>
                 </View>
                 <View>
                   <Text
@@ -210,15 +395,15 @@ return (
                     {item.disease}
                   </Text>
                 </View>
-              </View>
-              <View>
-                <SvgXml
-                  xml={dotsIcon}
-                  style={
-                    indexCheck2 === item.id
-                      ? {...styles.dotIconSelected}
-                      : {...styles.dotIcon}
-                  }></SvgXml>
+                <View>
+                  <SvgXml
+                    xml={dotsIcon}
+                    style={
+                      indexCheck2 === item.id
+                        ? {...styles.dotIconSelected}
+                        : {...styles.dotIcon}
+                    }></SvgXml>
+                </View>
               </View>
             </View>
           </View>
@@ -270,18 +455,17 @@ const styles = StyleSheet.create({
   },
 
   bigCard: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 28,
-    width: '90%',
+    width: 290,
     height: 120,
     marginTop: 20,
   },
   bigCardSelected: {
-    flexDirection: 'row',
     backgroundColor: 'rgba(28, 107, 164, 1)',
     borderRadius: 28,
-    width: '90%',
+    width: 280,
     height: 120,
     marginTop: 20,
   },
@@ -320,7 +504,7 @@ const styles = StyleSheet.create({
   },
   dotIconSelected: {
     marginTop: 10,
-    marginLeft: '18%',
+    marginLeft: 25,
   },
   dotIcon: {
     marginTop: 10,
