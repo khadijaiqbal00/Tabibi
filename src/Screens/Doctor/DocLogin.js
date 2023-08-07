@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {colors} from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
@@ -17,11 +17,34 @@ import {Google} from '../../Assets/icons';
 import {Fb} from '../../Assets/icons';
 import {Language} from '../../Assets/icons';
 import {Apple} from '../../Assets/icons';
+// import ErrorMessage from '../../Components/ErrorMessage';
+import * as yup from 'yup';
+import {Formik} from 'formik';
+import ErrorMessage from '../../Components/ErrorMessage';
 export default function LogIn({navigation}) {
-      const [showPass, setShowPass] = useState(false);
-const [email, setEmail] = useState('');
-const [pass, setPass] = useState('');
+  const [showPass, setShowPass] = useState(false);
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const validationSchema = yup.object().shape({
+    email: yup.string().email().required('Email is required'),
+    password: yup.string().min(6).required('Password is required'),
+  });
+  const onSubmitValue = () => {};
   return (
+    <Formik
+    initialValues={{email: '', password: ''}}
+    validateOnMount={true}
+    onSubmit={onSubmitValue}
+    validationSchema={validationSchema}>
+    {({
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      values,
+      touched,
+      errors,
+      isValid,
+    }) => (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground
         source={require('../../Assets/Images/Background.png')}
@@ -53,7 +76,14 @@ const [pass, setPass] = useState('');
                       },
                     }}
                     underlineColor="transparent"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
                     style={styles.TextInput}></TextInput>
+                       <ErrorMessage
+                        error={errors['email']}
+                        visible={touched['email']}
+                      />
                 </View>
                 <View style={styles.box2}>
                   <Text style={styles.text6}>Password </Text>
@@ -66,10 +96,11 @@ const [pass, setPass] = useState('');
                     }}
                     underlineColor="transparent"
                     style={styles.TextInput}
+                   
                     secureTextEntry={!showPass}
                     right={
                       <TextInput.Icon
-                        style = {{marginTop:10}}
+                        style={{marginTop: 10}}
                         icon={showPass ? 'eye-off-outline' : 'eye-outline'}
                         onPress={() => setShowPass(!showPass)}
                       />
@@ -77,7 +108,10 @@ const [pass, setPass] = useState('');
                     value={pass}
                     onChangeText={setPass}
                   />
-                 
+                   <ErrorMessage
+                        error={errors['password']}
+                        visible={touched['password']}
+                      />
                 </View>
 
                 <TouchableOpacity
@@ -88,9 +122,7 @@ const [pass, setPass] = useState('');
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  onPress={() => {
-                    // navigation.navigate('DrawerNavigation');
-                  }}
+                  onPress={handleSubmit}
                   style={styles.btnShape}>
                   <Text style={styles.btnText}>Login</Text>
                 </TouchableOpacity>
@@ -138,6 +170,8 @@ const [pass, setPass] = useState('');
         </ScrollView>
       </ImageBackground>
     </View>
+    )}
+    </Formik>
   );
 }
 
@@ -179,13 +213,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.black1,
     marginHorizontal: '9%',
-    marginVertical: '10%',
+    marginVertical: '5%',
     borderRadius: 5,
   },
   text: {
     alignSelf: 'center',
     fontSize: 20,
-    marginTop: '9%',
+    marginTop: '5%',
     color: colors.black,
     fontFamily: 'NunitoSans_7pt-Black',
   },

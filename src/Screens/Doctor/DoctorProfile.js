@@ -1,10 +1,22 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../Global/globalstyles';
-import {Back2, Doctor2, Settings,Fb,Vector, Language, Compass} from '../../Assets/icons';
+import {
+  Back2,
+  Doctor2,
+  Settings,
+  Fb,
+  Vector,
+  Language,
+  Compass,
+  Log,
+} from '../../Assets/icons';
 import ProfileComponent from '../../Components/ProfileComponent';
+
+
 const DoctorProfile = () => {
   return (
+    
     <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
       <Back2
         width={40}
@@ -31,15 +43,29 @@ const DoctorProfile = () => {
         </Text>
       </View>
 
-      <View style={{marginTop:'15%'}}>
-        <ProfileComponent title="Account Settings" iconName="Settings" svg={Settings} />
-        <ProfileComponent title="Payment Method" iconName="FireIcon" svg={Vector} />
-        <ProfileComponent title="Language Selection" iconName="FireIcon" svg={Language} />
-
-        <ProfileComponent title="Pivacy Policy" iconName="Vector" svg={Compass} />
-
-        <ProfileComponent title="Terms of use" iconName="Vector" svg={Compass} />
-
+      <View style={{marginTop: '15%'}}>
+        <ProfileComponent title="Account Settings" svg={Settings} />
+        <ProfileComponent title="Payment Method" svg={Vector} />
+        <ProfileComponent title="Language Selection" svg={Language} />
+        <ProfileComponent title="Pivacy Policy" svg={Compass} />
+        <ProfileComponent title="Terms of use" svg={Compass} />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginTop: '25%',
+        }}>
+        <Log width={25} height={25} />
+        <Text
+          style={{
+            color: 'white',
+            marginLeft: 10,
+            fontSize: 17,
+            fontFamily: 'NunitoSans_10pt-Bold',
+          }}>
+          LogOut
+        </Text>
       </View>
     </View>
   );

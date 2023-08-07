@@ -15,6 +15,26 @@ export {default as Back} from './back.svg';
 export {default as DoctorImg} from './Doctorimg.svg';
 export {default as Clock} from './clock.svg';
 
+export {default as Call} from './call.svg';
+export {default as Mic} from './mic.svg';
+export {default as Video} from './video.svg';
+export {default as Video2} from './Video2.svg';
+export {default as Back2} from './back2.svg';
+export {default as Doctor2} from './doc2.svg';
+export {default as Settings} from './settings.svg';
+export {default as Vector} from './Vector.svg';
+export {default as Compass} from './compass.svg';
+export {default as Log} from './log.svg';
+
+
+
+
+
+
+
+
+
+
 
 
 

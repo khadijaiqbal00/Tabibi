@@ -9,6 +9,8 @@ export const colors = {
   black3: '#061023',
   btnclr:'rgba(26, 69, 99, 1)',
   pageBackground: '#DCEDF9',
+  pageBackground2: 'rgba(28, 107, 164, 1)',
+
   statusbar: '#282931',
   headerText: 'white',
   contentColor: '#1A4563',
