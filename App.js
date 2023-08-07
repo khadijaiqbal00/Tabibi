@@ -9,12 +9,9 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
        <Root />
-<<<<<<< HEAD
       {/* <DocLogin/>
       <VideoCall1/> */}
-=======
       
->>>>>>> 906bf1363ec7423a14d648b4b769965af26087ae
     </View>
   );
 }

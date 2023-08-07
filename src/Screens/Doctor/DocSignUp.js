@@ -6,19 +6,40 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
-
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import * as Animatable from 'react-native-animatable';
-import { colors } from '../../Global/globalstyles';
+import { colors } from '../../global/globalstyles';
+// import { database} from '../../Firebase/firebase';
 
 export default function DocSignUp({navigation}) {
-   const [showPass, setShowPass] = useState(false);
-   const [showcPass, setShowcPass] = useState(false);
-   const [email, setEmail] = useState('');
-   const [pass, setPass] = useState('');
-   const [passC, setPassC] = useState('');
+  const [showPass, setShowPass] = useState(false);
+  const [showcPass, setShowcPass] = useState(false);
+  const [pass, setPass] = useState('');
+  const [passC, setPassC] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  
+  const addDoctor = () => {
+    database.ref('/doctors').push({
+      email: email,
+      name: name,
+      phone: phone,
+      pass: pass,
+      passC: passC,
+    });
+     
+    alert('Doctor is Posted');
+    setEmail('');
+    setName('');
+    setPhone('');
+    setPass('');
+    setPassC('');
+
+    //  handleSignUp();
+    navigation.navigate('DocLogin');
+  };
   return (
     <View style={styles.Container}>
       <IconButton
@@ -44,7 +65,7 @@ export default function DocSignUp({navigation}) {
         style={styles.TextInput}
         outlineStyle={styles.border}
       />
-   
+
       <Text style={styles.Label}>E-mail</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -57,7 +78,7 @@ export default function DocSignUp({navigation}) {
         underlineColor="transparent"
         style={styles.TextInput}
       />
-   
+
       <Text style={styles.Label}>Phone</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -71,7 +92,7 @@ export default function DocSignUp({navigation}) {
         style={styles.TextInput}
         underlineColorAndroid="transparent"
       />
-      
+
       <Text style={styles.Label}>Password</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -94,7 +115,7 @@ export default function DocSignUp({navigation}) {
         value={pass}
         onChangeText={setPass}
       />
-     
+
       <Text style={styles.Label}>Confirm Password</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -152,9 +173,7 @@ export default function DocSignUp({navigation}) {
       <View style={styles.bottomLine}>
         <Text style={styles.text4}>Already have an account?</Text>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('DocLogin');
-          }}>
+          onPress={addDoctor}>
           <Text style={styles.text5}>Login</Text>
         </TouchableOpacity>
       </View>

@@ -11,7 +11,7 @@ import React from 'react';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-import {colors} from '../../Global/globalstyles';
+import {colors} from '../../global/globalstyles';
 import {IconButton} from 'react-native-paper';
 export default function ForgotPassword({navigation}) {
   return (

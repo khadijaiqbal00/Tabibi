@@ -10,7 +10,7 @@ import {
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 
 import React,{useState} from 'react';
-import {colors} from '../../Global/globalstyles';
+import {colors} from '../../global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {Google} from '../../Assets/icons';

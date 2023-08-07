@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {colors} from '../../Global/globalstyles';
+import {colors} from '../../global/globalstyles';
 import {Back2, Doctor2, Settings,Fb,Vector, Language, Compass} from '../../Assets/icons';
 import ProfileComponent from '../../Components/ProfileComponent';
 const DoctorProfile = () => {
