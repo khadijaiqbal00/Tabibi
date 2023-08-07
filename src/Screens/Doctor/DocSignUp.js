@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+<<<<<<< HEAD
 import React, {useState} from 'react';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 import * as yup from 'yup';
@@ -237,6 +238,180 @@ export default function DocSignUp({navigation}) {
         </View>
       )}
     </Formik>
+=======
+import React,{useState,useEffect} from 'react';
+import {Chip, IconButton, TextInput} from 'react-native-paper';
+import { colors } from '../../global/globalstyles';
+// import { database} from '../../Firebase/firebase';
+
+export default function DocSignUp({navigation}) {
+  const [showPass, setShowPass] = useState(false);
+  const [showcPass, setShowcPass] = useState(false);
+  const [pass, setPass] = useState('');
+  const [passC, setPassC] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  
+  const addDoctor = () => {
+    database.ref('/doctors').push({
+      email: email,
+      name: name,
+      phone: phone,
+      pass: pass,
+      passC: passC,
+    });
+     
+    alert('Doctor is Posted');
+    setEmail('');
+    setName('');
+    setPhone('');
+    setPass('');
+    setPassC('');
+
+    //  handleSignUp();
+    navigation.navigate('DocLogin');
+  };
+  return (
+    <View style={styles.Container}>
+      <IconButton
+        icon="chevron-left"
+        size={30}
+        onPress={() => navigation.goBack()}
+      />
+      <Text style={styles.text}>Create a new account</Text>
+      <Text style={styles.subText}>
+        Veuillez remplir les informations ci-dessous pour créer votre nouveau
+        compte.
+      </Text>
+      <Text style={styles.Label}>Name</Text>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        outlineStyle={styles.border}
+      />
+
+      <Text style={styles.Label}>E-mail</Text>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+      />
+
+      <Text style={styles.Label}>Phone</Text>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        underlineColorAndroid="transparent"
+      />
+
+      <Text style={styles.Label}>Password</Text>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        style={styles.TextInput}
+        secureTextEntry={!showPass}
+        underlineColor="transparent"
+        right={
+          <TextInput.Icon
+            style={{marginTop: 10}}
+            icon={showPass ? 'eye-off-outline' : 'eye-outline'}
+            onPress={() => setShowPass(!showPass)}
+          />
+        }
+        value={pass}
+        onChangeText={setPass}
+      />
+
+      <Text style={styles.Label}>Confirm Password</Text>
+      <TextInput
+        textColor="rgba(26, 69, 99, 1)"
+        theme={{
+          colors: {
+            text: 'rgba(28, 107, 164, 1)',
+            primary: 'rgba(28, 107, 164, 1)',
+          },
+        }}
+        underlineColor="transparent"
+        style={styles.TextInput}
+        secureTextEntry={!showcPass}
+        right={
+          <TextInput.Icon
+            style={{marginTop: 10}}
+            icon={showcPass ? 'eye-off-outline' : 'eye-outline'}
+            onPress={() => setShowcPass(!showcPass)}
+          />
+        }
+        value={passC}
+        onChangeText={setPassC}
+      />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignSelf: 'center',
+          marginTop: 16,
+          marginLeft: '10%',
+        }}>
+        <Text
+          style={{
+            color: 'black',
+            marginTop: 10,
+            fontSize: 14,
+            fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+          }}>
+          Accept terms and conditions
+        </Text>
+        <IconButton
+          icon="chevron-left"
+          size={30}
+          color={'green'}
+          style={{marginTop: -2}}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('TabNavigation');
+        }}
+        style={styles.btnShape}>
+        <Text style={styles.btnText}>Signup</Text>
+      </TouchableOpacity>
+
+      <View style={styles.bottomLine}>
+        <Text style={styles.text4}>Already have an account?</Text>
+        <TouchableOpacity
+          onPress={addDoctor}>
+          <Text style={styles.text5}>Login</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+>>>>>>> 7dacfc24e2ee510fa68ec34305e113e84d7eec2e
   );
 }
 const styles = StyleSheet.create({

@@ -18,7 +18,7 @@ import HomeStack from './HomeStack';
 import ProfileStack from './ReportStack';
 import NotificationStack from './NotificationStack';
 import {SvgXml} from 'react-native-svg';
-import {colors} from '../Global/globalstyles';
+import {colors} from '../global/globalstyles';
 
 const Tab = createBottomTabNavigator();
 

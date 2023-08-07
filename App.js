@@ -12,9 +12,15 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
        <Root />
+<<<<<<< HEAD
       {/* <DocLogin/> */}
       {/* <DoctorProfile/> */}
 
+=======
+      {/* <DocLogin/>
+      <VideoCall1/> */}
+      
+>>>>>>> 7dacfc24e2ee510fa68ec34305e113e84d7eec2e
     </View>
   );
 }

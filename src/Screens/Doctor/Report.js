@@ -9,15 +9,15 @@ import {
     FlatList,
   } from 'react-native';
   import React, {useEffect, useState} from 'react';
-  import {colors} from '../../Global/globalstyles';
+  import {colors} from '../../global/globalstyles';
   import {SvgXml} from 'react-native-svg';
   import {searchIcon} from '../../Assets/PharmacyComp';
   import {filterIcon} from '../../Assets/PharmacyComp';
   import ScheduleCard from '../../Components/ScheduleCard';
   import WhiteCard from '../../Components/WhiteCard';
   import CalenderCard from '../../Components/CalenderCard';
-  import {scheduleData} from '../../Global/Data';
-  import {CalenderData} from '../../Global/Data';
+  import {scheduleData} from '../../global/Data';
+  import {CalenderData} from '../../global/Data';
   import {Dots, ReportIcon, Water, WhiteHDots,Weight,BlackDots} from '../../Assets/icons';
   
   const Report = () => {
