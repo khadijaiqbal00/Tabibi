@@ -45,7 +45,7 @@ const PatientReport = () => {
             color: 'rgba(14, 16, 18, 1)',
             fontFamily: 'NunitoSans_10pt-Bold',
           }}>
-          Report
+          ppReport
         </Text>
         <Dots style={{marginTop: 5, color: 'black'}} />
       </View>

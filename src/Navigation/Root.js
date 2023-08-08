@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import DrawerNavigation from './DrawerNavigation';
+
 import TabNavigation from "./TabNavigation"
 import DocLogin from '../Screens/Doctor/DocLogin';
 import DocSignUp from '../Screens/Doctor/DocSignUp';
@@ -14,6 +15,17 @@ import CreatePassword from '../Screens/Doctor/CreatePassword';
 import LoginSuccess from '../Screens/Doctor/LoginSuccess';
 import VerifyCode from '../Screens/Doctor/VerifyCode';
 import ResetPassword from '../Screens/Doctor/ResetPassword';
+import LogInPatient from '../Screens/Patient/LogInPatient';
+import SignUpPatient from '../Screens/Patient/SignUpPatient';
+import HomePatient from '../Screens/Patient/HomePatient';
+import TabNavigationPatient from './TabNavigationPatient';
+
+
+import ForgotPasswordPatient from '../Screens/Patient/ForgotPasswordPatient';
+import VerifyCodePatient from '../Screens/Patient/VerifyCodePatient';
+import CreatePasswordPatient from '../Screens/Patient/CreatePasswordPatient';
+import LoginSuccessPatient from '../Screens/Patient/LoginSuccessPatient';
+
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
@@ -34,12 +46,28 @@ const Root = () => {
           />
         ) : null}
         <Stack.Screen
+          name="LogInPatient"
+          component={LogInPatient}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="SignUpPatient"
+          component={SignUpPatient}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
           name="DocLogin"
           component={DocLogin}
           options={{
             headerShown: false,
           }}
         />
+
         <Stack.Screen
           name="DocSignUp"
           component={DocSignUp}
@@ -55,6 +83,13 @@ const Root = () => {
           }}
         />
         <Stack.Screen
+          name="ForgotPasswordPatient"
+          component={ForgotPasswordPatient}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="VerifyCode"
           component={VerifyCode}
           options={{
@@ -62,8 +97,22 @@ const Root = () => {
           }}
         />
         <Stack.Screen
+          name="VerifyCodePatient"
+          component={VerifyCodePatient}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="CreatePassword"
           component={CreatePassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="CreatePasswordPatient"
+          component={CreatePasswordPatient}
           options={{
             headerShown: false,
           }}
@@ -83,19 +132,26 @@ const Root = () => {
           }}
         />
         <Stack.Screen
+          name="LoginSuccessPatient"
+          component={LoginSuccessPatient}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="TabNavigation"
           component={TabNavigation}
           options={{
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
+        <Stack.Screen
+          name="TabNavigationPatient"
+          component={TabNavigationPatient}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

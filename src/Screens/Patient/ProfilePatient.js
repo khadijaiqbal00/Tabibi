@@ -3,7 +3,7 @@ import React from 'react'
 import {Back2, Star, DotsA} from '../../Assets/icons';
 
 
-const DoctorProfileP = () => {
+const ProfilePatient = () => {
   return (
     <View style={{flex:1,}}>
     <View style={{height:'20%', backgroundColor:'#1C6BA4'}}>
@@ -38,6 +38,6 @@ const DoctorProfileP = () => {
   )
 }
 
-export default DoctorProfileP
+export default ProfilePatient
 
 const styles = StyleSheet.create({})

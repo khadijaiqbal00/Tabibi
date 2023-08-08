@@ -20,7 +20,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../../Components/Loader';
-export default function DocSignUp({navigation}) {
+export default function SignUpPatient({navigation}) {
   const [loader, setLoader] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleToggle = () => {
@@ -28,11 +28,9 @@ export default function DocSignUp({navigation}) {
   };
   const [showPass, setShowPass] = useState(false);
   const [showcPass, setShowcPass] = useState(false);
-  
+
   const [pass, setPass] = useState('');
   const [passC, setPassC] = useState('');
-  
-
 
   const validationSchema = yup.object().shape({
     name: yup.string().required('Name is Required'),
@@ -46,7 +44,6 @@ export default function DocSignUp({navigation}) {
       .oneOf([yup.ref('Password'), null], 'Passwords must match'),
   });
 
-
   const addData = values => {
     delete values.Password;
     delete values.cpassword;
@@ -56,18 +53,15 @@ export default function DocSignUp({navigation}) {
         .collection('users')
         .add(values)
         .then(() => {
-          
           resolve(true);
         })
         .catch(error => {
           console.log(error);
-          
         });
     });
 
     return promise;
   };
-
 
   const onSubmitValue = async (values, {resetForm}) => {
     resetForm();
@@ -82,7 +76,7 @@ export default function DocSignUp({navigation}) {
       );
       console.log('djjdjd');
       Alert.alert('Signup Successful');
-      navigation.navigate("TabNavigation")
+      navigation.navigate('TabNavigation');
       if (user) {
         addData(values)
           .then(bool => {
@@ -94,47 +88,49 @@ export default function DocSignUp({navigation}) {
                   'Please verify your email address. An email has been sent to your email address',
                 );
                 await auth().signOut();
-                navigation.navigate('Login');
+                navigation.navigate('LogInPatient');
               })
               .catch(error => Alert.alert('Error: ', error));
           })
           .catch(error => Alert.alert('Signup failed'));
-
-      } else Alert.alert("Signup failed")
-
-
+      } else Alert.alert('Signup failed');
     } catch (error) {
-      setLoader(false)
-      console.log("Error", error.message)
+      setLoader(false);
+      console.log('Error', error.message);
       Alert.alert(error.message);
     }
   };
   return (
     <Formik
-    initialValues={{ email: '', Password: '', name: '',  PhoneNumber: '', cpassword: '',  }}
-    validateOnMount={true}
-    onSubmit={onSubmitValue}
-    validationSchema={validationSchema}
-  >
-    {({
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      values,
-      touched,
-      errors,
-      isValid,
-    }) => (
+      initialValues={{
+        email: '',
+        Password: '',
+        name: '',
+        PhoneNumber: '',
+        cpassword: '',
+      }}
+      validateOnMount={true}
+      onSubmit={onSubmitValue}
+      validationSchema={validationSchema}>
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        touched,
+        errors,
+        isValid,
+      }) => (
         <View style={styles.Container}>
           <IconButton
             icon="chevron-left"
             size={30}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.text}>Create a new account</Text>
+          <Text style={styles.text}>Create Patient a new account</Text>
           <Text style={styles.subText}>
             Veuillez remplir les informations ci-dessous pour créer votre
-            nouveau compte.
+            nouveau compte.Patiennnttttttt
           </Text>
           <Text style={styles.Label}>Name</Text>
           <TextInput
@@ -170,7 +166,7 @@ export default function DocSignUp({navigation}) {
             style={styles.TextInput}
             underlineColorAndroid="transparent"
           />
-           <ErrorMessage error={errors['email']} visible={touched['email']} />
+          <ErrorMessage error={errors['email']} visible={touched['email']} />
           <Text style={styles.Label}>Phone</Text>
           <View
             style={{
@@ -203,8 +199,11 @@ export default function DocSignUp({navigation}) {
               style={styles.TextInput1}
             />
           </View>
-          <ErrorMessage error={errors['PhoneNumber']} visible={touched['PhoneNumber']} />
-        
+          <ErrorMessage
+            error={errors['PhoneNumber']}
+            visible={touched['PhoneNumber']}
+          />
+
           <Text style={styles.Label}>Password</Text>
           <TextInput
             textColor="rgba(26, 69, 99, 1)"
@@ -217,7 +216,6 @@ export default function DocSignUp({navigation}) {
             style={styles.TextInput}
             secureTextEntry={!showPass}
             underlineColor="transparent"
-            
             right={
               <TextInput.Icon
                 style={{marginTop: 10}}
@@ -226,13 +224,15 @@ export default function DocSignUp({navigation}) {
               />
             }
             onChangeText={handleChange('Password')}
-              onBlur={handleBlur('Password')}
-              value={values.Password}
+            onBlur={handleBlur('Password')}
+            value={values.Password}
             // value={pass}
             // onChangeText={setPass}
-            
           />
-            <ErrorMessage error={errors['Password']} visible={touched['Password']} />
+          <ErrorMessage
+            error={errors['Password']}
+            visible={touched['Password']}
+          />
           <Text style={styles.Label}>Confirm Password</Text>
           <TextInput
             textColor="rgba(26, 69, 99, 1)"
@@ -258,7 +258,10 @@ export default function DocSignUp({navigation}) {
             // value={passC}
             // onChangeText={setPassC}
           />
-          <ErrorMessage error={errors['cpassword']} visible={touched['cpassword']} />
+          <ErrorMessage
+            error={errors['cpassword']}
+            visible={touched['cpassword']}
+          />
           <View
             style={{
               flexDirection: 'row',
@@ -297,15 +300,15 @@ export default function DocSignUp({navigation}) {
               </View>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-           onPress={handleSubmit}
-            style={styles.btnShape}>
+          <TouchableOpacity onPress={handleSubmit} style={styles.btnShape}>
             <Text style={styles.btnText}>Signup</Text>
           </TouchableOpacity>
 
           <View style={styles.bottomLine}>
             <Text style={styles.text4}>Already have an account!</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{
+                navigation.navigate("LogInPatient")
+            }}>
               <Text style={styles.text5}>Login</Text>
             </TouchableOpacity>
           </View>

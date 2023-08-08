@@ -2,33 +2,33 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import WishListStack from './MessagesStack';
-import ScheduleStack from './ScheduleStack';
-import {
-  getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import WishListStack from './MessagesStackPatient';
+import CategoryStack from './ScheduleStack';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
-import { bellIcon } from '../Assets/TabSvgs';
-import { bellSelected } from '../Assets/TabSvgs';
-import { homeIcon } from '../Assets/TabSvgs';
-import { homeIconClicked } from '../Assets/TabSvgs';
-import { messagesIcon } from '../Assets/TabSvgs';
-import { messageSelected } from '../Assets/TabSvgs';
-import { dateIcon } from '../Assets/TabSvgs';
-import { dateSelected } from '../Assets/TabSvgs';
-import { reportIcon } from '../Assets/TabSvgs';
-import { reportIconSelected } from '../Assets/TabSvgs';
-import HomeStack from './HomeStack';
-import ReportStack from './ReportStack';
-import NotificationStack from './NotificationStack';
+import {bellIcon} from '../Assets/TabSvgs';
+import {bellSelected} from '../Assets/TabSvgs';
+import {homeIcon} from '../Assets/TabSvgs';
+import {homeIconClicked} from '../Assets/TabSvgs';
+import {messagesIcon} from '../Assets/TabSvgs';
+import {messageSelected} from '../Assets/TabSvgs';
+import {dateIcon} from '../Assets/TabSvgs';
+import {dateSelected} from '../Assets/TabSvgs';
+import {reportIcon} from '../Assets/TabSvgs';
+import {reportIconSelected} from '../Assets/TabSvgs';
+import HomeStackPatient from './HomeStackPatient';
+// import ProfileStackPatient from './ReportStack';
+import ScheduleStackPatient from './ScheduleStackPatient';
+import ReportStackPatient from './ReportStackPatient';
+import NotificationStackPatient from './NotificationStackPatient';
 import {SvgXml} from 'react-native-svg';
-import { colors } from '../Global/globalstyles';
-import MessagesStack from './MessagesStack';
+import {colors} from '../Global/globalstyles';
+import MessagesStackPatient from './MessagesStackPatient';
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigation() {
-
-  const [route, setRoute] = useState('TabNavigation');
+export default function TabNavigationPatient() {
+  const [route, setRoute] = useState('TabNavigationPatient');
 
   return (
     <Tab.Navigator
@@ -45,11 +45,10 @@ export default function TabNavigation() {
           marginBottom: 3,
         },
         tabBarShowLabel: false,
-      }}
-      >
+      }}>
       <Tab.Screen
-        name="HomeStack"
-        component={HomeStack}
+        name="HomeStackPatient"
+        component={HomeStackPatient}
         listeners={{
           tabPress: e => {
             setRoute('Settings');
@@ -66,17 +65,16 @@ export default function TabNavigation() {
         }}
       />
       <Tab.Screen
-        name="MessagesStack"
-        component={MessagesStack}
+        name="MessagesStackPatient"
+        component={MessagesStackPatient}
         options={({route}) => ({
           tabBarStyle: (route => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-            console.log("heloooooooooooooo",routeName);
+            // console.log('heloooooooooooooo', routeName);
             if (
-              routeName === 'VoiceCall' ||
-              routeName === 'VideoCall1' ||
-              routeName === 'TextMessage' ||
-              routeName === 'Messages'
+              routeName === 'VoiceCallPatient' ||
+              routeName === 'VideoCall1Patient' ||
+              routeName === 'TextMessagePatient' 
             ) {
               return {display: 'none'};
             }
@@ -93,8 +91,8 @@ export default function TabNavigation() {
       />
 
       <Tab.Screen
-        name="ScheduleStack"
-        component={ScheduleStack}
+        name="ScheduleStackPatient"
+        component={ScheduleStackPatient}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
@@ -106,8 +104,8 @@ export default function TabNavigation() {
         }}
       />
       <Tab.Screen
-        name="ReportStack"
-        component={ReportStack}
+        name="ReportStackPatient"
+        component={ReportStackPatient}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
@@ -119,8 +117,8 @@ export default function TabNavigation() {
         }}
       />
       <Tab.Screen
-        name="NotificationStack"
-        component={NotificationStack}
+        name="NotificationStackPatient"
+        component={NotificationStackPatient}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (

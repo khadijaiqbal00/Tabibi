@@ -25,7 +25,9 @@ export {default as Settings} from './settings.svg';
 export {default as Vector} from './Vector.svg';
 export {default as Compass} from './compass.svg';
 export {default as Log} from './log.svg';
-
+export {default as Star} from './star.svg';
+export {default as Tick} from './tick.svg';
+export {default as DotsA} from './dotssss.svg';
 
 
 

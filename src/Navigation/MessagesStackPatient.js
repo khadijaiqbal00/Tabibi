@@ -2,45 +2,43 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Messages from '../Screens/Doctor/Messages';
+
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import VideoCall1 from '../Screens/Doctor/VideoCall1';
-import VoiceCall from '../Screens/Doctor/VoiceCall';
-import TextMessage from '../Screens/Doctor/TextMessage';
+import VideoCallPatient from '../Screens/Patient/VideoCallPatient';
+import VoiceCallPatient from '../Screens/Patient/VoiceCallPatient';
+import TextMessagePatient from '../Screens/Patient/TextMessagePatient';
+import MessagesPatient from '../Screens/Patient/MessagesPatient';
 const Stack = createNativeStackNavigator();
 
-export default function MessagesStack({navigation,route}) {
-  
-
-  
+export default function MessagesStackPatient({navigation, route}) {
   return (
-    <Stack.Navigator initialRouteName="Messages">
+    <Stack.Navigator initialRouteName="MessagesPatient">
       <Stack.Screen
-        name="Messages"
-        component={Messages}
+        name="MessagesPatient"
+        component={MessagesPatient}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="VoiceCall"
-        component={VoiceCall}
-        options={{
-          headerShown: false,
-          tabBarStyle: {display: 'none'},
-        }}
-      />
-      <Stack.Screen
-        name="TextMessage"
-        component={TextMessage}
+        name="VoiceCallPatient"
+        component={VoiceCallPatient}
         options={{
           headerShown: false,
           tabBarStyle: {display: 'none'},
         }}
       />
       <Stack.Screen
-        name="VideoCall1"
-        component={VideoCall1}
+        name="TextMessagePatient"
+        component={TextMessagePatient}
+        options={{
+          headerShown: false,
+          tabBarStyle: {display: 'none'},
+        }}
+      />
+      <Stack.Screen
+        name="VideoCallPatient"
+        component={VideoCallPatient}
         options={{
           headerShown: false,
           tabBarStyle: {display: 'none'},

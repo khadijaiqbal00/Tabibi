@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View , FlatList} from 'react-native'
-import React, {useState , useEffect} from 'react'
-import { colors } from '../../Global/globalstyles';
-import { notificationData } from '../../Global/Data';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {colors} from '../../Global/globalstyles';
+import {notificationData} from '../../Global/Data';
 import NotificationCard from '../../Components/NotificationCard';
-const Notification = () => {
+const NotificationPatient = () => {
   const [List, setList] = useState([{}]);
   useEffect(() => {
     console.log();
@@ -27,7 +27,7 @@ const Notification = () => {
 
             fontFamily: 'NunitoSans_10pt-Bold',
           }}>
-          Notification
+          NotificationPP
         </Text>
         <FlatList
           alwaysBounceVertical
@@ -47,8 +47,8 @@ const Notification = () => {
       </View>
     </View>
   );
-}
+};
 
-export default Notification
+export default NotificationPatient;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

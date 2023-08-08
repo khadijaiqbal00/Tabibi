@@ -3,6 +3,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../Screens/Doctor/Home';
+import DoctorProfile from '../Screens/Doctor/DoctorProfile';
+import DocAccSetting from '../Screens/Doctor/DocAccSetting';
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -16,6 +18,21 @@ export default function HomeStack() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="DoctorProfile"
+          component={DoctorProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="DocAccSetting"
+          component={DocAccSetting}
+          options={{
+            headerShown: false,
+          }}
+        />
+        
   
       </Stack.Navigator>
   );

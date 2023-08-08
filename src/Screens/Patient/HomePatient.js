@@ -31,7 +31,7 @@ import {fileIcon} from '../../Assets/TabSvgs';
 import {sendZipIcon} from '../../Assets/TabSvgs';
 // import { FlatList } from 'react-native-gesture-handler';
 
-const Home = ({navigation}) => {
+const HomePatient = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [List2, setList2] = useState([{}]);
 
@@ -86,7 +86,7 @@ const Home = ({navigation}) => {
                   fontSize: 16,
                   fontFamily: 'NunitoSans_10pt-Light',
                 }}>
-                Name
+                Name Patient
               </Text>
             </View>
           </View>
@@ -231,16 +231,11 @@ const Home = ({navigation}) => {
             justifyContent: 'space-between',
             width: '80%',
           }}>
-          <TouchableOpacity onPress = {()=>{
-            navigation.navigate('DoctorProfile')
-            
-          }}>
-            <Image
-              style={{height: 50, width: 50, borderRadius: 50, marginTop: '5%'}}
-              source={{
-                uri: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
-              }}></Image>
-          </TouchableOpacity>
+          <Image
+            style={{height: 50, width: 50, borderRadius: 50, marginTop: '5%'}}
+            source={{
+              uri: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+            }}></Image>
           <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -259,7 +254,7 @@ const Home = ({navigation}) => {
                 marginLeft: '15%',
                 fontFamily: 'NunitoSans_10pt-Bold',
               }}>
-              Add your Card
+              Add your Card Patient
             </Text>
           </TouchableOpacity>
         </View>
@@ -286,9 +281,11 @@ const Home = ({navigation}) => {
           marginLeft: '10%',
           marginTop: '15%',
         }}>
-        <TouchableOpacity onPress = {()=>{
-          navigation.navigate("DoctorSearch")
-        }} style={[styles.View1, {marginRight: '5%'}]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Appointment2');
+          }}
+          style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml
             xml={userIcon}
             style={{marginLeft: -10, marginTop: 5}}></SvgXml>
@@ -444,7 +441,7 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+export default HomePatient;
 
 const styles = StyleSheet.create({
   Container: {

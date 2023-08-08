@@ -23,7 +23,7 @@ import {chatData} from '../../Global/Data';
 
 
 ;
-const Messages = ({navigation}) => {
+const MessagesPatient = ({navigation}) => {
    const [modalVisible, setModalVisible] = useState(false);
    const [List, setList] = useState([{}]);
    const [List2, setList2] = useState([{}]);
@@ -42,7 +42,7 @@ const Messages = ({navigation}) => {
           color: 'rgba(14, 16, 18, 1)',
           fontFamily: 'NunitoSans_10pt-Bold',
         }}>
-        Messages
+        MessagesPatient
       </Text>
 
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
@@ -101,7 +101,7 @@ const Messages = ({navigation}) => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("TextMessage")
+              navigation.navigate("TextMessagePatient")
             }}>
             <PatientCard
               id={item.id}
@@ -116,7 +116,7 @@ const Messages = ({navigation}) => {
   );
 };
 
-export default Messages;
+export default MessagesPatient;
 
 const styles = StyleSheet.create({
   Container: {

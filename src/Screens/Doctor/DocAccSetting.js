@@ -10,14 +10,19 @@ import {colors} from '../../Global/globalstyles';
 import {Back2, Doctor2} from '../../Assets/icons';
 import ProfileComponent from '../../Components/ProfileComponent';
 
-const DocAccSetting = () => {
+const DocAccSetting = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
-      <Back2
-        width={40}
-        height={40}
-        style={{marginTop: '10%', marginHorizontal: '5%'}}
-      />
+      <TouchableOpacity onPress ={()=>{
+        navigation.goBack();
+        
+      }}>
+        <Back2
+          width={40}
+          height={40}
+          style={{marginTop: '10%', marginHorizontal: '5%'}}
+        />
+      </TouchableOpacity>
 
       <View style={{alignItems: 'center'}}>
         <Doctor2
@@ -149,7 +154,7 @@ const DocAccSetting = () => {
               ...Platform.select({
                 ios: {
                   shadowColor: '#000',
-                  shadowOffset: { width: 0, height: 2 },
+                  shadowOffset: {width: 0, height: 2},
                   shadowOpacity: 0.6,
                   shadowRadius: 2,
                 },
@@ -169,7 +174,8 @@ const DocAccSetting = () => {
               Save{' '}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{
+          <TouchableOpacity
+            style={{
               backgroundColor: '#FF0000',
               width: '50%',
               height: '80%',
@@ -177,7 +183,7 @@ const DocAccSetting = () => {
               ...Platform.select({
                 ios: {
                   shadowColor: '#000',
-                  shadowOffset: { width: 0, height: 2 },
+                  shadowOffset: {width: 0, height: 2},
                   shadowOpacity: 0.6,
                   shadowRadius: 2,
                 },
@@ -186,13 +192,16 @@ const DocAccSetting = () => {
                 },
               }),
             }}>
-            <Text style={{
+            <Text
+              style={{
                 color: 'white',
                 textAlign: 'center',
                 fontSize: 14,
                 fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
                 marginTop: 7,
-              }}>Delete Account </Text>
+              }}>
+              Delete Account{' '}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

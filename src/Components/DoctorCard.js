@@ -61,7 +61,7 @@ const DoctorCard = ({image,name, designation ,review,review2}) => {
         <Star
           width={17}
           height={17}
-          style={{marginTop: '6%', }}
+          style={{marginTop: 15, }}
         />
          <Text
           style={{

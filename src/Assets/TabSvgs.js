@@ -2,6 +2,37 @@ export const backCalender = `<svg width="15" height="26" viewBox="0 0 15 26" fil
 <path d="M13.5796 1L1.34771 13L13.5796 25" stroke="#4A545E" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `;
+export const bacbggreay = `<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="43" height="43" rx="15.5" fill="#DCEDF9" stroke="#D7DEEA"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.9142 22L21.0607 18.8535L20.3536 18.1464L16 22.5L20.3536 26.8535L21.0607 26.1464L17.9142 23H29.2071V22H17.9142Z" fill="#0E1012" stroke="#0E1012" stroke-width="0.5"/>
+</svg>
+`;
+export const linkSvgIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997" stroke="#97A1C1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14 11.0002C13.5705 10.4261 13.0226 9.95104 12.3934 9.60729C11.7642 9.26353 11.0684 9.05911 10.3533 9.00789C9.63816 8.95667 8.92037 9.05986 8.24861 9.31044C7.57685 9.56103 6.96684 9.95316 6.45996 10.4602L3.45996 13.4602C2.54917 14.4032 2.04519 15.6662 2.05659 16.9772C2.06798 18.2882 2.59382 19.5423 3.52086 20.4693C4.4479 21.3964 5.70197 21.9222 7.01295 21.9336C8.32393 21.945 9.58694 21.441 10.53 20.5302L12.24 18.8202" stroke="#97A1C1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+export const sendSvgIcon = `<svg width="48" height="45" viewBox="0 0 48 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 12C0 5.37258 5.37258 0 12 0H36C42.6274 0 48 5.37258 48 12V33C48 39.6274 42.6274 45 36 45H12C5.37258 45 0 39.6274 0 33V12Z" fill="#1C6BA4" fill-opacity="0.15"/>
+<path d="M34 13L23 24" stroke="#1C6BA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M34 13L27 33L23 24L14 20L34 13Z" stroke="#1C6BA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+export const callIcon = `<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="43" height="43" rx="15.5" fill="white" stroke="#D7DEEA"/>
+<path d="M30.4582 25.4261L26.3018 23.6448C26.1243 23.5691 25.9269 23.5532 25.7395 23.5994C25.5521 23.6455 25.3848 23.7513 25.2628 23.9009L23.4221 26.1497C20.5334 24.7877 18.2086 22.4629 16.8466 19.5742L19.0954 17.7335C19.2452 17.6117 19.3513 17.4444 19.3975 17.2569C19.4437 17.0694 19.4275 16.8719 19.3515 16.6945L17.5702 12.5381C17.4868 12.3468 17.3392 12.1906 17.1529 12.0964C16.9666 12.0022 16.7532 11.976 16.5497 12.0223L12.6902 12.9129C12.494 12.9583 12.3189 13.0688 12.1935 13.2264C12.0682 13.384 12 13.5795 12 13.7809C12 23.2997 19.7152 31 29.219 31C29.4205 31.0001 29.6161 30.9319 29.7738 30.8066C29.9315 30.6812 30.0421 30.5061 30.0874 30.3098L30.9781 26.4503C31.024 26.2458 30.9973 26.0316 30.9024 25.8447C30.8075 25.6577 30.6504 25.5097 30.4582 25.4261Z" fill="black"/>
+</svg>
+`;
+
+export const videBg = `<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="43" height="43" rx="15.5" fill="white" stroke="#D7DEEA"/>
+</svg>
+`;
+export const videoIcon = `<svg width="19" height="13" viewBox="0 0 19 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.0899 0H1.57674C0.705903 0 0 0.724479 0 1.61823V11.3818C0 12.2755 0.705903 13 1.57674 13H11.0899C11.9608 13 12.6667 12.2755 12.6667 11.3818V1.61823C12.6667 0.724479 11.9608 0 11.0899 0ZM17.3375 1.2763L13.7222 3.83568V9.16432L17.3375 11.7203C18.0368 12.2146 19 11.7102 19 10.8469V2.14974C19 1.28984 18.0401 0.782031 17.3375 1.2763Z" fill="black"/>
+</svg>
+`;
 
 export const forwardCalender = `<svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.3479 25L13.5798 13L1.3479 1" stroke="#4A545E" stroke-linecap="round" stroke-linejoin="round"/>

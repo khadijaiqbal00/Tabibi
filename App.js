@@ -10,14 +10,14 @@ import Messages from './src/Screens/Doctor/Messages';
 import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
 import Schedule from './src/Screens/Doctor/Schedule';
 import DoctorSearch from './src/Screens/Patient/DoctorSearch';
-import DoctorProfileP from './src/Screens/Patient/DoctorProfileP';
-import Appointment2 from './src/Screens/Patient/Appointment2';
+import DoctorProfileP from './src/Screens/Patient/ProfilePatient';
+import Appointment1 from './src/Screens/Patient/Appointment1';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       {/* <Root /> */}
-    <Appointment2/>
+       <Root />
+    {/* <Appointment1/> */}
     </View>
   );
 }
