@@ -56,6 +56,8 @@ const Schedule = () => {
 
       <View style={{marginLeft: 10}}>
         <FlatList
+          alwaysBounceVertical
+          alwaysBounceHorizontal
           horizontal
           keyboardShouldPersistTaps="handled"
           showsHorizontalScrollIndicator={false}
@@ -102,6 +104,8 @@ const Schedule = () => {
       <View style={{flexDirection: 'row', marginLeft: '5%'}}></View>
 
       <FlatList
+        alwaysBounceVertical
+        alwaysBounceHorizontal
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}
         data={List}

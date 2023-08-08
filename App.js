@@ -17,8 +17,12 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
        {/* <Root /> */}
+<<<<<<< HEAD
     {/* <DoctorProfileP/> */}
   <Appointment2/>
+=======
+    <Appointment2/>
+>>>>>>> bc8b31ca69ec2476841b248e709166c813cc092f
     </View>
   );
 }

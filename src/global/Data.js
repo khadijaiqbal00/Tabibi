@@ -195,6 +195,73 @@ export const CalenderData = [
     id: 8,
   },
 ];
+export const TimeData = [
+  {
+    time: '08.30',
+
+    id: 0,
+  },
+  {
+    time: '08.30',
+
+    id: 1,
+  },
+  {
+    time: '08.30',
+
+    id: 2,
+  },
+  {
+    time: '08.30',
+
+    id: 3,
+  },
+  {
+    time: '08.30',
+
+    id: 4,
+  },
+  {
+    time: '08.30',
+
+    id: 5,
+  },
+  {
+    time: '08.30',
+
+    id: 6,
+  },
+  {
+    time: '08.30',
+
+    id: 7,
+  },
+  {
+    time: '08.30',
+
+    id: 8,
+  },
+  {
+    time: '08.30',
+
+    id: 9,
+  },
+  {
+    time: '08.30',
+
+    id: 10,
+  },
+  {
+    time: '08.30',
+
+    id: 11,
+  },
+  {
+    time: '08.30',
+
+    id: 12,
+  },
+];
 // export const menu = [
 //   {key: 1, title: 'BEEF'},
 //   {key: 2, title: 'CHICKEN'},

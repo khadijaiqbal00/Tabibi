@@ -106,6 +106,8 @@ const Home = () => {
 
             <FlatList
               horizontal
+              alwaysBounceVertical
+              alwaysBounceHorizontal
               keyboardShouldPersistTaps="handled"
               showsHorizontalScrollIndicator={false}
               data={List2}
@@ -342,6 +344,8 @@ const Home = () => {
 
       <FlatList
         horizontal
+        alwaysBounceVertical
+        alwaysBounceHorizontal
         data={List}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
