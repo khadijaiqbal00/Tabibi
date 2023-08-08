@@ -12,7 +12,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {colors} from '../../global/globalstyles';
+import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
 import {PharmacyIcon} from '../../Assets/PharmacyComp';
 import {searchIcon} from '../../Assets/PharmacyComp';
@@ -21,11 +21,11 @@ import {userIcon} from '../../Assets/PharmacyComp';
 import {reportIcon} from '../../Assets/PharmacyComp';
 import AppointmentCard from '../../Components/AppointmentCard';
 import {dotsIcon} from '../../Assets/TabSvgs';
-import {appointmentData} from '../../global/Data';
+import {appointmentData} from '../../Global/Data';
 import {useIsFocused} from '@react-navigation/native';
 import {backbgWhiteIcon} from '../../Assets/TabSvgs';
 import {locationIcon} from '../../Assets/TabSvgs';
-import {pharmacyData} from '../../global/Data';
+import {pharmacyData} from '../../Global/Data';
 import PharmacyCard from '../../Components/PharmacyCard';
 import {fileIcon} from '../../Assets/TabSvgs';
 import {sendZipIcon} from '../../Assets/TabSvgs';

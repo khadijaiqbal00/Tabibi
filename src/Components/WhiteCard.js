@@ -3,7 +3,7 @@ import React from 'react';
 import {SvgXml} from 'react-native-svg';
 import {dotsIcon} from '../Assets/TabSvgs';
 import {activePaitentIcon} from '../Assets/TabSvgs';
-import {colors} from '../global/globalstyles';
+import {colors} from '../Global/globalstyles';
 import {Doc, Dotsv} from '../Assets/icons';
 
 const WhiteCard = ({name, image, symptom, time}) => {

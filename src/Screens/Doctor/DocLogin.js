@@ -9,13 +9,8 @@ import {
 } from 'react-native';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 
-<<<<<<< HEAD
 import React, {useState} from 'react';
 import {colors} from '../../Global/globalstyles';
-=======
-import React,{useState} from 'react';
-import {colors} from '../../global/globalstyles';
->>>>>>> 7dacfc24e2ee510fa68ec34305e113e84d7eec2e
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {Google} from '../../Assets/icons';
@@ -101,7 +96,8 @@ export default function LogIn({navigation}) {
                     }}
                     underlineColor="transparent"
                     style={styles.TextInput}
-                   
+                    
+                  
                     secureTextEntry={!showPass}
                     right={
                       <TextInput.Icon

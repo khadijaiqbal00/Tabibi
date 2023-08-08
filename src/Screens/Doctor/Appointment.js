@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {colors} from '../../global/globalstyles';
+import {colors} from '../../Global/globalstyles';
 import {Back, DoctorImg} from '../../Assets/icons';
-import {scheduleData} from '../../global/Data';
+import {scheduleData} from '../../Global/Data';
 import DocAppointment from '../../Components/DocAppointment';
 const Appointment = () => {
   const [List, setList] = useState([{}]);

@@ -8,12 +8,12 @@ import {
   FlatList
 } from 'react-native';
 import React ,{useState,useEffect}from 'react';
-import {colors} from '../../global/globalstyles';
+import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
 import {searchIcon} from '../../Assets/PharmacyComp';
 import {filterIcon} from '../../Assets/PharmacyComp';
 import PatientCard from '../../Components/PatientCard';
-import {chatData} from '../../global/Data';
+import {chatData} from '../../Global/Data';
 const Messages = () => {
    const [List, setList] = useState([{}]);
    useEffect(() => {
