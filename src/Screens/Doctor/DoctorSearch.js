@@ -67,6 +67,10 @@ const DoctorSearch = () => {
         </Text>
        
       </View>
+
+
+
+
       <View
         style={{
           flexDirection: 'row',

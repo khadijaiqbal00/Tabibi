@@ -31,9 +31,9 @@ const DoctorCard = ({image,name, designation ,review,review2}) => {
       ) : (
         <Image source={image} style={styles.cardImage} />
       )}
-        <SvgXml
+        {/* <SvgXml
           xml={activePaitentIcon}
-          style={{marginTop: -90, marginLeft: '80%'}}></SvgXml>
+          style={{marginTop: -90, marginLeft: '80%'}}></SvgXml> */}
       </View>
       <View
         style={{
@@ -59,9 +59,9 @@ const DoctorCard = ({image,name, designation ,review,review2}) => {
         </Text>
         <View style={{flexDirection:'row'}}>
         <Star
-          width={19}
-          height={19}
-          style={{marginTop: '5%', }}
+          width={17}
+          height={17}
+          style={{marginTop: '6%', }}
         />
          <Text
           style={{

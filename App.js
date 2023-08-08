@@ -9,12 +9,13 @@ import DoctorProfile from './src/Screens/Doctor/DoctorProfile';
 import Messages from './src/Screens/Doctor/Messages';
 import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
 import DoctorSearch from './src/Screens/Doctor/DoctorSearch';
+import Schedule from './src/Screens/Doctor/Schedule';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       {/* <Root /> */}
-    <DoctorSearch/>
+       <Root />
+    {/* <DoctorSearch/> */}
     {/* <Messages/> */}
     
     </View>
