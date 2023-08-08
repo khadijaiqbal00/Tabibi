@@ -8,16 +8,15 @@ import Appointment from './src/Screens/Doctor/Appointment';
 import DoctorProfile from './src/Screens/Doctor/DoctorProfile';
 import Messages from './src/Screens/Doctor/Messages';
 import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
-import DoctorSearch from './src/Screens/Doctor/DoctorSearch';
 import Schedule from './src/Screens/Doctor/Schedule';
+import DoctorSearch from './src/Screens/Patient/DoctorSearch';
+import DoctorProfileP from './src/Screens/Patient/DoctorProfileP';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       <Root />
-    {/* <DoctorSearch/> */}
-    {/* <Messages/> */}
-    
+       {/* <Root /> */}
+    <DoctorProfileP/>
     </View>
   );
 }
