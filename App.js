@@ -8,12 +8,14 @@ import Appointment from './src/Screens/Doctor/Appointment';
 import DoctorProfile from './src/Screens/Doctor/DoctorProfile';
 import Messages from './src/Screens/Doctor/Messages';
 import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
+import DoctorSearch from './src/Screens/Doctor/DoctorSearch';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       <Root />
-   
+       {/* <Root /> */}
+    <DoctorSearch/>
+    {/* <Messages/> */}
     
     </View>
   );
