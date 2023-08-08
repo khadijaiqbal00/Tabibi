@@ -11,12 +11,14 @@ import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
 import Schedule from './src/Screens/Doctor/Schedule';
 import DoctorSearch from './src/Screens/Patient/DoctorSearch';
 import DoctorProfileP from './src/Screens/Patient/DoctorProfileP';
+import Appointment2 from './src/Screens/Patient/Appointment2';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
        {/* <Root /> */}
-    <DoctorProfileP/>
+    {/* <DoctorProfileP/> */}
+  <Appointment2/>
     </View>
   );
 }
