@@ -3,6 +3,7 @@ import {
   Text,
   View,
   Image,
+  Alert,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
@@ -15,8 +16,12 @@ import * as Animatable from 'react-native-animatable';
 import {colors} from '../../Global/globalstyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ErrorMessage from '../../Components/ErrorMessage';
-
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from '../../Components/Loader';
 export default function DocSignUp({navigation}) {
+  const [loader, setLoader] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleToggle = () => {
     setChecked(!checked);
@@ -26,20 +31,80 @@ export default function DocSignUp({navigation}) {
   
   const [pass, setPass] = useState('');
   const [passC, setPassC] = useState('');
-  const onSubmitValue = () => {};
+  
 
 
   const validationSchema = yup.object().shape({
     name: yup.string().required('Name is Required'),
     email: yup.string().email().required('Email is required'),
     PhoneNumber: yup.string().required().min(11),
-    password: yup.string().min(6).required(),
+    Password: yup.string().min(6).required(),
     cpassword: yup
       .string()
       .min(6)
       .required('Confirm password field is required')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+      .oneOf([yup.ref('Password'), null], 'Passwords must match'),
   });
+
+
+  const addData = values => {
+    delete values.Password;
+    delete values.cpassword;
+
+    let promise = new Promise((resolve, reject) => {
+      firestore()
+        .collection('users')
+        .add(values)
+        .then(() => {
+          
+          resolve(true);
+        })
+        .catch(error => {
+          console.log(error);
+          
+        });
+    });
+
+    return promise;
+  };
+
+
+  const onSubmitValue = async (values, {resetForm}) => {
+    resetForm();
+    setLoader(true);
+    console.log(values.email);
+    console.log(values.Password);
+
+    try {
+      const user = await auth().createUserWithEmailAndPassword(
+        values.email,
+        values.Password,
+      );
+      console.log('djjdjd');
+      Alert.alert('Signup Successful');
+      navigation.navigate("DocSignUp")
+      if (user) {
+        addData(values)
+          .then((bool) => {
+            auth().currentUser.sendEmailVerification()
+            .then(async () => {
+                setLoader(false)
+                alert("Please verify your email address. An email has been sent to your email address")
+                await auth().signOut();
+                navigation.navigate('Login');
+              })
+              .catch((error) => alert("Error: ", error))
+          }).catch((error) => alert("Signup failed"))
+
+      } else alert("Signup failed")
+
+
+    } catch (error) {
+      setLoader(false)
+      console.log("Error", error.message)
+      alert(error.message);
+    }
+  };
   return (
     <Formik
     initialValues={{ email: '', Password: '', name: '',  PhoneNumber: '', cpassword: '',  }}
@@ -156,8 +221,11 @@ export default function DocSignUp({navigation}) {
                 onPress={() => setShowPass(!showPass)}
               />
             }
-            value={pass}
-            onChangeText={setPass}
+            onChangeText={handleChange('Password')}
+              onBlur={handleBlur('Password')}
+              value={values.Password}
+            // value={pass}
+            // onChangeText={setPass}
             
           />
             <ErrorMessage error={errors['Password']} visible={touched['Password']} />
@@ -180,8 +248,11 @@ export default function DocSignUp({navigation}) {
                 onPress={() => setShowcPass(!showcPass)}
               />
             }
-            value={passC}
-            onChangeText={setPassC}
+            onChangeText={handleChange('cpassword')}
+            onBlur={handleBlur('cpassword')}
+            value={values.cpassword}
+            // value={passC}
+            // onChangeText={setPassC}
           />
           <ErrorMessage error={errors['cpassword']} visible={touched['cpassword']} />
           <View
