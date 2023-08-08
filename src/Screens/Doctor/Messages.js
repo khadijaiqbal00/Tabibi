@@ -77,6 +77,8 @@ const Messages = () => {
         </Text>
       </View>
       <FlatList
+        alwaysBounceVertical
+        alwaysBounceHorizontal
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}
         data={List}
@@ -84,8 +86,8 @@ const Messages = () => {
         renderItem={({item}) => (
           <PatientCard
             id={item.id}
-            image = {item.image}
-            name = {item.name}
+            image={item.image}
+            name={item.name}
             message={item.message}
           />
         )}

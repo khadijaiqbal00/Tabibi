@@ -40,6 +40,8 @@ const Appointment = () => {
         </Text>
         <View style={{width: '85%'}}>
           <FlatList
+            alwaysBounceVertical
+            alwaysBounceHorizontal
             keyboardShouldPersistTaps="handled"
             showsHorizontalScrollIndicator={false}
             data={List}
@@ -54,16 +56,14 @@ const Appointment = () => {
               />
             )}
           />
-
-       
         </View>
         <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('VerifyCode');
-            }}
-            style={styles.btnShape}>
-            <Text style={styles.btnText}>CONNECT NOW</Text>
-          </TouchableOpacity>
+          onPress={() => {
+            navigation.navigate('VerifyCode');
+          }}
+          style={styles.btnShape}>
+          <Text style={styles.btnText}>CONNECT NOW</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
