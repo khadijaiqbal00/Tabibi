@@ -1,12 +1,18 @@
-import { StyleSheet, Text, View,FlatList,Pressable, TouchableOpacity } from 'react-native'
-import React , {useState,useEffect}from 'react'
-import { colors } from '../../Global/globalstyles';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {colors} from '../../Global/globalstyles';
 import {Back, Star} from '../../Assets/icons';
-import { backCalender } from '../../Assets/TabSvgs';
-import { forwardCalender } from '../../Assets/TabSvgs';
+import {backCalender} from '../../Assets/TabSvgs';
+import {forwardCalender} from '../../Assets/TabSvgs';
 import {SvgXml} from 'react-native-svg';
-import { TimeData } from '../../Global/Data';
-
+import {TimeData} from '../../Global/Data';
 
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 
@@ -68,16 +74,16 @@ LocaleConfig.locales['fr'] = {
 
 LocaleConfig.defaultLocale = 'fr';
 const Appointment1 = () => {
-    const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState('');
 
-    const [indexCheck, setIndexCheck] = useState('0');
+  const [indexCheck, setIndexCheck] = useState('0');
 
-    const [List, setList] = useState([{}]);
+  const [List, setList] = useState([{}]);
 
-    useEffect(() => {
-      console.log();
-      setList(TimeData);
-    });
+  useEffect(() => {
+    console.log();
+    setList(TimeData);
+  });
   return (
     <View style={styles.Container}>
       <View style={{flexDirection: 'row'}}>
@@ -137,7 +143,7 @@ const Appointment1 = () => {
           textSectionTitleColor: 'transparent',
           todayTextColor: 'white',
           todayBackgroundColor: 'rgba(28, 107, 164, 1)',
-          todayDotColor:"white",
+          todayDotColor: 'white',
           selectedDayBackgroundColor: 'red',
         }}
         markedDates={{
@@ -241,9 +247,9 @@ const Appointment1 = () => {
       </View>
     </View>
   );
-}
+};
 
-export default Appointment1
+export default Appointment1;
 
 const styles = StyleSheet.create({
   Container: {

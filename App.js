@@ -15,9 +15,9 @@ import Appointment1 from './src/Screens/Patient/Appointment1';
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       <Root />
-    {/* <Appointment1/> */}
+      <StatusBar barStyle={'light-content'} backgroundColor="black" />
+      <Root />
+      {/* <Appointment1/> */}
     </View>
   );
 }
