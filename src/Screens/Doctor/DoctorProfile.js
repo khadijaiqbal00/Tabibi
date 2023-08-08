@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../Global/globalstyles';
-import {Back2, Doctor2, Settings,Fb,Vector, Language, Compass} from '../../Assets/icons';
+import {Back2, Doctor2, Settings,Fb,Vector, Language, Compass, Log} from '../../Assets/icons';
 import ProfileComponent from '../../Components/ProfileComponent';
 
 const DoctorProfile = () => {

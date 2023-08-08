@@ -6,12 +6,15 @@ import VideoCall1 from './src/Screens/Doctor/VideoCall1';
 import VoiceCall from './src/Screens/Doctor/VoiceCall';
 import Appointment from './src/Screens/Doctor/Appointment';
 import DoctorProfile from './src/Screens/Doctor/DoctorProfile';
-
+import Messages from './src/Screens/Doctor/Messages';
+import DocAccSetting from './src/Screens/Doctor/DocAccSetting';
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'light-content'} backgroundColor='black' /> 
-       <Root />
+       {/* <Root /> */}
+      <DocAccSetting/>
+    
     </View>
   );
 }
