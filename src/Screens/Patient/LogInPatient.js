@@ -125,7 +125,10 @@ export default function LogInPatient({navigation}) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                      onPress={handleSubmit}
+                      // onPress={handleSubmit}
+                      onPress={() => {
+                        navigation.navigate('TabNavigationPatient');
+                      }}
                       style={styles.btnShape}>
                       <Text style={styles.btnText}>LogIn</Text>
                     </TouchableOpacity>
