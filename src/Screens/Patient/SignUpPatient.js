@@ -127,10 +127,9 @@ export default function SignUpPatient({navigation}) {
             size={30}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.text}>Create Patient a new account</Text>
+          <Text style={styles.text}>Create a new account</Text>
           <Text style={styles.subText}>
-            Veuillez remplir les informations ci-dessous pour créer votre
-            nouveau compte.Patiennnttttttt
+          Please fill in the information below to create your new account.
           </Text>
           <Text style={styles.Label}>Name</Text>
           <TextInput
@@ -267,7 +266,7 @@ export default function SignUpPatient({navigation}) {
               flexDirection: 'row',
               alignSelf: 'center',
               marginTop: 10,
-              marginLeft: '10%',
+              // marginLeft: '10%',
               marginBottom: '4%',
             }}>
             <Text
@@ -286,22 +285,22 @@ export default function SignUpPatient({navigation}) {
                   height: 24,
                   borderRadius: 12,
                   borderWidth: 2,
-                  borderColor: 'white',
-                  backgroundColor: checked ? 'white' : 'transparent',
+                  borderColor: checked ? 'rgba(13, 255, 110, 1)' : 'white',
+                  backgroundColor: checked ? 'rgba(13, 255, 110, 1)' : 'transparent',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  marginLeft: 5,
+                  marginLeft: 15,
                   marginTop: 8,
                 }}>
                 {checked && (
-                  <Icon name="check" size={18} color="rgba(193, 193, 193, 1)" />
+                  <Icon name="check" size={18} color="white" />
                 )}
                 {/* You can change the color and size of the check icon */}
               </View>
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={handleSubmit} style={styles.btnShape}>
-            <Text style={styles.btnText}>Signup</Text>
+            <Text style={styles.btnText}>Register</Text>
           </TouchableOpacity>
 
           <View style={styles.bottomLine}>

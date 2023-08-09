@@ -1,3 +1,4 @@
+//Login Screen of patient
 import {
   StyleSheet,
   Text,
@@ -30,7 +31,7 @@ export default function LogInPatient({navigation}) {
     password: yup.string().min(6).required('Password is required'),
   });
   const onSubmitValue = () => {
-    navigation.navigate("TabNavigationPatient")
+    navigation.navigate('TabNavigationPatient');
   };
   return (
     <Formik
@@ -49,9 +50,9 @@ export default function LogInPatient({navigation}) {
       }) => (
         <View style={{flex: 1, backgroundColor: 'white'}}>
           <ImageBackground
-            source={require('../../Assets/Images/Background.png')}
+            source={require('../../Assets/Images/Background1.png')}
             style={{
-              height: '97%',
+              height: '100%',
             }}>
             <ScrollView>
               <View style={styles.Container}>
@@ -61,7 +62,7 @@ export default function LogInPatient({navigation}) {
                     size={30}
                     onPress={() => navigation.goBack()}
                   />
-                  <Text style={styles.text}>Log in as a Patient </Text>
+                  <Text style={styles.text}>Login </Text>
                   <Text style={styles.text1}>
                     Please fill in the information below to LogInPatient to your
                     account.
@@ -126,7 +127,7 @@ export default function LogInPatient({navigation}) {
                     <TouchableOpacity
                       onPress={handleSubmit}
                       style={styles.btnShape}>
-                      <Text style={styles.btnText}>LogInPatient</Text>
+                      <Text style={styles.btnText}>LogIn</Text>
                     </TouchableOpacity>
 
                     <View style={styles.bottomLine}>
@@ -138,8 +139,19 @@ export default function LogInPatient({navigation}) {
                         <Text style={styles.text5}>Register Now</Text>
                       </TouchableOpacity>
                     </View>
+                    <TouchableOpacity
+                      onPress={handleSubmit}
+                      style={styles.btnShape1}>
+                      <Text style={{color: 'black' , fontSize:13, fontFamily: 'NunitoSans_7pt-Black',
+                    }}>Are you a Doctor? {' '}
+                      <Text style={styles.text5} onPress={ ()=>navigation.navigate('DocLogin')}>Login</Text>
+                      {' '}/ {''}
+                      <Text style={styles.text5} onPress={ ()=>navigation.navigate('DocSignUp')}>Signup</Text>
+                       </Text>
+                     
+                    </TouchableOpacity>
                     <View style={styles.line}>
-                      <View style={styles.line2}></View>
+                      {/* <View style={styles.line2}></View> */}
                     </View>
                     <View>
                       <Text style={styles.text7}>Or Continue With</Text>
@@ -223,13 +235,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.black1,
     marginHorizontal: '9%',
-    marginVertical: '5%',
+    marginVertical: '3%',
     borderRadius: 5,
   },
   text: {
     alignSelf: 'center',
     fontSize: 20,
-    marginTop: '5%',
+    marginTop: '2%',
     color: colors.black,
     fontFamily: 'NunitoSans_7pt-Black',
   },
@@ -237,7 +249,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: '87%',
     alignSelf: 'center',
-    backgroundColor: 'rgba(179, 186, 198, 1)',
+    backgroundColor: 'rgba(227, 228, 230, 1)',
   },
   line2: {
     height: 3,
@@ -265,7 +277,7 @@ const styles = StyleSheet.create({
   },
   box1: {
     width: '100%',
-    marginTop: '10%',
+    marginTop: '8%',
   },
   box2: {
     width: '100%',
@@ -304,9 +316,32 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '10%',
     borderRadius: 4,
-    backgroundColor: colors.darkblue,
+    backgroundColor: '#0060F7',
   },
   btnText: {
+    alignSelf: 'center',
+    fontSize: 15,
+    marginTop: 13,
+    color: colors.white,
+    fontWeight: '900',
+  },
+  btnShape1: {
+    backgroundColor: colors.black1,
+    height: 47,
+    width: '87%',
+    alignSelf: 'center',
+    // marginTop: '2%',
+    marginBottom:'4%', 
+    borderRadius: 4,
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#0060F7',
+    flexDirection:'row',
+    alignItems:'center', 
+    justifyContent:'center'
+    // marginHorizontal:15, 
+  },
+  btnText1: {
     alignSelf: 'center',
     fontSize: 15,
     marginTop: 13,
@@ -329,7 +364,8 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: '#0060F7',
     marginLeft: 5,
-    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    fontFamily: 'NunitoSans_7pt-Black',
+    // fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     fontSize: 14,
   },
   text6: {
