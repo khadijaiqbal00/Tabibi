@@ -1,8 +1,15 @@
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {colors} from '../../Global/globalstyles';
 import {Back, Star} from '../../Assets/icons';
-import {SvgXml} from 'react-native-svg'
+import {SvgXml} from 'react-native-svg';
 import {searchIcon} from '../../Assets/PharmacyComp';
 import {filterIcon} from '../../Assets/PharmacyComp';
 import PatientCard from '../../Components/PatientCard';
@@ -10,12 +17,12 @@ import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
 
 const DoctorSearch = () => {
-    const [List, setList] = useState([{}]);
-   useEffect(() => {
-     console.log();
-     setList(DoctorData);
-     console.log('>>>', List);
-   });
+  const [List, setList] = useState([{}]);
+  useEffect(() => {
+    console.log();
+    setList(DoctorData);
+    console.log('>>>', List);
+  });
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
       <View style={{flexDirection: 'row'}}>
@@ -65,11 +72,7 @@ const DoctorSearch = () => {
           }}>
           Doctors
         </Text>
-       
       </View>
-
-
-
 
       <View
         style={{
@@ -85,7 +88,7 @@ const DoctorSearch = () => {
             color: 'rgba(14, 16, 18, 1)',
             fontFamily: 'NunitoSans_10pt-SemiBold',
           }}>
-          List of Patients
+          List of Doctors
         </Text>
         <Text
           style={{
@@ -106,10 +109,10 @@ const DoctorSearch = () => {
         renderItem={({item}) => (
           <DoctorCard
             id={item.id}
-            image = {item.image}
-            name = {item.name}
+            image={item.image}
+            name={item.name}
             designation={item.designation}
-            review={item.review} 
+            review={item.review}
             review2={item.review2}
           />
         )}
@@ -121,17 +124,17 @@ const DoctorSearch = () => {
 export default DoctorSearch;
 
 const styles = StyleSheet.create({
-    TextInput: {
-        alignSelf: 'center',
-        width: '87%',
-        backgroundColor: 'rgba(238, 246, 252, 1)',
-        borderRadius: 18,
-        elevation: 1,
-        height: 56,
-        paddingLeft: 50,
-        paddingTop: 5,
-        color: 'black',
-        fontSize: 14,
-        fontFamily: 'NunitoSans_10pt-Medium',
-      },
+  TextInput: {
+    alignSelf: 'center',
+    width: '87%',
+    backgroundColor: 'rgba(238, 246, 252, 1)',
+    borderRadius: 18,
+    elevation: 1,
+    height: 56,
+    paddingLeft: 50,
+    paddingTop: 5,
+    color: 'black',
+    fontSize: 14,
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
 });

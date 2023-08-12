@@ -24,8 +24,8 @@ import {dotsIcon} from '../../Assets/TabSvgs';
 const Schedule = () => {
    const [List, setList] = useState([{}]);
    const [List2, setList2] = useState([{}]);
-   const [indexCheck, setIndexCheck] = useState('0');
-   const [indexCheck2, setIndexCheck2] = useState('0');
+   const [indexCheck, setIndexCheck] = useState(0);
+   const [indexCheck2, setIndexCheck2] = useState(0);
 
    useEffect(() => {
      console.log();

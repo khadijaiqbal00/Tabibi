@@ -12,12 +12,19 @@ import Schedule from './src/Screens/Doctor/Schedule';
 import DoctorSearch from './src/Screens/Patient/DoctorSearch';
 import DoctorProfileP from './src/Screens/Patient/ProfilePatient';
 import Appointment1 from './src/Screens/Patient/Appointment1';
+import Appointment2 from './src/Screens/Patient/Appointment2';
+import DoctorDetails from './src/Screens/Doctor/DoctorDetails';
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={'light-content'} backgroundColor="black" />
-      <Root />
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor="rgba(28, 107, 164, 1)"
+      />
+      {/* <Root /> */}
       {/* <Appointment1/> */}
+      <DoctorDetails
+      />
     </View>
   );
 }

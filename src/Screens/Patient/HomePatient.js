@@ -21,7 +21,7 @@ import {userIcon} from '../../Assets/PharmacyComp';
 import {reportIcon} from '../../Assets/PharmacyComp';
 import AppointmentCard from '../../Components/AppointmentCard';
 import {dotsIcon} from '../../Assets/TabSvgs';
-import {appointmentData} from '../../Global/Data';
+import {appointmentData, scheduleData} from '../../Global/Data';
 import {useIsFocused} from '@react-navigation/native';
 import {backbgWhiteIcon} from '../../Assets/TabSvgs';
 import {locationIcon} from '../../Assets/TabSvgs';
@@ -29,25 +29,546 @@ import {pharmacyData} from '../../Global/Data';
 import PharmacyCard from '../../Components/PharmacyCard';
 import {fileIcon} from '../../Assets/TabSvgs';
 import {sendZipIcon} from '../../Assets/TabSvgs';
+import {Back, DoctorImg, Star, Clock} from '../../Assets/icons';
+
+import {
+  Back2,
+  Doctor2,
+  Settings,
+  Fb,
+  Vector,
+  Language,
+  Compass,
+  Log,
+} from '../../Assets/icons';
+import ProfileComponent from '../../Components/ProfileComponent';
+import PatientCard from '../../Components/PatientCard';
+import {DoctorData} from '../../Global/Data';
+import DoctorCard from '../../Components/DoctorCard';
 // import { FlatList } from 'react-native-gesture-handler';
 
 const HomePatient = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
+  const [modalVisible4, setModalVisible4] = useState(false);
+  const [modalVisible5, setModalVisible5] = useState(false);
   const [List2, setList2] = useState([{}]);
+  const [List3, setList3] = useState([{}]);
 
-  const [indexCheck2, setIndexCheck2] = useState('0');
-
-  const isfocussed = useIsFocused();
+  const [indexCheck2, setIndexCheck2] = useState(0);
   const [List, setList] = useState([{}]);
+  const [List4, setList4] = useState([{}]);
+
   useEffect(() => {
     console.log();
     setList(appointmentData);
     setList2(pharmacyData);
+    setList3(scheduleData);
+    setList4(DoctorData);
+
     console.log('>>>', List);
   });
-
   return (
     <View style={styles.Container}>
+      <Modal animationType="fade" transparent={false} visible={modalVisible2}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: colors.pageBackground2,
+            height: '100%',
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible2(false);
+            }}>
+            <Back2
+              width={40}
+              height={40}
+              style={{marginTop: '10%', marginHorizontal: '5%'}}
+            />
+          </TouchableOpacity>
+
+          <View style={{alignItems: 'center'}}>
+            <Doctor2
+              width={80}
+              height={80}
+              style={{
+                marginTop: -30,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                color: colors.white,
+                marginTop: '2%',
+                fontFamily: 'NunitoSans_10pt-Bold',
+              }}>
+              Doctor Name
+            </Text>
+          </View>
+
+          <View style={{marginTop: '15%'}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible5(true);
+              }}>
+              <ProfileComponent title="Account Settings" svg={Settings} />
+            </TouchableOpacity>
+            <ProfileComponent title="Payment Method" svg={Vector} />
+            <ProfileComponent title="Language Selection" svg={Language} />
+            <ProfileComponent title="Pivacy Policy" svg={Compass} />
+            <ProfileComponent title="Terms of use" svg={Compass} />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: '20%',
+            }}>
+            <Log width={25} height={25} />
+            <Text
+              style={{
+                color: 'white',
+                marginLeft: 10,
+                fontSize: 17,
+                fontFamily: 'NunitoSans_10pt-Bold',
+              }}>
+              LogOut
+            </Text>
+          </View>
+        </View>
+      </Modal>
+      <Modal animationType="fade" transparent={false} visible={modalVisible3}>
+        <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible3(false);
+            }}>
+            <Back
+              width={50}
+              height={50}
+              style={{marginTop: '5%', marginHorizontal: 10}}
+            />
+          </TouchableOpacity>
+          <View style={{alignItems: 'center'}}>
+            <DoctorImg width={110} height={110} style={{marginTop: '15%'}} />
+            <Text
+              style={{
+                fontSize: 22,
+                color: 'rgba(14, 16, 18, 1)',
+                marginTop: '4%',
+                fontFamily: 'NunitoSans_10pt-Bold',
+              }}>
+              Dr. Chalukya Gunasekara
+            </Text>
+            <Text
+              style={{
+                fontSize: 15,
+                color: 'rgba(123, 141, 158, 1)',
+                marginTop: '1%',
+                fontFamily: 'NunitoSans_10pt-Medium',
+              }}>
+              Demonologist in Asiri hospital
+            </Text>
+            <View style={{flexDirection: 'row'}}>
+              <Star width={17} height={17} style={{marginLeft: 5}} />
+              <Text
+                style={{
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                  fontSize: 16,
+
+                  marginHorizontal: 7,
+                  color: 'rgba(74, 84, 94, 1)',
+                }}>
+                4.7
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'NunitoSans_7pt-Light',
+                  fontSize: 14,
+                  marginTop: 2,
+                  marginHorizontal: 2,
+                  color: '#4A545E',
+                }}>
+                17 reviews
+              </Text>
+            </View>
+            <View style={{width: '85%', marginTop: 10}}>
+              <TextInput
+                multiline={true}
+                numberOfLines={7}
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInput1}></TextInput>
+            </View>
+          </View>
+          <View style={{width: '87%', alignSelf: 'center', marginTop: '12%'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                backgroundColor: colors.white,
+                borderRadius: 28,
+                width: '100%',
+                height: 90,
+                alignSelf: 'center',
+                marginTop: 20,
+              }}>
+              <View></View>
+              <View
+                style={{
+                  backgroundColor: 'rgba(220, 237, 249, 1)',
+                  height: 65,
+                  width: '25%',
+                  borderRadius: 20,
+                  marginLeft: '3%',
+                  marginTop: 13,
+                }}>
+                <Clock
+                  width={35}
+                  height={35}
+                  style={{marginVertical: '20%', marginHorizontal: '25%'}}
+                />
+              </View>
+              <View style={{marginLeft: '6%', marginTop: '6%'}}>
+                <Text
+                  style={{
+                    fontFamily: 'NunitoSans_7pt-Light',
+                    fontSize: 14,
+                    color: 'rgba(14, 16, 18, 1)',
+                  }}>
+                  {/* {name} */}
+                  Availability
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    fontSize: 17,
+                    marginTop: 10,
+                    color: 'rgba(14, 16, 18, 1)',
+                  }}>
+                  6h - 17h
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Appointment1');
+              }}
+              style={styles.btnShape}>
+              <Text style={styles.btnText}>CONNECT NOW</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible4}>
+        <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible4(false);
+              }}>
+              <Back
+                width={45}
+                height={46}
+                style={{marginHorizontal: 18, marginTop: 18}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 27,
+                fontFamily: 'NunitoSans_10pt-Bold',
+                marginTop: '6%',
+              }}>
+              Doctors
+            </Text>
+          </View>
+          <View style={{marginTop: '6%'}}>
+            <TextInput
+              placeholderTextColor={'rgba(138, 160, 188, 1)'}
+              placeholder="Looking for a Doctor..."
+              style={styles.TextInputDoc}></TextInput>
+            <SvgXml
+              xml={searchIcon}
+              style={{marginTop: -40, marginLeft: '10%'}}></SvgXml>
+            <TouchableOpacity>
+              <SvgXml
+                xml={filterIcon}
+                style={{marginTop: -22, marginLeft: '80%'}}></SvgXml>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+            }}>
+            <Text
+              style={{
+                marginLeft: '9%',
+                fontSize: 17,
+                marginTop: 30,
+                color: 'rgba(14, 16, 18, 1)',
+                fontFamily: 'NunitoSans_10pt-SemiBold',
+              }}>
+              Doctors
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '90%',
+            }}>
+            <Text
+              style={{
+                marginLeft: '9%',
+                fontSize: 17,
+                marginTop: 30,
+                color: 'rgba(14, 16, 18, 1)',
+                fontFamily: 'NunitoSans_10pt-SemiBold',
+              }}>
+              List of Patients
+            </Text>
+            <Text
+              onPress={() => {
+                setModalVisible3(true);
+              }}
+              style={{
+                marginLeft: '9%',
+                fontSize: 14,
+                marginTop: 30,
+                color: 'rgba(28, 107, 164, 1)',
+                fontFamily: 'NunitoSans_10pt-Light',
+              }}>
+              See all
+            </Text>
+          </View>
+          <FlatList
+            keyboardShouldPersistTaps="handled"
+            showsHorizontalScrollIndicator={false}
+            data={List4}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <DoctorCard
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                designation={item.designation}
+                review={item.review}
+                review2={item.review2}
+              />
+            )}
+          />
+        </View>
+      </Modal>
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible5}>
+        <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible5(false);
+            }}>
+            <Back2
+              width={40}
+              height={40}
+              style={{marginTop: '10%', marginHorizontal: '5%'}}
+            />
+          </TouchableOpacity>
+
+          <View style={{alignItems: 'center'}}>
+            <Doctor2
+              width={80}
+              height={80}
+              style={{
+                marginTop: -30,
+              }}
+            />
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: colors.white,
+                marginTop: '2%',
+                fontFamily: 'NunitoSans_10pt-Bold',
+              }}>
+              Doctor Name
+            </Text>
+          </View>
+
+          <View style={{marginTop: '15%', marginHorizontal: '5%'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
+                  marginRight: 8,
+                }}>
+                Full Name :
+              </Text>
+              <TextInput
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInputSetting}></TextInput>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                marginTop: '4%',
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
+                  marginRight: 8,
+                }}>
+                Address :
+              </Text>
+              <TextInput
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInputSetting}></TextInput>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'start',
+              marginTop: '4%',
+              marginHorizontal: '5%',
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 14,
+                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                marginTop: 7,
+                marginRight: 8,
+              }}>
+              Bio :
+            </Text>
+            <TextInput
+              multiline={true}
+              numberOfLines={4}
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting2}></TextInput>
+          </View>
+
+          <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 14,
+                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                marginTop: 7,
+                marginRight: 8,
+              }}>
+              Verify that you are a Doctor :
+            </Text>
+            <View
+              style={{
+                height: '35%',
+                width: '80%',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                alignSelf: 'center',
+                borderRadius: 10,
+                marginTop: 10,
+              }}></View>
+
+            <View style={styles.bottomLine}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: 'white',
+                  width: '35%',
+                  height: '80%',
+                  borderRadius: 20,
+                  ...Platform.select({
+                    ios: {
+                      shadowColor: '#000',
+                      shadowOffset: {width: 0, height: 2},
+                      shadowOpacity: 0.6,
+                      shadowRadius: 2,
+                    },
+                    android: {
+                      elevation: 4,
+                    },
+                  }),
+                }}>
+                <Text
+                  style={{
+                    color: '#00CA20',
+                    textAlign: 'center',
+                    fontSize: 14,
+                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                    marginTop: 7,
+                  }}>
+                  Save
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#FF0000',
+                  width: '50%',
+                  height: '80%',
+                  borderRadius: 20,
+                  ...Platform.select({
+                    ios: {
+                      shadowColor: '#000',
+                      shadowOffset: {width: 0, height: 2},
+                      shadowOpacity: 0.6,
+                      shadowRadius: 2,
+                    },
+                    android: {
+                      elevation: 4,
+                    },
+                  }),
+                }}>
+                <Text
+                  style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    fontSize: 14,
+                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                    marginTop: 7,
+                  }}>
+                  Delete Account
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
         <View
           style={{
@@ -65,14 +586,14 @@ const HomePatient = ({navigation}) => {
               flexDirection: 'row',
               zIndex: 1,
             }}>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}>
               <SvgXml
                 xml={backbgWhiteIcon}
                 style={{marginTop: 20, marginLeft: '10%'}}></SvgXml>
-            </TouchableHighlight>
+            </TouchableOpacity>
             <SvgXml
               xml={locationIcon}
               style={{marginTop: 30, marginLeft: '10%'}}></SvgXml>
@@ -231,11 +752,16 @@ const HomePatient = ({navigation}) => {
             justifyContent: 'space-between',
             width: '80%',
           }}>
-          <Image
-            style={{height: 50, width: 50, borderRadius: 50, marginTop: '5%'}}
-            source={{
-              uri: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
-            }}></Image>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible2(true);
+            }}>
+            <Image
+              style={{height: 50, width: 50, borderRadius: 50, marginTop: 16}}
+              source={{
+                uri: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+              }}></Image>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -254,7 +780,7 @@ const HomePatient = ({navigation}) => {
                 marginLeft: '15%',
                 fontFamily: 'NunitoSans_10pt-Bold',
               }}>
-              Add your Card Patient
+              Add your Card
             </Text>
           </TouchableOpacity>
         </View>
@@ -283,7 +809,7 @@ const HomePatient = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Appointment2');
+            setModalVisible4(true);
           }}
           style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml
@@ -298,7 +824,7 @@ const HomePatient = ({navigation}) => {
               width: 120,
               fontFamily: 'NunitoSans_10pt-Medium',
             }}>
-            Patients
+            Doctors
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.View1, {marginRight: '10%'}]}>
@@ -587,5 +1113,77 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginRight: 20,
     marginLeft: -10,
+  },
+  btnShape: {
+    height: 47,
+    width: '95%',
+    alignSelf: 'center',
+    marginTop: '10%',
+    borderRadius: 12,
+    backgroundColor: '#1C6BA4',
+  },
+  btnText: {
+    alignSelf: 'center',
+    fontSize: 15,
+    marginTop: 13,
+    color: colors.white,
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
+  TextInput1: {
+    alignSelf: 'center',
+    width: '100%',
+    backgroundColor: colors.white,
+    borderRadius: 28,
+    height: 157,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  TextInputDoc: {
+    alignSelf: 'center',
+    width: '87%',
+    backgroundColor: 'rgba(238, 246, 252, 1)',
+    borderRadius: 18,
+    elevation: 1,
+    height: 56,
+    paddingLeft: 50,
+    paddingTop: 5,
+    color: 'black',
+    fontSize: 14,
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
+  bottomLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '13%',
+    marginBottom: '10%',
+    height: '10%',
+    // borderRadius:20,
+  },
+  TextInputSetting: {
+    alignSelf: 'center',
+    width: '60%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    height: 37,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  TextInputSetting2: {
+    alignSelf: 'center',
+    width: '88%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    height: 97,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
   },
 });

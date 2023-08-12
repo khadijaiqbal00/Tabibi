@@ -4,7 +4,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import WishListStack from './MessagesStackPatient';
 import CategoryStack from './ScheduleStack';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 import {bellIcon} from '../Assets/TabSvgs';
 import {bellSelected} from '../Assets/TabSvgs';
@@ -24,11 +23,21 @@ import NotificationStackPatient from './NotificationStackPatient';
 import {SvgXml} from 'react-native-svg';
 import {colors} from '../Global/globalstyles';
 import MessagesStackPatient from './MessagesStackPatient';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigationPatient() {
   const [route, setRoute] = useState('TabNavigationPatient');
+
+  // React.useLayoutEffect(() => {
+  //   const routeName = getFocusedRouteNameFromRoute(route);
+  //   if (routeName === 'HomePatient') {
+  //     navigation.setOptions({tabBarVisible: false});
+  //   } else {
+  //     navigation.setOptions({tabBarVisible: true});
+  //   }
+  // }, [navigation, route]);
 
   return (
     <Tab.Navigator
@@ -67,14 +76,14 @@ export default function TabNavigationPatient() {
       <Tab.Screen
         name="MessagesStackPatient"
         component={MessagesStackPatient}
-        options={({route}) => ({
+        options={({route,navigation}) => ({
           tabBarStyle: (route => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
             // console.log('heloooooooooooooo', routeName);
             if (
               routeName === 'VoiceCallPatient' ||
-              routeName === 'VideoCall1Patient' ||
-              routeName === 'TextMessagePatient' 
+              routeName === 'VideoCallPatient' ||
+              routeName === 'TextMessagePatient'
             ) {
               return {display: 'none'};
             }

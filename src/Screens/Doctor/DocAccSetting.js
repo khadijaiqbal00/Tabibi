@@ -8,7 +8,6 @@ import {
 import React from 'react';
 import {colors} from '../../Global/globalstyles';
 import {Back2, Doctor2} from '../../Assets/icons';
-import ProfileComponent from '../../Components/ProfileComponent';
 
 const DocAccSetting = ({navigation}) => {
   return (

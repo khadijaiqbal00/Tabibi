@@ -11,6 +11,7 @@ import MessagesPatient from '../Screens/Patient/MessagesPatient';
 const Stack = createNativeStackNavigator();
 
 export default function MessagesStackPatient({navigation, route}) {
+  
   return (
     <Stack.Navigator initialRouteName="MessagesPatient">
       <Stack.Screen
@@ -27,6 +28,7 @@ export default function MessagesStackPatient({navigation, route}) {
           headerShown: false,
           tabBarStyle: {display: 'none'},
         }}
+     
       />
       <Stack.Screen
         name="TextMessagePatient"

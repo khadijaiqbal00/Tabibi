@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React,{useLayoutEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePatient from '../Screens/Patient/HomePatient';
@@ -8,8 +8,32 @@ import DoctorSearch from '../Screens/Patient/DoctorSearch';
 import Appointment2 from '../Screens/Patient/Appointment2';
 import Appointment1 from '../Screens/Patient/Appointment1';
 const Stack = createNativeStackNavigator();
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
-export default function HomeStackPatient() {
+export default function HomeStackPatient({route,
+  navigation}) {
+  // React.useLayoutEffect(() => {
+    
+  //       const routeName = getFocusedRouteNameFromRoute(route);
+
+  //       if (routeName === 'Appointment2' || routeName === 'Appointment1') {
+  //         navigation.setOptions({tabBarStyle: {display: 'none'}});
+  //         navigation.getParent()?.setOptions({headerShown: false});
+  //         navigation
+  //           .getParent()
+  //           ?.getParent()
+  //           ?.setOptions({tabBarStyle: {display: 'none'}});
+  //       } else {
+  //         navigation.setOptions({
+  //           tabBarStyle: {display: 'flex'},
+  //         });
+  //         navigation.getParent()?.setOptions({headerShown: true});
+  //         navigation
+  //           .getParent()
+  //           ?.getParent()
+  //           ?.setOptions({tabBarStyle: {display: 'flex'}});
+  //       }
+  //     }, [navigation, route]);
   return (
     <Stack.Navigator initialRouteName="HomePatient">
       <Stack.Screen
@@ -38,6 +62,7 @@ export default function HomeStackPatient() {
         component={Appointment2}
         options={{
           headerShown: false,
+          tabBarVisible: false, // Hide the bottom tab bar on this screen
         }}
       />
       <Stack.Screen
