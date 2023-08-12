@@ -28,10 +28,11 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
 
-  const [route, setRoute] = useState('TabNavigation');
+  const [route, setRoute] = useState('MessagesStack');
 
   return (
     <Tab.Navigator
+      initialRouteName="MessagesStack"
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}
@@ -45,8 +46,7 @@ export default function TabNavigation() {
           marginBottom: 3,
         },
         tabBarShowLabel: false,
-      }}
-      >
+      }}>
       <Tab.Screen
         name="HomeStack"
         component={HomeStack}
@@ -71,7 +71,7 @@ export default function TabNavigation() {
         options={({route}) => ({
           tabBarStyle: (route => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-            console.log("heloooooooooooooo",routeName);
+            console.log('heloooooooooooooo', routeName);
             if (
               routeName === 'VoiceCall' ||
               routeName === 'VideoCall1' ||
