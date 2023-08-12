@@ -7,7 +7,6 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import asyncStorage from '@react-native-async-storage/async-storage';
@@ -26,7 +25,7 @@ import * as yup from 'yup';
 import {Formik} from 'formik';
 import ErrorMessage from '../../Components/ErrorMessage';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 
 
@@ -39,41 +38,29 @@ export default function LogIn({navigation}) {
     password: yup.string().min(6).required('Password is required'),
   });
 
-  const signInWithFacebook = async () => {
-    try {
-      const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+  async function onFacebookButtonPress() {
+    // Attempt login with permissions
+    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
   
-      if (result.isCancelled) {
-        console.log('Facebook login was cancelled.');
-      } else {
-        const accessTokenData = await AccessToken.getCurrentAccessToken();
-        const accessToken = accessTokenData.accessToken;
-  
-        // Authenticate with Firebase using the Facebook access token
-        const facebookCredential = auth.FacebookAuthProvider.credential(accessToken);
-        await auth().signInWithCredential(facebookCredential);
-  
-        // Save user data to Firestore
-        const user = auth().currentUser;
-        if (user) {
-          const userData = {
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-            // Add more user data as needed
-          };
-  
-          await firestore().collection('users').doc(user.uid).set(userData);
-  
-          // Navigate to the home page
-          navigation.navigate('Home'); // Replace 'Home' with your actual home page screen name
-        }
-      }
-    } catch (error) {
-      console.log('Facebook login error:', error);
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
     }
-  };
   
+    // Once signed in, get the users AccessToken
+    const data = await AccessToken.getCurrentAccessToken();
+  
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+  
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+  
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(facebookCredential);
+  }
+
+
   const[userInfo, setUserInfo] = useState(null);
 
   const signIn = async () => {
@@ -100,7 +87,7 @@ export default function LogIn({navigation}) {
         await firestore().collection('users').doc(user.uid).set(userData);
   
         // Navigate to the home page
-        navigation.navigate("TabNavigation")
+        avigation.navigate("TabNavigation")
       }
   
     } catch (error) {
@@ -294,7 +281,7 @@ export default function LogIn({navigation}) {
                     <TouchableOpacity style={styles.box} onPress={()=>signIn()}>
                       <Google width={30} height={30} style={{marginTop: 15}} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.box} onPress={signInWithFacebook}>
+                    <TouchableOpacity style={styles.box} onPress={() => onFacebookButtonPress().then(() => console.log('Signed in with Facebook!'))}>
                       <Fb width={34} height={34} style={{marginTop: 12}} />
                     </TouchableOpacity>
                     <View style={styles.box}>
