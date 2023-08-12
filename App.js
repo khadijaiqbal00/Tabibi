@@ -21,10 +21,10 @@ export default function App() {
         barStyle={'light-content'}
         backgroundColor="rgba(28, 107, 164, 1)"
       />
-      {/* <Root /> */}
+      <Root />
       {/* <Appointment1/> */}
-      <DoctorDetails
-      />
+      {/* <DoctorDetails
+      /> */}
     </View>
   );
 }
