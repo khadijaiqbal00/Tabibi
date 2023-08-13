@@ -64,7 +64,8 @@ export default function LogInPatient({navigation}) {
         await firestore().collection('PatientUsers').doc(user.uid).set(userData);
   
         // Navigate to the home page
-        navigation.navigate("TabNavigation")
+        navigation.navigate('LoginSuccessPatient')
+        // navigation.navigate("TabNavigationPatient")
       }
   
     } catch (error) {
@@ -118,7 +119,8 @@ export default function LogInPatient({navigation}) {
       if (user.user.emailVerified) {
         console.log(user.user);
         await getData(user.user.email);
-        navigation.navigate("TabNavigation")
+        navigation.navigate('LoginSuccessPatient')
+        // navigation.navigate("TabNavigationPatient")
 
       } else {
         setLoader(true);
@@ -246,6 +248,7 @@ export default function LogInPatient({navigation}) {
 
                     <TouchableOpacity
                       onPress={() => {
+                        
                         navigation.navigate('TabNavigationPatient');
                       }}>
                       <Text style={styles.text3}> Forgot Password?</Text>

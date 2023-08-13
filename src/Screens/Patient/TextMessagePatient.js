@@ -1,22 +1,57 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TouchableHighlight,
-  Image,
-  TextInput,
-  KeyboardAvoidingView
-} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {SvgXml} from 'react-native-svg';
-import {bacbggreay} from '../../Assets/TabSvgs';
 
 
-import {callIcon, linkSvgIcon, sendSvgIcon} from '../../Assets/TabSvgs';
-import {videBg} from '../../Assets/TabSvgs';
-import {videoIcon} from '../../Assets/TabSvgs';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Button, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native';
+import { RTCPeerConnection, mediaDevices } from 'react-native-webrtc';
+import { SvgXml } from 'react-native-svg';
+import { bacbggreay, callIcon, linkSvgIcon, sendSvgIcon, videBg, videoIcon } from '../../Assets/TabSvgs';
+ 
 const TextMessagePatient = ({navigation}) => {
+  const [isCalling, setIsCalling] = useState(false);
+  const [isCallAccepted, setIsCallAccepted] = useState(false);
+  const localStream = useRef(null);
+  const remoteStream = useRef(null);
+  const peerConnection = useRef(null);
+
+  const handleCallButton = async () => {
+    try {
+      setIsCalling(true);
+
+      localStream.current = await mediaDevices.getUserMedia({ audio: true, video: true });
+      peerConnection.current.ontrack = (event) => {
+        remoteStream.current = event.streams[0];
+        setIsCallAccepted(true); // Automatically accept the call when the remote stream arrives
+        // Update the UI to display the remote stream
+      };
+      peerConnection.current = new RTCPeerConnection({
+        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      });
+
+      localStream.current.getTracks().forEach((track) => {
+        peerConnection.current.addTrack(track, localStream.current);
+      });
+
+      peerConnection.current.ontrack = (event) => {
+        remoteStream.current = event.streams[0];
+        // Handle remote stream, e.g., display in a video element
+        setIsCallAccepted(true); // Automatically accept the call when the remote stream arrives
+      };
+
+      const offer = await peerConnection.current.createOffer();
+      await peerConnection.current.setLocalDescription(offer);
+      // Send offer to the other user
+    } catch (error) {
+      console.error('Error creating offer:', error);
+    }
+  };
+
+  const handleHangUp = () => {
+    setIsCalling(false);
+    setIsCallAccepted(false);
+    peerConnection.current.close();
+    remoteStream.current = null;
+    // Perform any additional cleanup, state updates, etc.
+  };
   return (
     <View>
       <View
@@ -93,9 +128,11 @@ const TextMessagePatient = ({navigation}) => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('VoiceCallPatient');
-              }}>
+            onPress={handleCallButton}
+              // onPress={() => {
+              //   navigation.navigate('VoiceCallPatient');
+              // }}
+              >
               <SvgXml xml={callIcon} style={{marginTop: 20}}></SvgXml>
             </TouchableOpacity>
             <TouchableOpacity
@@ -150,6 +187,12 @@ const TextMessagePatient = ({navigation}) => {
           </KeyboardAvoidingView>
         </View>
       </View>
+      {remoteStream.current && (
+        <RTCView
+          streamURL={remoteStream.current?.toURL()}
+          style={{ width: 200, height: 150 }}
+        />
+      )}
     </View>
   );
 };

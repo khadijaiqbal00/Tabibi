@@ -87,7 +87,8 @@ export default function LogIn({navigation}) {
         await firestore().collection('DocUsers').doc(user.uid).set(userData);
   
         // Navigate to the home page
-        avigation.navigate("TabNavigation")
+        navigation.navigate('LoginSuccess')
+        // navigation.navigate("TabNavigation")
       }
   
     } catch (error) {
@@ -141,7 +142,8 @@ export default function LogIn({navigation}) {
       if (user.user.emailVerified) {
         console.log(user.user);
         await getData(user.user.email);
-        navigation.navigate("TabNavigation")
+        // navigation.navigate("TabNavigation")
+        navigation.navigate('LoginSuccess')
 
       } else {
         setLoader(true);

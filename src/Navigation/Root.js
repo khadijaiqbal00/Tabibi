@@ -152,6 +152,9 @@ const Root = () => {
             headerShown: false,
           }}
         />
+       
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -29,7 +29,7 @@ export {default as Star} from './star.svg';
 export {default as Tick} from './tick.svg';
 export {default as DotsA} from './dotssss.svg';
 export {default as Phone} from './phone.svg';
-
+export {default as LoginCheck2} from './LoginCheck2.svg'
 
 
 
