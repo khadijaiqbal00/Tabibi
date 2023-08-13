@@ -88,11 +88,11 @@ export default function DocLogIn({navigation}) {
           email: user.email,
           // Add more user data as needed
         };
-
+  
         await firestore().collection('users').doc(user.uid).set(userData);
-
+  
         // Navigate to the home page
-        navigation.navigate('TabNavigation');
+        avigation.navigate("TabNavigation")
       }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -120,11 +120,8 @@ export default function DocLogIn({navigation}) {
 
   const getData = async email => {
     try {
-      await firestore()
-        .collection('users')
-        .where('email', '==', email)
-        .get()
-        .then(querySnapshot => {
+      await firestore().collection('users').where("email", "==", email).get()
+        .then((querySnapshot) => {
           setUserData(querySnapshot.docs[0].data());
         })
         .catch(error => {
@@ -151,7 +148,8 @@ export default function DocLogIn({navigation}) {
       if (user.user.emailVerified) {
         console.log(user.user);
         await getData(user.user.email);
-        navigation.navigate('TabNavigation');
+        navigation.navigate("TabNavigation")
+
       } else {
         setLoader(true);
         auth()

@@ -20,6 +20,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../../Components/Loader';
+
 export default function DocSignUp({navigation}) {
   const [loader, setLoader] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -51,7 +52,7 @@ export default function DocSignUp({navigation}) {
     console.log(values);
     let promise = new Promise((resolve, reject) => {
       firestore()
-        .collection('users')
+        .collection('DocUsers')
         .add(values)
         .then(() => {
           
