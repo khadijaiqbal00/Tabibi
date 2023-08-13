@@ -84,7 +84,7 @@ export default function LogIn({navigation}) {
           // Add more user data as needed
         };
   
-        await firestore().collection('users').doc(user.uid).set(userData);
+        await firestore().collection('DocUsers').doc(user.uid).set(userData);
   
         // Navigate to the home page
         avigation.navigate("TabNavigation")
@@ -116,7 +116,7 @@ export default function LogIn({navigation}) {
 
   const getData = async (email) => {
     try {
-      await firestore().collection('users').where("email", "==", email).get()
+      await firestore().collection('DocUsers').where("email", "==", email).get()
         .then((querySnapshot) => {
           setUserData(querySnapshot.docs[0].data());
         }).catch((error) => {

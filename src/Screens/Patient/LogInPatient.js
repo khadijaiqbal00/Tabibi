@@ -9,19 +9,27 @@ import {
   ImageBackground,
 } from 'react-native';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
-
-import React, {useState} from 'react';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import React, {useState, useEffect} from 'react';
 import {colors} from '../../Global/globalstyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {Google} from '../../Assets/icons';
 import {Fb} from '../../Assets/icons';
 import {Language} from '../../Assets/icons';
-import {Apple} from '../../Assets/icons';
-// import ErrorMessage from '../../Components/ErrorMessage';
+import {Phone} from '../../Assets/icons';
+import auth from '@react-native-firebase/auth';
+import asyncStorage from '@react-native-async-storage/async-storage';
+import Loader from '../../Components/Loader';
+import firestore from '@react-native-firebase/firestore';
 import * as yup from 'yup';
 import {Formik} from 'formik';
 import ErrorMessage from '../../Components/ErrorMessage';
+
+
+
+
 export default function LogInPatient({navigation}) {
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState('');
@@ -30,9 +38,125 @@ export default function LogInPatient({navigation}) {
     email: yup.string().email().required('Email is required'),
     password: yup.string().min(6).required('Password is required'),
   });
-  const onSubmitValue = () => {
-    navigation.navigate('TabNavigationPatient');
+  const[userInfo, setUserInfo] = useState(null);
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+  
+      const { idToken } = userInfo;
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  
+      // Authenticate with Firebase
+      await auth().signInWithCredential(googleCredential);
+  
+      // Save user data to Firestore
+      const user = auth().currentUser;
+      if (user) {
+        const userData = {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          // Add more user data as needed
+        };
+  
+        await firestore().collection('PatientUsers').doc(user.uid).set(userData);
+  
+        // Navigate to the home page
+        navigation.navigate("TabNavigation")
+      }
+  
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
   };
+
+
+
+
+  const [loader, setLoader] = useState(false);
+  // const {userData, setUserData} = useContext(LoginContext);
+  const [userData, setUserData] = useState(false)
+  useEffect(() => {
+    asyncStorage.setItem("start", "true");
+    GoogleSignin.configure({webClientId:'964902769562-j3iiq87ho1cagkf9avs409pddr2o7r52.apps.googleusercontent.com'});
+  });
+
+  const getData = async (email) => {
+    try {
+      await firestore().collection('PatientUsers').where("email", "==", email).get()
+        .then((querySnapshot) => {
+          setUserData(querySnapshot.docs[0].data());
+        }).catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+    } catch (error) {
+      alert("Error getting profile data from login:", error);
+      console.log("Error from account", error);
+    }
+  }
+
+  const onSubmitValue = async (values, { resetForm }) => {
+
+    setLoader(true);
+    resetForm();
+
+    try {
+      const user = await auth().signInWithEmailAndPassword(values.email, values.password);
+      if (user) {
+        setLoader(false);
+      }
+      if (user.user.emailVerified) {
+        console.log(user.user);
+        await getData(user.user.email);
+        navigation.navigate("TabNavigation")
+
+      } else {
+        setLoader(true);
+        auth().currentUser.sendEmailVerification()
+          .then(() => {
+            setLoader(false);
+            alert("Email not verified. Please verify your email address. An email has been sent to your email address")
+            navigation.navigate('LoginPatient');
+          })
+      }
+
+    } catch (error) {
+      setLoader(false)
+      console.log("Error", error);
+      alert("Invalid email/password")
+    }
+  };
+  async function onFacebookButtonPress() {
+    // Attempt login with permissions
+    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+  
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+  
+    // Once signed in, get the users AccessToken
+    const data = await AccessToken.getCurrentAccessToken();
+  
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+  
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+  
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(facebookCredential);
+  }
   return (
     <Formik
       initialValues={{email: '', password: ''}}
@@ -108,8 +232,11 @@ export default function LogInPatient({navigation}) {
                             onPress={() => setShowPass(!showPass)}
                           />
                         }
-                        value={pass}
-                        onChangeText={setPass}
+                        onChangeText={handleChange('password')}
+                        onBlur={handleBlur('password')}
+                        value={values.password}
+                        // value={pass}
+                        // onChangeText={setPass}
                       />
                       <ErrorMessage
                         error={errors['password']}
@@ -125,10 +252,8 @@ export default function LogInPatient({navigation}) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                      // onPress={handleSubmit}
-                      onPress={() => {
-                        navigation.navigate('TabNavigationPatient');
-                      }}
+                      onPress={handleSubmit}
+                      
                       style={styles.btnShape}>
                       <Text style={styles.btnText}>LogIn</Text>
                     </TouchableOpacity>
@@ -162,18 +287,14 @@ export default function LogInPatient({navigation}) {
 
                     <View style={styles.container}>
                       <View style={styles.row}>
+                      <TouchableOpacity style={styles.box} onPress={()=>signIn()}>
+                      <Google width={30} height={30} style={{marginTop: 15}} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.box} onPress={() => onFacebookButtonPress().then(() => console.log('Signed in with Facebook!'))}>
+                      <Fb width={34} height={34} style={{marginTop: 12}} />
+                    </TouchableOpacity>
                         <View style={styles.box}>
-                          <Google
-                            width={30}
-                            height={30}
-                            style={{marginTop: 15}}
-                          />
-                        </View>
-                        <View style={styles.box}>
-                          <Fb width={34} height={34} style={{marginTop: 12}} />
-                        </View>
-                        <View style={styles.box}>
-                          <Apple
+                          <Phone
                             width={30}
                             height={30}
                             style={{marginTop: 12}}

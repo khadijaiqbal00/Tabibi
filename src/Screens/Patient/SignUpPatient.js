@@ -44,39 +44,46 @@ export default function SignUpPatient({navigation}) {
       .oneOf([yup.ref('Password'), null], 'Passwords must match'),
   });
 
-  const addData = values => {
+   const addData = values => {
     delete values.Password;
     delete values.cpassword;
-
+    console.log(values);
     let promise = new Promise((resolve, reject) => {
       firestore()
-        .collection('users')
+        .collection('PatientUsers')
         .add(values)
         .then(() => {
+          
           resolve(true);
         })
         .catch(error => {
           console.log(error);
+          
         });
     });
 
     return promise;
   };
 
+
   const onSubmitValue = async (values, {resetForm}) => {
+   
+    
+    if (!checked) {
+      setLoader(false);
+      Alert.alert('Please accept the terms and conditions.');
+      return;
+    }
     resetForm();
     setLoader(true);
-    console.log(values.email);
-    console.log(values.Password);
-
     try {
       const user = await auth().createUserWithEmailAndPassword(
         values.email,
         values.Password,
       );
-      console.log('djjdjd');
+    
       Alert.alert('Signup Successful');
-      navigation.navigate('TabNavigation');
+      
       if (user) {
         addData(values)
           .then(bool => {
@@ -88,15 +95,18 @@ export default function SignUpPatient({navigation}) {
                   'Please verify your email address. An email has been sent to your email address',
                 );
                 await auth().signOut();
-                navigation.navigate('LogInPatient');
+                navigation.navigate("TabNavigation")
               })
               .catch(error => Alert.alert('Error: ', error));
           })
           .catch(error => Alert.alert('Signup failed'));
-      } else Alert.alert('Signup failed');
+
+      } else Alert.alert("Signup failed")
+
+
     } catch (error) {
-      setLoader(false);
-      console.log('Error', error.message);
+      setLoader(false)
+      console.log("Error", error.message)
       Alert.alert(error.message);
     }
   };
