@@ -23,9 +23,6 @@ export default function App() {
         backgroundColor="rgba(28, 107, 164, 1)"
       />
       <Root />
-      {/* <Appointment1/> */}
-      {/* <Messages
-      /> */}
     </View>
   );
 }

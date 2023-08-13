@@ -45,7 +45,9 @@ import ProfileComponent from '../../Components/ProfileComponent';
 import PatientCard from '../../Components/PatientCard';
 import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
+import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 // import { FlatList } from 'react-native-gesture-handler';
+import firestore from '@react-native-firebase/firestore';
 
 const Home = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -55,20 +57,100 @@ const Home = ({navigation}) => {
   const [modalVisible5, setModalVisible5] = useState(false);
   const [List2, setList2] = useState([{}]);
   const [List3, setList3] = useState([{}]);
+  const [init, setInit] = useState();
 
-  const [indexCheck2, setIndexCheck2] = useState(0);
+  const [indexCheck2, setIndexCheck2] = useState(init);
   const [List, setList] = useState([{}]);
    const [List4, setList4] = useState([{}]);
+
+
+  // const getAppointmentsData = async () => {
+  //     try {
+  //       firestore()
+  //         .collection('appointments')
+  //         .get()
+  //         .then(querySnapshot => {
+  //           // const fireStoreData = querySnapshot.docs[0].data();
+  //           setList(querySnapshot.docs[0]?.data());
+  //           // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', fireStoreData);
+
+  //           // setList(fire)
+
+  //           // setList(fireStoreData?.name);
+  //         })
+  //         .catch(error => {
+  //           console.log('Error getting documents: ', error);
+  //         });
+  //       // setList(fireStoreAppointmentData);
+  //     } catch (error) {
+  //       alert('Error getting data:', error);
+  //       console.log('Error from account', error);
+  //     }  
+   
+  // };
+
   
   useEffect(() => {
-    console.log();
-    setList(appointmentData);
-    setList2(pharmacyData);
-    setList3(scheduleData);
-    setList4(DoctorData);
+    
+    const AppointmentDataFireStore = firestore()
+      .collection('appointments')
+      .onSnapshot(snapshot => {
+        const appointmentsData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setList(appointmentsData);
+      });
+          console.log('', List[0].id);
+          setInit(List[0].id);
 
-    console.log('>>>', List);
-  });
+
+
+    return () => AppointmentDataFireStore();
+
+   
+    // // setList(appointmentData);
+    // setList2(pharmacyData);
+    // setList3(scheduleData);
+    // setList4(DoctorData);
+  },[]);
+  useEffect(() => {
+    
+    const DoctorsDataFireStore = firestore()
+      .collection('doctors')
+      .onSnapshot(snapshot => {
+        const doctorsData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setList4(doctorsData);
+        console.log(doctorsData)
+      });
+
+
+
+    return () => DoctorsDataFireStore();
+
+   
+    // // setList(appointmentData);
+    // setList2(pharmacyData);
+    // setList3(scheduleData);
+    // setList4(DoctorData);
+  },[]);
+  useEffect(() => {
+    const PharmacyDataFireStore = firestore()
+      .collection('pharmacies')
+      .onSnapshot(snapshot => {
+        const PharmacyData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setList2(PharmacyData);
+      });
+
+    return () => PharmacyDataFireStore;
+  })
+  
   return (
     <View style={styles.Container}>
       <Modal animationType="fade" transparent={false} visible={modalVisible2}>
@@ -111,7 +193,7 @@ const Home = ({navigation}) => {
           <View style={{marginTop: '15%'}}>
             <TouchableOpacity
               onPress={() => {
-                setModalVisible5(true)
+                setModalVisible5(true);
               }}>
               <ProfileComponent title="Account Settings" svg={Settings} />
             </TouchableOpacity>
@@ -277,7 +359,7 @@ const Home = ({navigation}) => {
               <Back
                 width={45}
                 height={46}
-                style={{ marginHorizontal: 18, marginTop : 18}}
+                style={{marginHorizontal: 18, marginTop: 18}}
               />
             </TouchableOpacity>
             <Text
@@ -305,22 +387,27 @@ const Home = ({navigation}) => {
                 style={{marginTop: -22, marginLeft: '80%'}}></SvgXml>
             </TouchableOpacity>
           </View>
-          <View
+
+          <Text
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '90%',
+              marginLeft: '9%',
+              fontSize: 17,
+              marginTop: 30,
+              color: 'rgba(14, 16, 18, 1)',
+              fontFamily: 'NunitoSans_10pt-SemiBold',
             }}>
-            <Text
-              style={{
-                marginLeft: '9%',
-                fontSize: 17,
-                marginTop: 30,
-                color: 'rgba(14, 16, 18, 1)',
-                fontFamily: 'NunitoSans_10pt-SemiBold',
-              }}>
-              Doctors
-            </Text>
+            Live Doctors
+          </Text>
+
+          <View style = {{width: 300, marginLeft: 10}}>
+            <FlatList
+              horizontal
+              keyboardShouldPersistTaps="handled"
+              showsHorizontalScrollIndicator={false}
+              data={List4}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => <OnlineDoctorCard image={item.image} />}
+            />
           </View>
 
           <View
@@ -337,8 +424,9 @@ const Home = ({navigation}) => {
                 color: 'rgba(14, 16, 18, 1)',
                 fontFamily: 'NunitoSans_10pt-SemiBold',
               }}>
-              List of Patients
+              List of Doctors
             </Text>
+
             <Text
               onPress={() => {
                 setModalVisible3(true);
@@ -376,7 +464,7 @@ const Home = ({navigation}) => {
         <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
           <TouchableOpacity
             onPress={() => {
-               setModalVisible5(false)
+              setModalVisible5(false);
             }}>
             <Back2
               width={40}
@@ -827,7 +915,9 @@ const Home = ({navigation}) => {
             Patients
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.View1, {marginRight: '10%'}]}>
+        <TouchableOpacity onPress ={()=>{
+          navigation.navigate("ReportStack")
+        }} style={[styles.View1, {marginRight: '10%'}]}>
           <SvgXml style={{marginLeft: -10}} xml={reportIcon}></SvgXml>
           <Text
             style={{
@@ -877,7 +967,7 @@ const Home = ({navigation}) => {
         alwaysBounceVertical
         alwaysBounceHorizontal
         data={List}
-        keyExtractor={item => item.id}
+        // keyExtractor={item => item.id}
         renderItem={({item}) => (
           <Pressable
             onPress={() => {
@@ -1049,7 +1139,7 @@ const styles = StyleSheet.create({
   },
   dotIconSelected: {
     marginTop: 10,
-    marginLeft: 25,
+    marginLeft: "40%",
   },
   dotIcon: {
     marginTop: 10,

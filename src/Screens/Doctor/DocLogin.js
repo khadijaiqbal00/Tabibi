@@ -30,7 +30,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 
-export default function LogIn({navigation}) {
+export default function DocLogIn({navigation}) {
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -92,7 +92,7 @@ export default function LogIn({navigation}) {
         await firestore().collection('users').doc(user.uid).set(userData);
 
         // Navigate to the home page
-        avigation.navigate('TabNavigation');
+        navigation.navigate('TabNavigation');
       }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

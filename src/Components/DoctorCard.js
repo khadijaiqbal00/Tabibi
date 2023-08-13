@@ -29,7 +29,7 @@ const DoctorCard = ({image,name, designation ,review,review2}) => {
           <Image source={require('../Assets/Images/DocImage.png')} style={styles.cardImage} />
        
       ) : (
-        <Image source={image} style={styles.cardImage} />
+        <Image source={{uri : image}} style={styles.cardImage} />
       )}
         {/* <SvgXml
           xml={activePaitentIcon}

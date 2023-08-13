@@ -31,8 +31,6 @@ export default function DocSignUp({navigation}) {
   
   const [pass, setPass] = useState('');
   const [passC, setPassC] = useState('');
-  
-
 
   const validationSchema = yup.object().shape({
     name: yup.string().required('Name is Required'),
@@ -50,7 +48,7 @@ export default function DocSignUp({navigation}) {
   const addData = values => {
     delete values.Password;
     delete values.cpassword;
-
+    console.log(values);
     let promise = new Promise((resolve, reject) => {
       firestore()
         .collection('users')
@@ -70,19 +68,23 @@ export default function DocSignUp({navigation}) {
 
 
   const onSubmitValue = async (values, {resetForm}) => {
+   
+    
+    if (!checked) {
+      setLoader(false);
+      Alert.alert('Please accept the terms and conditions.');
+      return;
+    }
     resetForm();
     setLoader(true);
-    console.log(values.email);
-    console.log(values.Password);
-
     try {
       const user = await auth().createUserWithEmailAndPassword(
         values.email,
         values.Password,
       );
-      console.log('djjdjd');
+    
       Alert.alert('Signup Successful');
-      navigation.navigate("TabNavigation")
+      
       if (user) {
         addData(values)
           .then(bool => {
@@ -94,7 +96,7 @@ export default function DocSignUp({navigation}) {
                   'Please verify your email address. An email has been sent to your email address',
                 );
                 await auth().signOut();
-                navigation.navigate('Login');
+                navigation.navigate("TabNavigation")
               })
               .catch(error => Alert.alert('Error: ', error));
           })
@@ -305,7 +307,7 @@ export default function DocSignUp({navigation}) {
 
           <View style={styles.bottomLine}>
             <Text style={styles.text4}>Already have an account!</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('DocLogin')}>
               <Text style={styles.text5}>Login</Text>
             </TouchableOpacity>
           </View>

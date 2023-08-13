@@ -28,7 +28,6 @@ const Messages = ({navigation}) => {
    const [List, setList] = useState([{}]);
    const [List2, setList2] = useState([{}]);
    useEffect(() => {
-     console.log();
      setList(chatData);
      console.log('>>>', List);
    });
@@ -105,7 +104,7 @@ const Messages = ({navigation}) => {
             }}>
             <PatientCard
               id={item.id}
-              image={item.image}
+              image={item?.image}
               name={item.name}
               message={item.message}
             />
