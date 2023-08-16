@@ -37,7 +37,7 @@ const Root = () => {
   }, []);
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="TabNavigation">
+      <Stack.Navigator initialRouteName="TabNavigationPatient">
         {showSplash ? (
           <Stack.Screen
             name="SplashScreen"

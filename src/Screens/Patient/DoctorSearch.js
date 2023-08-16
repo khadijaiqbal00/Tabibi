@@ -15,22 +15,45 @@ import {filterIcon} from '../../Assets/PharmacyComp';
 import PatientCard from '../../Components/PatientCard';
 import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
+import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
+import firestore from '@react-native-firebase/firestore';
 
-const DoctorSearch = () => {
-  const [List, setList] = useState([{}]);
-  useEffect(() => {
-    console.log();
-    setList(DoctorData);
-    console.log('>>>', List);
-  });
+const DoctorSearch = ({navigation}) => {
+  const [List4, setList4] = useState([{}]);
+
+   useEffect(() => {
+     const DoctorsDataFireStore = firestore()
+       .collection('doctors')
+       .onSnapshot(snapshot => {
+         const doctorsData = snapshot.docs.map(doc => ({
+           id: doc.id,
+           ...doc.data(),
+         }));
+         setList4(doctorsData);
+         console.log(doctorsData);
+       });
+
+     return () => DoctorsDataFireStore();
+
+     // // setList(appointmentData);
+     // setList2(pharmacyData);
+     // setList3(scheduleData);
+     // setList4(DoctorData);
+   }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
       <View style={{flexDirection: 'row'}}>
-        <Back
-          width={45}
-          height={46}
-          style={{marginTop: '5%', marginHorizontal: '5%'}}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back
+            width={45}
+            height={46}
+            style={{marginHorizontal: 18, marginTop: 18}}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: 'black',
@@ -46,7 +69,7 @@ const DoctorSearch = () => {
         <TextInput
           placeholderTextColor={'rgba(138, 160, 188, 1)'}
           placeholder="Looking for a Doctor..."
-          style={styles.TextInput}></TextInput>
+          style={styles.TextInputDoc}></TextInput>
         <SvgXml
           xml={searchIcon}
           style={{marginTop: -40, marginLeft: '10%'}}></SvgXml>
@@ -56,22 +79,27 @@ const DoctorSearch = () => {
             style={{marginTop: -22, marginLeft: '80%'}}></SvgXml>
         </TouchableOpacity>
       </View>
-      <View
+
+      <Text
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          width: '90%',
+          marginLeft: '9%',
+          fontSize: 17,
+          marginTop: 30,
+          color: 'rgba(14, 16, 18, 1)',
+          fontFamily: 'NunitoSans_10pt-SemiBold',
         }}>
-        <Text
-          style={{
-            marginLeft: '9%',
-            fontSize: 17,
-            marginTop: 30,
-            color: 'rgba(14, 16, 18, 1)',
-            fontFamily: 'NunitoSans_10pt-SemiBold',
-          }}>
-          Doctors
-        </Text>
+        Live Doctors
+      </Text>
+
+      <View style={{width: 300, marginLeft: 10}}>
+        <FlatList
+          horizontal
+          keyboardShouldPersistTaps="handled"
+          showsHorizontalScrollIndicator={false}
+          data={List4}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <OnlineDoctorCard image={item.image} />}
+        />
       </View>
 
       <View
@@ -90,7 +118,11 @@ const DoctorSearch = () => {
           }}>
           List of Doctors
         </Text>
+
         <Text
+          onPress={() => {
+            setModalVisible3(true);
+          }}
           style={{
             marginLeft: '9%',
             fontSize: 14,
@@ -101,20 +133,26 @@ const DoctorSearch = () => {
           See all
         </Text>
       </View>
+
       <FlatList
         keyboardShouldPersistTaps="handled"
         showsHorizontalScrollIndicator={false}
-        data={List}
+        data={List4}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <DoctorCard
-            id={item.id}
-            image={item.image}
-            name={item.name}
-            designation={item.designation}
-            review={item.review}
-            review2={item.review2}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('DoctorDetails', {Doc: item});
+            }}>
+            <DoctorCard
+              id={item.id}
+              image={item.image}
+              name={item.name}
+              designation={item.designation}
+              review={item.review}
+              review2={item.review2}
+            />
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -125,6 +163,31 @@ export default DoctorSearch;
 
 const styles = StyleSheet.create({
   TextInput: {
+    alignSelf: 'center',
+    width: '87%',
+    backgroundColor: 'rgba(238, 246, 252, 1)',
+    borderRadius: 18,
+    elevation: 1,
+    height: 56,
+    paddingLeft: 50,
+    paddingTop: 5,
+    color: 'black',
+    fontSize: 14,
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
+  TextInput1: {
+    alignSelf: 'center',
+    width: '100%',
+    backgroundColor: colors.white,
+    borderRadius: 28,
+    height: 157,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  TextInputDoc: {
     alignSelf: 'center',
     width: '87%',
     backgroundColor: 'rgba(238, 246, 252, 1)',

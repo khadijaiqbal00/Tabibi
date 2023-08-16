@@ -61,7 +61,7 @@ const ScheduleCard = ({name,image,symptom,time}) => {
       <View>
         <SvgXml
           xml={dotsIcon}
-          style={{marginTop: 10, marginLeft: '40%'}}></SvgXml>
+          style={{marginTop: 10, alignSelf:"flex-end"}}></SvgXml>
       </View>
     </View>
   );

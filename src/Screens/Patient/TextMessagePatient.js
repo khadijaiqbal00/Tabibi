@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Button, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native';
-import { RTCPeerConnection, mediaDevices } from 'react-native-webrtc';
+// import { RTCPeerConnection, mediaDevices } from 'react-native-webrtc';
 import { SvgXml } from 'react-native-svg';
 import { bacbggreay, callIcon, linkSvgIcon, sendSvgIcon, videBg, videoIcon } from '../../Assets/TabSvgs';
  

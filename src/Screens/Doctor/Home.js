@@ -399,7 +399,7 @@ const Home = ({navigation}) => {
             Live Doctors
           </Text>
 
-          <View style = {{width: 300, marginLeft: 10}}>
+          <View style={{width: 300, marginLeft: 10}}>
             <FlatList
               horizontal
               keyboardShouldPersistTaps="handled"
@@ -441,20 +441,26 @@ const Home = ({navigation}) => {
               See all
             </Text>
           </View>
+
           <FlatList
             keyboardShouldPersistTaps="handled"
             showsHorizontalScrollIndicator={false}
             data={List4}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
-              <DoctorCard
-                id={item.id}
-                image={item.image}
-                name={item.name}
-                designation={item.designation}
-                review={item.review}
-                review2={item.review2}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('DoctorDetails', {Doc: item});
+                }}>
+                <DoctorCard
+                  id={item.id}
+                  image={item.image}
+                  name={item.name}
+                  designation={item.designation}
+                  review={item.review}
+                  review2={item.review2}
+                />
+              </TouchableOpacity>
             )}
           />
         </View>
@@ -897,7 +903,7 @@ const Home = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            setModalVisible4(true);
+            navigation.navigate("DoctorSearch")
           }}
           style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml
@@ -912,12 +918,14 @@ const Home = ({navigation}) => {
               width: 120,
               fontFamily: 'NunitoSans_10pt-Medium',
             }}>
-            Patients
+            Doctors
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress ={()=>{
-          navigation.navigate("ReportStack")
-        }} style={[styles.View1, {marginRight: '10%'}]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ReportStack');
+          }}
+          style={[styles.View1, {marginRight: '10%'}]}>
           <SvgXml style={{marginLeft: -10}} xml={reportIcon}></SvgXml>
           <Text
             style={{

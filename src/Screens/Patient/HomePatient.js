@@ -809,7 +809,7 @@ const HomePatient = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            setModalVisible4(true);
+            navigation.navigate("DoctorSearch");
           }}
           style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml

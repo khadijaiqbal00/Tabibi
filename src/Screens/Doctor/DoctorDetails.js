@@ -1,11 +1,20 @@
 import { StyleSheet, Text, View ,Image, TouchableOpacity} from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import { colors } from '../../Global/globalstyles';
 import { backTransparentIcon, dotTransparentIcon, verifiedDocIcon, ratingStarIcon ,availabilityIcon} from '../../Assets/TabSvgs';
 import { SvgXml} from 'react-native-svg';
 
 
-export default function DoctorDetails() {
+export default function DoctorDetails({route,navigation}) {
+   const {Doc} = route.params;
+  //  console.log("Doc>>>>>>>",Doc)
+   const image = Doc.image;
+
+   const name = Doc.name;
+  //  console.log("nameeee", name)
+   const review = Doc.review;
+   const review2 = Doc.review2;
+   const designation = Doc.designation;
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
       <View
@@ -16,9 +25,13 @@ export default function DoctorDetails() {
           width: '100%',
           backgroundColor: 'rgba(28, 107, 164, 1)',
         }}>
-        <SvgXml
-          xml={backTransparentIcon}
-          style={{marginLeft: 20, marginTop: 20}}></SvgXml>
+        <TouchableOpacity onPress = {()=>{
+          navigation.goBack();
+        }}>
+          <SvgXml
+            xml={backTransparentIcon}
+            style={{marginLeft: 20, marginTop: 20}}></SvgXml>
+        </TouchableOpacity>
         <Text
           style={{
             marginTop: 30,
@@ -45,7 +58,7 @@ export default function DoctorDetails() {
         }}>
         <Image
           source={{
-            uri: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+            uri: image,
           }}
           style={{
             height: 80,
@@ -65,7 +78,7 @@ export default function DoctorDetails() {
               marginTop: 30,
               fontFamily: 'NunitoSans_10pt-Bold',
             }}>
-            Dr Chalukya Gunasekara
+            {name}
           </Text>
           <Text
             style={{
@@ -76,7 +89,7 @@ export default function DoctorDetails() {
               marginLeft: 10,
               fontFamily: 'NunitoSans_10pt-Bold',
             }}>
-            Dermatologue in Asiri Hospital
+            {designation}
           </Text>
         </View>
         <SvgXml
@@ -117,7 +130,7 @@ export default function DoctorDetails() {
               fontSize: 18,
               fontFamily: 'NunitoSans_10pt-Bold',
             }}>
-            100+
+            {review2}
           </Text>
         </View>
         <View
@@ -145,7 +158,7 @@ export default function DoctorDetails() {
               fontSize: 18,
               fontFamily: 'NunitoSans_10pt-Bold',
             }}>
-            29 ans
+            {review}
           </Text>
         </View>
         <View
@@ -213,7 +226,7 @@ export default function DoctorDetails() {
           width: '85%',
           alignSelf: 'center',
           borderRadius: 24,
-          marginTop: 40,
+          marginTop: 20,
           flexDirection: 'row',
         }}>
         <SvgXml
@@ -243,21 +256,23 @@ export default function DoctorDetails() {
           </Text>
         </View>
       </View>
-      <TouchableOpacity
+      <TouchableOpacity onPress = {()=>{
+        navigation.navigate("Appointment1",{Doctor : Doc})
+      }}
         style={{
           backgroundColor: 'rgba(28, 107, 164, 1)',
           height: 70,
           width: '85%',
           alignSelf: 'center',
           borderRadius: 14,
-          marginTop: 30,
+          marginTop: 20,
         }}>
         <Text
           style={{
             marginTop: 23,
             marginLeft: 20,
             color: 'white',
-            textAlign:"center",
+            textAlign: 'center',
             fontSize: 16,
             fontFamily: 'NunitoSans_10pt-Medium',
           }}>

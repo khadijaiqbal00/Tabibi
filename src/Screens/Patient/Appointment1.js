@@ -73,7 +73,9 @@ LocaleConfig.locales['fr'] = {
 };
 
 LocaleConfig.defaultLocale = 'fr';
-const Appointment1 = () => {
+const Appointment1 = ({navigation,route}) => {
+     const {Doctor} = route.params;
+
   const [selected, setSelected] = useState('');
 
   const [indexCheck, setIndexCheck] = useState('0');
@@ -87,11 +89,15 @@ const Appointment1 = () => {
   return (
     <View style={styles.Container}>
       <View style={{flexDirection: 'row'}}>
-        <Back
-          width={45}
-          height={46}
-          style={{marginTop: '5%', marginHorizontal: '5%'}}
-        />
+        <TouchableOpacity onPress = {()=>{
+          navigation.goBack();
+        }}>
+          <Back
+            width={45}
+            height={46}
+            style={{marginTop: '5%', marginHorizontal: '5%'}}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: 'black',
@@ -160,6 +166,7 @@ const Appointment1 = () => {
           height: '100%',
           borderTopLeftRadius: 32,
           borderTopRightRadius: 32,
+          marginTop: -25,
         }}>
         <View
           style={{
@@ -222,6 +229,9 @@ const Appointment1 = () => {
             />
           </View>
           <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Appointment2', {Doctor: Doctor});
+            }}
             style={{
               backgroundColor: 'white',
               height: 50,

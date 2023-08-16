@@ -7,6 +7,8 @@ import ProfilePatient from '../Screens/Patient/ProfilePatient';
 import DoctorSearch from '../Screens/Patient/DoctorSearch';
 import Appointment2 from '../Screens/Patient/Appointment2';
 import Appointment1 from '../Screens/Patient/Appointment1';
+import DoctorDetails from '../Screens/Doctor/DoctorDetails';
+import TextMessagePatient from '../Screens/Patient/TextMessagePatient';
 const Stack = createNativeStackNavigator();
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
@@ -58,6 +60,13 @@ export default function HomeStackPatient({route,
         }}
       />
       <Stack.Screen
+        name="DoctorDetails"
+        component={DoctorDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="Appointment2"
         component={Appointment2}
         options={{
@@ -70,6 +79,14 @@ export default function HomeStackPatient({route,
         component={Appointment1}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TextMessagePatient"
+        component={TextMessagePatient}
+        options={{
+          headerShown: false,
+          tabBarStyle: {display: 'none'},
         }}
       />
     </Stack.Navigator>

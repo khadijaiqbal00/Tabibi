@@ -19,6 +19,7 @@ import { scheduleData } from '../../Global/Data';
 import { CalenderData } from '../../Global/Data';
 import { Calendar } from '../../Assets/icons';
 import {dotsIcon} from '../../Assets/TabSvgs';
+import firestore from '@react-native-firebase/firestore';
 
 
 const Schedule = () => {
@@ -27,12 +28,28 @@ const Schedule = () => {
    const [indexCheck, setIndexCheck] = useState(0);
    const [indexCheck2, setIndexCheck2] = useState(0);
 
+     useEffect(() => {
+       const ScheduleDataFireStore = firestore()
+         .collection('patientsSchedule')
+         .onSnapshot(snapshot => {
+           const scheduleData = snapshot.docs.map(doc => ({
+             id: doc.id,
+             ...doc.data(),
+           }));
+           setList(scheduleData);
+         });
+
+       return () => ScheduleDataFireStore();
+
+      
+     }, []);
+
    useEffect(() => {
-     console.log();
-     setList(scheduleData);
+    //  console.log();
+    //  setList(scheduleData);
      setList2(CalenderData);
 
-     console.log('>>>', List);
+    //  console.log('>>>', List);
    });
   return (
     <View style={styles.Container}>
@@ -324,7 +341,7 @@ const styles = StyleSheet.create({
   },
   dotIconSelected: {
     marginTop: 10,
-    marginLeft: '18%',
+    marginLeft: '48%',
   },
   dotIcon: {
     marginTop: 10,
