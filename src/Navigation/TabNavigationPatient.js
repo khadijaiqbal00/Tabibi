@@ -41,6 +41,7 @@ export default function TabNavigationPatient() {
 
   return (
     <Tab.Navigator
+      initialRouteName="HomeStackPatient"
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}
@@ -76,7 +77,7 @@ export default function TabNavigationPatient() {
       <Tab.Screen
         name="MessagesStackPatient"
         component={MessagesStackPatient}
-        options={({route,navigation}) => ({
+        options={({route, navigation}) => ({
           tabBarStyle: (route => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
             // console.log('heloooooooooooooo', routeName);

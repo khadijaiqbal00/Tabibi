@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef ,useCallback} from 'react';
 import { View, Button, Text, TextInput, TouchableOpacity, Modal,Image, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native';
 import {colors} from '../../Global/globalstyles';
 import {Back, DoctorImg, Star, Clock} from '../../Assets/icons';
 import {SvgXml} from 'react-native-svg';
+import {GiftedChat,InputToolbar,Composer} from 'react-native-gifted-chat';
+import firestore from '@react-native-firebase/firestore';
 
 import {scheduleData} from '../../Global/Data';
 import {
@@ -76,15 +78,94 @@ const Appointment2 = ({navigation,route}) => {
       remoteStream.current = null;
       // Perform any additional cleanup, state updates, etc.
     };
+      const [messages, setMessages] = useState([]);
+
   useEffect(() => {
     console.log();
     setList(scheduleData);
     console.log('>>>', List);
   });
+
+;
+
+  //Message Part 
+    useEffect(() => {
+      // setMessages([
+      //   {
+      //     _id: 1,
+      //     text: 'Hello developer',
+      //     createdAt: new Date(),
+      //     user: {
+      //       _id: 2,
+      //       name: 'React Native',
+      //       avatar: 'https://placeimg.com/140/140/any',
+      //     },
+
+      //   },
+      // ]);
+
+        const MessagesDataFireStore = firestore()
+          .collection('chats')
+          .doc(Doctor.id + Doctor.name)
+          .collection('messages')
+          .orderBy('createdAt', 'desc')
+          .onSnapshot(snapshot => {
+            const allMessages = snapshot.docs.map(doc => ({
+              id: doc.id,
+
+              ...doc.data(),
+              createdAt: doc._data.createdAt,
+            }));
+            setMessages(allMessages);
+          });
+        return () => MessagesDataFireStore();
+
+      // const subscriber = firestore().collection("chats").doc(Doctor.id+Doctor.name).collection('messages').orderBy("createdAt","desc");
+      // subscriber.onSnapshot(querysnapshot => {
+      //   const allMessages = querysnapshot.map((item => {
+      //     return {...item._data, createdAt: Date.parse(new Date())};
+      //   }));
+      //   setMessages(allMessages);
+      // }); 
+      // return () => subscriber();
+    }, []);
+     const renderComposer = props => {
+       const customStyle = {
+         color: 'rgba(26, 69, 99, 1)',
+           fontSize: 16,
+            fontFamily: 'NunitoSans_10pt-Medium',
+       };
+       return (
+         <Composer
+           {...props}
+           textInputStyle={[props.textInputStyle, customStyle]}
+         />
+       );
+     };
+      const renderInputToolbar = props => (
+        <InputToolbar
+          {...props}
+          containerStyle={{backgroundColor: 'rgba(255, 255, 255, 1)', alignSelf:"center",marginLeft:"1%", height: 60, paddingTop:10,borderRadius:12, paddingLeft:30}} // Customize the toolbar background color
+        />
+      );
+    const onSend = useCallback((messages = []) => {
+      const msg = messages[0];
+      const myMsg = {
+        ...msg,
+        sendBy: Doctor.id,
+        sendTo: Doctor.name,
+        createdAt: Date.parse(msg.createdAt),
+      };
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages, myMsg),
+      );
+      firestore().collection("chats").doc(""+Doctor.id+Doctor.name).collection('messages').add(myMsg)
+      firestore().collection("chats").doc(""+Doctor.name+Doctor.id).collection('messages').add(myMsg)
+    }, []);
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
-        <View>
+        <View style={{height: '12%'}}>
           <View
             style={{
               backgroundColor: 'rgba(220, 237, 249, 1)',
@@ -121,6 +202,9 @@ const Appointment2 = ({navigation,route}) => {
                     width: 50,
                     fontFamily: 'NunitoSans_10pt-Light',
                   }}
+                  // source={{
+                  //   uri: image,
+                  // }}
                   source={{
                     uri: image,
                   }}
@@ -178,51 +262,29 @@ const Appointment2 = ({navigation,route}) => {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View
-              style={{
-                backgroundColor: 'transparent',
-                height: '20%',
-                width: '90%',
-                alignSelf: 'center',
-              }}>
-              <KeyboardAvoidingView>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: '182%',
-                    backgroundColor: 'white',
-                    borderRadius: 12,
-                    height: 60,
-                  }}>
-                  <SvgXml
-                    xml={linkSvgIcon}
-                    style={{marginTop: 20, marginLeft: '5%'}}></SvgXml>
-
-                  <TextInput
-                    placeholder="Enter message.."
-                    style={{
-                      paddingLeft: 20,
-                      marginRight: 30,
-                      color: 'black',
-                      fontSize: 17,
-                      fontFamily: 'NunitoSans_10pt-Medium',
-                    }}
-                    placeholderTextColor={'rgba(25, 52, 105, 0.6)'}></TextInput>
-
-                  <SvgXml
-                    xml={sendSvgIcon}
-                    style={{marginTop: 8, marginLeft: '17%'}}></SvgXml>
-                </View>
-              </KeyboardAvoidingView>
-            </View>
           </View>
-          {remoteStream.current && (
-            <RTCView
-              streamURL={remoteStream.current?.toURL()}
-              style={{width: 200, height: 150}}
-            />
-          )}
+          {/* <SvgXml
+            xml={linkSvgIcon}
+            style={{marginTop: 20, marginLeft: '5%'}}></SvgXml> */}
+
+          {/* <SvgXml
+            xml={sendSvgIcon}
+            style={{marginTop: 8, marginLeft: '47%'}}></SvgXml> */}
+        </View>
+        <View style={{flex: 2, backgroundColor: 'rgba(220, 237, 249, 1)'}}>
+          <GiftedChat
+            messages={messages}
+            placeholder="Enter chat..."
+            onSend={messages => onSend(messages)}
+            user={{
+              // _id: 1,
+              _id: Doctor.id,
+            }}
+            renderComposer={renderComposer}
+            renderInputToolbar={renderInputToolbar}
+            // renderInputText={renderInputText}
+            textInputProps={{autoCorrect: false}} // Example of additional text input props
+          />
         </View>
       </Modal>
       <TouchableOpacity

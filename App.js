@@ -14,6 +14,8 @@ import DoctorProfileP from './src/Screens/Patient/ProfilePatient';
 import Appointment1 from './src/Screens/Patient/Appointment1';
 import Appointment2 from './src/Screens/Patient/Appointment2';
 import DoctorDetails from './src/Screens/Doctor/DoctorDetails';
+import TextMessagePatient from './src/Screens/Patient/TextMessagePatient';
+import SendChat from './src/Screens/Patient/SendChat';
 // import Messages from './src/Screens/Doctor/Messages';
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
         backgroundColor="rgba(28, 107, 164, 1)"
       />
       <Root />
+      {/* <TextMessagePatient /> */}
+      {/* <SendChat /> */}
     </View>
   );
 }

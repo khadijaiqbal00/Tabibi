@@ -14,7 +14,7 @@ export default function MessagesStack({navigation,route}) {
 
   
   return (
-    <Stack.Navigator initialRouteName="Messages">
+    <Stack.Navigator initialRouteName="TextMessage">
       <Stack.Screen
         name="Messages"
         component={Messages}

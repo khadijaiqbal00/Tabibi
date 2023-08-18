@@ -92,7 +92,7 @@ export default function DocLogIn({navigation}) {
         await firestore().collection('users').doc(user.uid).set(userData);
   
         // Navigate to the home page
-        avigation.navigate("TabNavigation")
+        navigation.navigate("TabNavigation")
       }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

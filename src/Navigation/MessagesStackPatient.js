@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 export default function MessagesStackPatient({navigation, route}) {
   
   return (
-    <Stack.Navigator initialRouteName="MessagesPatient">
+    <Stack.Navigator initialRouteName="TextMessagePatient">
       <Stack.Screen
         name="MessagesPatient"
         component={MessagesPatient}
@@ -28,7 +28,6 @@ export default function MessagesStackPatient({navigation, route}) {
           headerShown: false,
           tabBarStyle: {display: 'none'},
         }}
-     
       />
       <Stack.Screen
         name="TextMessagePatient"

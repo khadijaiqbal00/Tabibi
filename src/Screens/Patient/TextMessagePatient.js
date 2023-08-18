@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Button, Text, TextInput, TouchableOpacity, FlatList,Image, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native';
 // import { RTCPeerConnection, mediaDevices } from 'react-native-webrtc';
 import { SvgXml } from 'react-native-svg';
 import { bacbggreay, callIcon, linkSvgIcon, sendSvgIcon, videBg, videoIcon } from '../../Assets/TabSvgs';
@@ -12,7 +12,43 @@ const TextMessagePatient = ({navigation}) => {
   const localStream = useRef(null);
   const remoteStream = useRef(null);
   const peerConnection = useRef(null);
+  const [senderMessage, setSenderMessage] = useState('');
+    const [submitMessageSender, setSubmitMessageSender] = useState('');
+const handleSubmit = () => {
+  // setSubmitMessageSender(senderMessage);
+  if (senderMessage !== '') {
+    // Create a copy of the array and add the new message
+    const newMessages = [...submitMessageSender, senderMessage];
+    setSubmitMessageSender(newMessages);
+    setSenderMessage(''); // Clear the input
+  }
+};
 
+const renderItem = ({item}) => {
+  return (
+    <Text
+      style={{
+        color: 'white',
+        alignSelf: 'flex-end',
+        marginRight: '5%',
+        backgroundColor: 'rgba(28, 107, 164, 1)',
+        marginTop: 30,
+        paddingVertical: 10,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+        borderBottomLeftRadius: 16,
+        paddingHorizontal: 20,
+        width: '70%',
+        fontFamily: 'NunitoSans_10pt-Medium',
+      }}>
+      {item}
+    </Text>
+  );
+};
+
+  const handleInputChange = text => {
+    setSenderMessage(text);
+  };
   const handleCallButton = async () => {
     try {
       setIsCalling(true);
@@ -82,13 +118,10 @@ const TextMessagePatient = ({navigation}) => {
           <View style={{flexDirection: 'row'}}>
             <Image
               style={{
-                color: 'black',
                 marginTop: 15,
-                fontSize: 16,
                 borderRadius: 100,
                 height: 50,
                 width: 50,
-                fontFamily: 'NunitoSans_10pt-Light',
               }}
               source={{
                 uri: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg',
@@ -128,11 +161,11 @@ const TextMessagePatient = ({navigation}) => {
               </View>
             </View>
             <TouchableOpacity
-            onPress={handleCallButton}
+              onPress={handleCallButton}
               // onPress={() => {
               //   navigation.navigate('VoiceCallPatient');
               // }}
-              >
+            >
               <SvgXml xml={callIcon} style={{marginTop: 20}}></SvgXml>
             </TouchableOpacity>
             <TouchableOpacity
@@ -147,52 +180,77 @@ const TextMessagePatient = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-
         <View
-          style={{
-            backgroundColor: 'transparent',
-            height: '20%',
-            width: '90%',
-            alignSelf: 'center',
-          }}>
-          <KeyboardAvoidingView>
-            <View
+          style={{backgroundColor: 'transparent', height: 280, width: '100%'}}>
+          <FlatList
+            data={submitMessageSender}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+          {/* {submitMessageSender !== '' && (
+            <Text
               style={{
-                flexDirection: 'row',
-                marginTop: '182%',
-                backgroundColor: 'white',
-                borderRadius: 12,
-                height: 60,
+                color: 'white',
+                alignSelf: 'flex-end',
+                marginRight: '5%',
+                backgroundColor: 'rgba(28, 107, 164, 1)',
+                marginTop: 30,
+                paddingVertical: 10,
+                borderTopLeftRadius: 16,
+                borderTopRightRadius: 16,
+                borderBottomLeftRadius: 16,
+                paddingHorizontal: 20,
+                width: '70%',
+                fontFamily: 'NunitoSans_10pt-Medium',
               }}>
-              <SvgXml
-                xml={linkSvgIcon}
-                style={{marginTop: 20, marginLeft: '5%'}}></SvgXml>
-             
-                <TextInput
-                  placeholder="Enter message.."
-                  style={{
-                    paddingLeft: 20,
-                    marginRight: 30,
-                    color: 'black',
-                    fontSize: 17,
-                    fontFamily: 'NunitoSans_10pt-Medium',
-                  }}
-                  placeholderTextColor={'rgba(25, 52, 105, 0.6)'}></TextInput>
-              
+              {submitMessageSender}
+            </Text>
+          )} */}
+        </View>
+        <KeyboardAvoidingView>
+          <View
+            style={{
+              backgroundColor: 'red',
+              flexDirection: 'row',
+              backgroundColor: 'white',
+              borderRadius: 12,
+              height: 60,
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            <SvgXml
+              xml={linkSvgIcon}
+              style={{marginTop: 20, marginLeft: '5%'}}></SvgXml>
 
+            <TextInput
+              style={{
+                paddingLeft: 20,
+                marginRight: 30,
+                color: 'black',
+                fontSize: 17,
+                width: '58%',
+                fontFamily: 'NunitoSans_10pt-Medium',
+              }}
+              placeholderTextColor={'rgba(25, 52, 105, 0.6)'}
+              value={senderMessage}
+              onChangeText={handleInputChange}
+              placeholder="Enter message..."
+            />
+
+            <TouchableOpacity onPress={handleSubmit}>
               <SvgXml
                 xml={sendSvgIcon}
-                style={{marginTop: 8, marginLeft: '17%'}}></SvgXml>
-            </View>
-          </KeyboardAvoidingView>
-        </View>
+                style={{marginTop: 8, marginLeft: '4%'}}></SvgXml>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </View>
-      {remoteStream.current && (
+      {/* {remoteStream.current && (
         <RTCView
           streamURL={remoteStream.current?.toURL()}
-          style={{ width: 200, height: 150 }}
+          style={{width: 200, height: 150}}
         />
-      )}
+      )} */}
     </View>
   );
 };
