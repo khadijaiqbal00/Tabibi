@@ -45,7 +45,10 @@ import ProfileComponent from '../../Components/ProfileComponent';
 import PatientCard from '../../Components/PatientCard';
 import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
+import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 // import { FlatList } from 'react-native-gesture-handler';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomePatient = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -55,20 +58,97 @@ const HomePatient = ({navigation}) => {
   const [modalVisible5, setModalVisible5] = useState(false);
   const [List2, setList2] = useState([{}]);
   const [List3, setList3] = useState([{}]);
+  const [init, setInit] = useState();
 
-  const [indexCheck2, setIndexCheck2] = useState(0);
+  const [indexCheck2, setIndexCheck2] = useState(init);
   const [List, setList] = useState([{}]);
   const [List4, setList4] = useState([{}]);
+  const logout = async () => {
+    try {
+      // Clear user authentication data from AsyncStorage
+      await AsyncStorage.removeItem('USERID');
+      navigation.navigate("LogInPatient");
+      // You can also clear other user-related data if needed
+
+      // Redirect the user to the login screen or any other appropriate screen
+      // For example, if you're using React Navigation:
+      // navigation.navigate('Login');
+    } catch (error) {
+      console.error('Error while logging out:', error);
+    }
+  };
+
+ 
 
   useEffect(() => {
-    console.log();
-    setList(appointmentData);
-    setList2(pharmacyData);
-    setList3(scheduleData);
-    setList4(DoctorData);
+    const AppointmentDataFireStore = firestore()
+      .collection('appointments')
+      .onSnapshot(
+        snapshot => {
+          const appointmentsData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setList(appointmentsData);
 
-    console.log('>>>', List);
+          if (appointmentsData.length > 0) {
+            console.log('', appointmentsData[0].id);
+            setInit(appointmentsData[0].id);
+          }
+        },
+        error => {
+          console.error('Error fetching appointments data:', error);
+          // Handle the error here, such as showing an error message to the user
+        },
+      );
+
+    // Return a cleanup function to unsubscribe the listener
+    return () => AppointmentDataFireStore();
+
+  }, []);
+  useEffect(() => {
+    const DoctorsDataFireStore = firestore()
+      .collection('doctors')
+      .onSnapshot(
+        snapshot => {
+          const doctorsData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setList4(doctorsData);
+          console.log(doctorsData);
+        },
+        error => {
+          console.error('Error fetching doctors data:', error);
+          // Handle the error here, such as showing an error message to the user
+        },
+      );
+
+    // Return a cleanup function to unsubscribe the listener
+    return () => DoctorsDataFireStore(); // This should be changed
+
+  
+  }, []);
+  useEffect(() => {
+    const PharmacyDataFireStore = firestore()
+      .collection('pharmacies')
+      .onSnapshot(
+        snapshot => {
+          const pharmacyData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setList2(pharmacyData);
+        },
+        error => {
+          console.error('Error fetching pharmacy data:', error);
+          // Handle the error here, such as showing an error message to the user
+        },
+      );
+    // Return a cleanup function to unsubscribe the listener
+    return () => PharmacyDataFireStore(); // Call the function to unsubscribe
   });
+
   return (
     <View style={styles.Container}>
       <Modal animationType="fade" transparent={false} visible={modalVisible2}>
@@ -127,15 +207,17 @@ const HomePatient = ({navigation}) => {
               marginTop: '20%',
             }}>
             <Log width={25} height={25} />
-            <Text
-              style={{
-                color: 'white',
-                marginLeft: 10,
-                fontSize: 17,
-                fontFamily: 'NunitoSans_10pt-Bold',
-              }}>
-              LogOut
-            </Text>
+            <TouchableOpacity onPress={logout}>
+              <Text
+                style={{
+                  color: 'white',
+                  marginLeft: 10,
+                  fontSize: 17,
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                }}>
+                LogOut
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -305,22 +387,27 @@ const HomePatient = ({navigation}) => {
                 style={{marginTop: -22, marginLeft: '80%'}}></SvgXml>
             </TouchableOpacity>
           </View>
-          <View
+
+          <Text
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '90%',
+              marginLeft: '9%',
+              fontSize: 17,
+              marginTop: 30,
+              color: 'rgba(14, 16, 18, 1)',
+              fontFamily: 'NunitoSans_10pt-SemiBold',
             }}>
-            <Text
-              style={{
-                marginLeft: '9%',
-                fontSize: 17,
-                marginTop: 30,
-                color: 'rgba(14, 16, 18, 1)',
-                fontFamily: 'NunitoSans_10pt-SemiBold',
-              }}>
-              Doctors
-            </Text>
+            Live Doctors
+          </Text>
+
+          <View style={{width: 300, marginLeft: 10}}>
+            <FlatList
+              horizontal
+              keyboardShouldPersistTaps="handled"
+              showsHorizontalScrollIndicator={false}
+              data={List4}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => <OnlineDoctorCard image={item.image} />}
+            />
           </View>
 
           <View
@@ -337,8 +424,9 @@ const HomePatient = ({navigation}) => {
                 color: 'rgba(14, 16, 18, 1)',
                 fontFamily: 'NunitoSans_10pt-SemiBold',
               }}>
-              List of Patients
+              List of Doctors
             </Text>
+
             <Text
               onPress={() => {
                 setModalVisible3(true);
@@ -353,20 +441,26 @@ const HomePatient = ({navigation}) => {
               See all
             </Text>
           </View>
+
           <FlatList
             keyboardShouldPersistTaps="handled"
             showsHorizontalScrollIndicator={false}
             data={List4}
             keyExtractor={item => item.id}
             renderItem={({item}) => (
-              <DoctorCard
-                id={item.id}
-                image={item.image}
-                name={item.name}
-                designation={item.designation}
-                review={item.review}
-                review2={item.review2}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('DoctorDetails', {Doc: item});
+                }}>
+                <DoctorCard
+                  id={item.id}
+                  image={item.image}
+                  name={item.name}
+                  designation={item.designation}
+                  review={item.review}
+                  review2={item.review2}
+                />
+              </TouchableOpacity>
             )}
           />
         </View>
@@ -759,7 +853,7 @@ const HomePatient = ({navigation}) => {
             <Image
               style={{height: 50, width: 50, borderRadius: 50, marginTop: 16}}
               source={{
-                uri: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+                uri: 'https://static01.nyt.com/images/2023/03/14/science/14SCI-Span-illo/14SCI-Span-illo-superJumbo.jpg',
               }}></Image>
           </TouchableOpacity>
           <TouchableOpacity
@@ -809,7 +903,7 @@ const HomePatient = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("DoctorSearch");
+            navigation.navigate('DoctorSearch');
           }}
           style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml
@@ -824,10 +918,14 @@ const HomePatient = ({navigation}) => {
               width: 120,
               fontFamily: 'NunitoSans_10pt-Medium',
             }}>
-            Doctors
+            Patients
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.View1, {marginRight: '10%'}]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ReportStack');
+          }}
+          style={[styles.View1, {marginRight: '10%'}]}>
           <SvgXml style={{marginLeft: -10}} xml={reportIcon}></SvgXml>
           <Text
             style={{
@@ -877,7 +975,7 @@ const HomePatient = ({navigation}) => {
         alwaysBounceVertical
         alwaysBounceHorizontal
         data={List}
-        keyExtractor={item => item.id}
+        // keyExtractor={item => item.id}
         renderItem={({item}) => (
           <Pressable
             onPress={() => {
@@ -1049,7 +1147,7 @@ const styles = StyleSheet.create({
   },
   dotIconSelected: {
     marginTop: 10,
-    marginLeft: 25,
+    marginLeft: '40%',
   },
   dotIcon: {
     marginTop: 10,

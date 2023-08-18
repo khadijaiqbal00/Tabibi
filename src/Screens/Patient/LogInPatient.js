@@ -26,6 +26,7 @@ import firestore from '@react-native-firebase/firestore';
 import * as yup from 'yup';
 import {Formik} from 'formik';
 import ErrorMessage from '../../Components/ErrorMessage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -61,10 +62,11 @@ export default function LogInPatient({navigation}) {
           // Add more user data as needed
         };
   
-        await firestore().collection('PatientUsers').doc(user.uid).set(userData);
+        const Val = await firestore().collection('PatientUsers').doc(user.uid).set(userData);
+        console.log(">>>>>>>>>>>>>>>>>",Val[0])
   
         // Navigate to the home page
-        navigation.navigate('LoginSuccessPatient')
+        // navigation.navigate('LoginSuccessPatient')
         // navigation.navigate("TabNavigationPatient")
       }
   
@@ -117,10 +119,14 @@ export default function LogInPatient({navigation}) {
         setLoader(false);
       }
       if (user.user.emailVerified) {
-        console.log(user.user);
+        console.log(">>>>>>>>>>>>>>>>>>",user.user.uid);
         await getData(user.user.email);
-        navigation.navigate('LoginSuccessPatient')
-        // navigation.navigate("TabNavigationPatient")
+        // navigation.navigate('LoginSuccessPatient')
+
+        goToNext(user.user.email, user.user.uid);
+
+
+
 
       } else {
         setLoader(true);
@@ -138,6 +144,13 @@ export default function LogInPatient({navigation}) {
       alert("Invalid email/password")
     }
   };
+
+  const goToNext = async(email , userId)=>{
+    await AsyncStorage.setItem("EMAIL",email)
+    await AsyncStorage.setItem("USERID",userId)
+    navigation.navigate('TabNavigationPatient');
+
+  }
   async function onFacebookButtonPress() {
     // Attempt login with permissions
     const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);

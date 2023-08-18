@@ -75,6 +75,7 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr';
 const Appointment1 = ({navigation,route}) => {
      const {Doctor} = route.params;
+     const {id} = route.params;
 
   const [selected, setSelected] = useState('');
 
@@ -230,7 +231,7 @@ const Appointment1 = ({navigation,route}) => {
           </View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Appointment2', {Doctor: Doctor});
+              navigation.navigate('Appointment2', {Doctor: Doctor,id:id});
             }}
             style={{
               backgroundColor: 'white',

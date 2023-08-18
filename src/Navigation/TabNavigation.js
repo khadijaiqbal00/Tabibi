@@ -28,11 +28,11 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
 
-  const [route, setRoute] = useState('HomeStack');
+  const [route, setRoute] = useState('ScheduleStack');
 
   return (
     <Tab.Navigator
-      initialRouteName="HomeStack"
+      initialRouteName="ScheduleStack"
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}

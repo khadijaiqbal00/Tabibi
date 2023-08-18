@@ -7,6 +7,8 @@ import { SvgXml} from 'react-native-svg';
 
 export default function DoctorDetails({route,navigation}) {
    const {Doc} = route.params;
+   const {id} = route.params;
+   console.log(">>>>>>>>>>>>>>>>>>>>>>>",Doc)
   //  console.log("Doc>>>>>>>",Doc)
    const image = Doc.image;
 
@@ -257,7 +259,7 @@ export default function DoctorDetails({route,navigation}) {
         </View>
       </View>
       <TouchableOpacity onPress = {()=>{
-        navigation.navigate("Appointment1",{Doctor : Doc})
+        navigation.navigate("Appointment1",{Doctor : Doc, id:id})
       }}
         style={{
           backgroundColor: 'rgba(28, 107, 164, 1)',

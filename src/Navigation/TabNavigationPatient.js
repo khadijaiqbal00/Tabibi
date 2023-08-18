@@ -28,7 +28,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigationPatient() {
-  const [route, setRoute] = useState('TabNavigationPatient');
+  const [route, setRoute] = useState('HomeStackPatient');
 
   // React.useLayoutEffect(() => {
   //   const routeName = getFocusedRouteNameFromRoute(route);

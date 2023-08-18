@@ -46,7 +46,6 @@ import PatientCard from '../../Components/PatientCard';
 import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
 import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
-// import { FlatList } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 
 const Home = ({navigation}) => {
@@ -63,92 +62,73 @@ const Home = ({navigation}) => {
   const [List, setList] = useState([{}]);
    const [List4, setList4] = useState([{}]);
 
-
-  // const getAppointmentsData = async () => {
-  //     try {
-  //       firestore()
-  //         .collection('appointments')
-  //         .get()
-  //         .then(querySnapshot => {
-  //           // const fireStoreData = querySnapshot.docs[0].data();
-  //           setList(querySnapshot.docs[0]?.data());
-  //           // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', fireStoreData);
-
-  //           // setList(fire)
-
-  //           // setList(fireStoreData?.name);
-  //         })
-  //         .catch(error => {
-  //           console.log('Error getting documents: ', error);
-  //         });
-  //       // setList(fireStoreAppointmentData);
-  //     } catch (error) {
-  //       alert('Error getting data:', error);
-  //       console.log('Error from account', error);
-  //     }  
-   
-  // };
-
   
   useEffect(() => {
     
-    const AppointmentDataFireStore = firestore()
-      .collection('appointments')
-      .onSnapshot(snapshot => {
+  const AppointmentDataFireStore = firestore()
+    .collection('appointments')
+    .onSnapshot(
+      snapshot => {
         const appointmentsData = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
         }));
         setList(appointmentsData);
-      });
-          console.log('', List[0].id);
-          setInit(List[0].id);
+        if (appointmentsData.length > 0) {
+          console.log('', appointmentsData[0].id);
+          setInit(appointmentsData[0].id);
+        }
+      },
+      error => {
+        console.error('Error fetching appointments data:', error);
+        // Handle the error here, such as showing an error message to the user
+      },
+    );
 
-
-
-    return () => AppointmentDataFireStore();
-
-   
-    // // setList(appointmentData);
-    // setList2(pharmacyData);
-    // setList3(scheduleData);
-    // setList4(DoctorData);
+  // Return a cleanup function to unsubscribe the listener
+  return () => AppointmentDataFireStore();
   },[]);
   useEffect(() => {
     
     const DoctorsDataFireStore = firestore()
       .collection('doctors')
-      .onSnapshot(snapshot => {
-        const doctorsData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setList4(doctorsData);
-        console.log(doctorsData)
-      });
+      .onSnapshot(
+        snapshot => {
+          const doctorsData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setList4(doctorsData);
+          console.log(doctorsData);
+        },
+        error => {
+          console.error('Error fetching doctors data:', error);
+          // Handle the error here, such as showing an error message to the user
+        },
+      );
 
-
-
+    // Return a cleanup function to unsubscribe the listener
     return () => DoctorsDataFireStore();
-
-   
-    // // setList(appointmentData);
-    // setList2(pharmacyData);
-    // setList3(scheduleData);
-    // setList4(DoctorData);
   },[]);
   useEffect(() => {
     const PharmacyDataFireStore = firestore()
       .collection('pharmacies')
-      .onSnapshot(snapshot => {
-        const PharmacyData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setList2(PharmacyData);
-      });
+      .onSnapshot(
+        snapshot => {
+          const PharmacyData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setList2(PharmacyData);
+        },
+        error => {
+          console.error('Error fetching pharmacy data:', error);
+          // Handle the error here, such as showing an error message to the user
+        },
+      );
 
-    return () => PharmacyDataFireStore;
+    // Return a cleanup function to unsubscribe the listener
+    return () => PharmacyDataFireStore(); // Call the function to unsubscribe
   })
   
   return (

@@ -28,28 +28,38 @@ const Schedule = () => {
    const [indexCheck, setIndexCheck] = useState(0);
    const [indexCheck2, setIndexCheck2] = useState(0);
 
-     useEffect(() => {
-       const ScheduleDataFireStore = firestore()
-         .collection('patientsSchedule')
-         .onSnapshot(snapshot => {
+  useEffect(() => {
+   const ScheduleDataFireStore = firestore()
+     .collection('patientsSchedule')
+     .onSnapshot(
+       snapshot => {
+         if (!snapshot.empty) {
+           // Check if the snapshot is not empty
            const scheduleData = snapshot.docs.map(doc => ({
              id: doc.id,
              ...doc.data(),
            }));
+           console.log(
+             '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+             scheduleData,
+           );
            setList(scheduleData);
-         });
+         } else {
+           console.log('Snapshot is empty');
+           setList([]); // Assuming setList is used to update some state
+         }
+       },
+       error => {
+         console.error('Error fetching schedule data:', error);
+       },
+     );
 
-       return () => ScheduleDataFireStore();
+   // Return a cleanup function to unsubscribe the listener
+   return () => ScheduleDataFireStore();
 
-      
-     }, []);
-
+  }, []);
    useEffect(() => {
-    //  console.log();
-    //  setList(scheduleData);
      setList2(CalenderData);
-
-    //  console.log('>>>', List);
    });
   return (
     <View style={styles.Container}>
@@ -148,6 +158,8 @@ const Schedule = () => {
                   borderRadius: 22,
                   marginHorizontal: 20,
                 }}>
+
+                
                 <Image
                   style={{
                     width: 50,

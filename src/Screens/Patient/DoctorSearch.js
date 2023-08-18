@@ -17,28 +17,34 @@ import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
 import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 import firestore from '@react-native-firebase/firestore';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let id = '';
 const DoctorSearch = ({navigation}) => {
   const [List4, setList4] = useState([{}]);
+  const getDoctors = async() =>{
+    id = await AsyncStorage.getItem('USERID');
+    let tempData = [];
+    const email = await AsyncStorage.getItem('EMAIL');
+    firestore()
+      .collection('doctors')
+      // .where("email","!=",email)
+      .onSnapshot(snapshot => {
+        if(snapshot.docs != []){
+          snapshot.docs.map(doc => {
+              tempData.push(doc.data());
+          })
+        }
+        setList4(tempData);
+
+      
+        // console.log(doctorsData);
+      });
+    }
+
 
    useEffect(() => {
-     const DoctorsDataFireStore = firestore()
-       .collection('doctors')
-       .onSnapshot(snapshot => {
-         const doctorsData = snapshot.docs.map(doc => ({
-           id: doc.id,
-           ...doc.data(),
-         }));
-         setList4(doctorsData);
-         console.log(doctorsData);
-       });
-
-     return () => DoctorsDataFireStore();
-
-     // // setList(appointmentData);
-     // setList2(pharmacyData);
-     // setList3(scheduleData);
-     // setList4(DoctorData);
+    getDoctors();
+     
    }, []);
 
   return (
@@ -142,7 +148,7 @@ const DoctorSearch = ({navigation}) => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('DoctorDetails', {Doc: item});
+              navigation.navigate('DoctorDetails', {Doc: item, id: id});
             }}>
             <DoctorCard
               id={item.id}

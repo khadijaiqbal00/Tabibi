@@ -95,7 +95,7 @@ export default function SignUpPatient({navigation}) {
                   'Please verify your email address. An email has been sent to your email address',
                 );
                 await auth().signOut();
-                navigation.navigate("TabNavigation")
+                navigation.navigate("TabNavigationPatient")
               })
               .catch(error => Alert.alert('Error: ', error));
           })

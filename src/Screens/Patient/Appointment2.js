@@ -5,7 +5,7 @@ import {Back, DoctorImg, Star, Clock} from '../../Assets/icons';
 import {SvgXml} from 'react-native-svg';
 import {GiftedChat,InputToolbar,Composer} from 'react-native-gifted-chat';
 import firestore from '@react-native-firebase/firestore';
-
+import { useRoute } from '@react-navigation/native';
 import {scheduleData} from '../../Global/Data';
 import {
   bacbggreay,
@@ -15,28 +15,26 @@ import {
   videBg,
   videoIcon,
 } from '../../Assets/TabSvgs';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import DocAppointment from '../../Components/DocAppointment';
 const Appointment2 = ({navigation,route}) => {
    const {Doctor} = route.params;
-   //  console.log("Doctor>>>>>>>",Doctor)
    const image = Doctor.image;
-
    const name = Doctor.name;
-   //  console.log("nameeee", name)
+   console.log('nameeee', route.params.id);
+   console.log('Doct Id', Doctor.name);
    const review = Doctor.review;
    const review2 = Doctor.review2;
    const designation = Doctor.designation;
-  const [List, setList] = useState([{}]);
-
-  const [modalVisible, setModalVisible] = useState(false);
-    const [isCalling, setIsCalling] = useState(false);
-    const [isCallAccepted, setIsCallAccepted] = useState(false);
-    const localStream = useRef(null);
-    const remoteStream = useRef(null);
-    const peerConnection = useRef(null);
-
-    const handleCallButton = async () => {
+   const [List, setList] = useState([{}]);
+   const [modalVisible, setModalVisible] = useState(false);
+   const [isCalling, setIsCalling] = useState(false);
+   const [isCallAccepted, setIsCallAccepted] = useState(false);
+   const [messages, setMessages] = useState([]);
+   const localStream = useRef(null);
+   const remoteStream = useRef(null);
+   const peerConnection = useRef(null);
+   const handleCallButton = async () => {
       try {
         setIsCalling(true);
 
@@ -69,17 +67,15 @@ const Appointment2 = ({navigation,route}) => {
       } catch (error) {
         console.error('Error creating offer:', error);
       }
-    };
+   };
 
-    const handleHangUp = () => {
-      setIsCalling(false);
-      setIsCallAccepted(false);
-      peerConnection.current.close();
-      remoteStream.current = null;
-      // Perform any additional cleanup, state updates, etc.
-    };
-      const [messages, setMessages] = useState([]);
-
+  const handleHangUp = () => {
+    setIsCalling(false);
+    setIsCallAccepted(false);
+    peerConnection.current.close();
+    remoteStream.current = null;
+    // Perform any additional cleanup, state updates, etc.
+  };
   useEffect(() => {
     console.log();
     setList(scheduleData);
@@ -90,23 +86,9 @@ const Appointment2 = ({navigation,route}) => {
 
   //Message Part 
     useEffect(() => {
-      // setMessages([
-      //   {
-      //     _id: 1,
-      //     text: 'Hello developer',
-      //     createdAt: new Date(),
-      //     user: {
-      //       _id: 2,
-      //       name: 'React Native',
-      //       avatar: 'https://placeimg.com/140/140/any',
-      //     },
-
-      //   },
-      // ]);
-
         const MessagesDataFireStore = firestore()
           .collection('chats')
-          .doc(Doctor.id + Doctor.name)
+          .doc(route.params.id + Doctor.name)
           .collection('messages')
           .orderBy('createdAt', 'desc')
           .onSnapshot(snapshot => {
@@ -119,15 +101,6 @@ const Appointment2 = ({navigation,route}) => {
             setMessages(allMessages);
           });
         return () => MessagesDataFireStore();
-
-      // const subscriber = firestore().collection("chats").doc(Doctor.id+Doctor.name).collection('messages').orderBy("createdAt","desc");
-      // subscriber.onSnapshot(querysnapshot => {
-      //   const allMessages = querysnapshot.map((item => {
-      //     return {...item._data, createdAt: Date.parse(new Date())};
-      //   }));
-      //   setMessages(allMessages);
-      // }); 
-      // return () => subscriber();
     }, []);
      const renderComposer = props => {
        const customStyle = {
@@ -149,18 +122,29 @@ const Appointment2 = ({navigation,route}) => {
         />
       );
     const onSend = useCallback((messages = []) => {
+       console.log("1111111111111111111111");
+
       const msg = messages[0];
+      
       const myMsg = {
         ...msg,
-        sendBy: Doctor.id,
+        sendBy: route.params.id,
         sendTo: Doctor.name,
         createdAt: Date.parse(msg.createdAt),
       };
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, myMsg),
       );
-      firestore().collection("chats").doc(""+Doctor.id+Doctor.name).collection('messages').add(myMsg)
-      firestore().collection("chats").doc(""+Doctor.name+Doctor.id).collection('messages').add(myMsg)
+      firestore()
+        .collection('chats')
+        .doc('' + route.params.id + Doctor.name)
+        .collection('messages')
+        .add(myMsg);
+      firestore()
+        .collection('chats')
+        .doc('' + Doctor.name + route.params.id)
+        .collection('messages')
+        .add(myMsg);
     }, []);
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
@@ -278,7 +262,7 @@ const Appointment2 = ({navigation,route}) => {
             onSend={messages => onSend(messages)}
             user={{
               // _id: 1,
-              _id: Doctor.id,
+              _id: route.params.id,
             }}
             renderComposer={renderComposer}
             renderInputToolbar={renderInputToolbar}

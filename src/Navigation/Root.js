@@ -25,26 +25,39 @@ import ForgotPasswordPatient from '../Screens/Patient/ForgotPasswordPatient';
 import VerifyCodePatient from '../Screens/Patient/VerifyCodePatient';
 import CreatePasswordPatient from '../Screens/Patient/CreatePasswordPatient';
 import LoginSuccessPatient from '../Screens/Patient/LoginSuccessPatient';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 
-const Root = () => {
+const Root = ({navigation}) => {
   const [showSplash, setShowSplash] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setShowSplash(false);
-    }, 1000);
-  }, []);
+  const checkLogin = async () => {
+    const id = await AsyncStorage.getItem('USERID');
+    if (id != null) {
+
+      navigation.navigate('TabNavigationPatient');
+    } else {
+      navigation.navigate('LogInPatient');
+    }
+  };
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     checkLogin();
+
+  //     setShowSplash(false);
+
+      
+  //   }, 1000);
+  // }, []);
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="TabNavigationPatient">
-        {showSplash ? (
+      <Stack.Navigator initialRouteName="SplashScreen">
+        {/* {showSplash ? ( */}
           <Stack.Screen
             name="SplashScreen"
             component={SplashScreen}
             options={{headerShown: false}}
           />
-        ) : null}
+        {/* ) : null} */}
         <Stack.Screen
           name="LogInPatient"
           component={LogInPatient}
@@ -152,9 +165,6 @@ const Root = () => {
             headerShown: false,
           }}
         />
-       
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );
