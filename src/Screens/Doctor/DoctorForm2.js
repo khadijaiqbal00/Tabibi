@@ -15,14 +15,7 @@ import {Formik} from 'formik';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import {colors} from '../../Global/globalstyles';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import ErrorMessage from '../../Components/ErrorMessage';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Loader from '../../Components/Loader';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import Slider from '@react-native-community/slider';
 export default function DoctorForm2({navigation}) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
@@ -69,6 +62,23 @@ export default function DoctorForm2({navigation}) {
   };
 
   const bloodTypes = ['Cardiology', 'Dermatology', 'Neurology', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  const [hours, setHours] = useState(0);
+  const [endHours, setEndHours] = useState(0);
+  const increaseHours = () => {
+    setHours((prevHours) => (prevHours < 23 ? prevHours + 1 : prevHours));
+  };
+  
+  const decreaseHours = () => {
+    setHours((prevHours) => (prevHours > 0 ? prevHours - 1 : prevHours));
+  };
+
+  const increaseHours1 = () => {
+    setEndHours((prevHours) => (prevHours < 23 ? prevHours + 1 : prevHours));
+  };
+  
+  const decreaseHours1 = () => {
+    setEndHours((prevHours) => (prevHours > 0 ? prevHours - 1 : prevHours));
+  };
 
   const onSubmitValue = async => {};
 
@@ -177,7 +187,32 @@ export default function DoctorForm2({navigation}) {
         />
       </View>
       <Text style={styles.Label}>Availability Hours</Text>
+      <View style={{flexDirection:'row', justifyContent:'center', marginTop:10,}}>
+      <View style={styles.box}>
+  <TouchableOpacity onPress={increaseHours} style={styles.arrow}>
+    <Text style={styles.arrowText}>↑</Text>
+  </TouchableOpacity>
 
+  <Text style={styles.hoursText}>{hours.toString().padStart(2, '0')}:00</Text>
+
+  <TouchableOpacity onPress={decreaseHours} style={styles.arrow}>
+    <Text style={styles.arrowText}>↓</Text>
+  </TouchableOpacity>
+</View>
+<View style={styles.box}>
+  <TouchableOpacity onPress={increaseHours1} style={styles.arrow}>
+    <Text style={styles.arrowText}>↑</Text>
+  </TouchableOpacity>
+
+  <Text style={styles.hoursText}>{endHours.toString().padStart(2, '0')}:00</Text>
+
+  <TouchableOpacity onPress={decreaseHours1} style={styles.arrow}>
+    <Text style={styles.arrowText}>↓</Text>
+  </TouchableOpacity>
+</View>
+      </View>
+      
+     
     
 
      
@@ -309,6 +344,26 @@ export default function DoctorForm2({navigation}) {
   );
 }
 const styles = StyleSheet.create({
+    box: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'white',
+       marginHorizontal:10,
+       backgroundColor:'white',
+      },
+      arrow: {
+        padding: 5,
+      },
+      arrowText: {
+        fontSize: 18,
+      },
+      hoursText: {
+        color:'#1A4563',
+        fontSize: 17,
+        padding: 10,
+      },
   line: {
     height: 1,
     width: '100%',
