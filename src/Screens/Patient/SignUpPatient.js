@@ -11,15 +11,13 @@ import React, {useState} from 'react';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import * as Animatable from 'react-native-animatable';
 import {colors} from '../../Global/globalstyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ErrorMessage from '../../Components/ErrorMessage';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Loader from '../../Components/Loader';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 export default function SignUpPatient({navigation}) {
   const [loader, setLoader] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -44,7 +42,7 @@ export default function SignUpPatient({navigation}) {
       .oneOf([yup.ref('Password'), null], 'Passwords must match'),
   });
 
-   const addData = values => {
+  const addData = values => {
     delete values.Password;
     delete values.cpassword;
     console.log(values);
@@ -53,22 +51,31 @@ export default function SignUpPatient({navigation}) {
         .collection('PatientUsers')
         .add(values)
         .then(() => {
-          
           resolve(true);
         })
         .catch(error => {
           console.log(error);
-          
         });
     });
 
     return promise;
   };
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+  const [dob, setDob] = useState('');
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    setDob(currentDate.toISOString().split('T')[0]);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
 
   const onSubmitValue = async (values, {resetForm}) => {
-   
-    
     if (!checked) {
       setLoader(false);
       Alert.alert('Please accept the terms and conditions.');
@@ -81,9 +88,9 @@ export default function SignUpPatient({navigation}) {
         values.email,
         values.Password,
       );
-    
+
       Alert.alert('Signup Successful');
-      
+
       if (user) {
         addData(values)
           .then(bool => {
@@ -95,18 +102,15 @@ export default function SignUpPatient({navigation}) {
                   'Please verify your email address. An email has been sent to your email address',
                 );
                 await auth().signOut();
-                navigation.navigate("TabNavigationPatient")
+                navigation.navigate('TabNavigationPatient');
               })
               .catch(error => Alert.alert('Error: ', error));
           })
           .catch(error => Alert.alert('Signup failed'));
-
-      } else Alert.alert("Signup failed")
-
-
+      } else Alert.alert('Signup failed');
     } catch (error) {
-      setLoader(false)
-      console.log("Error", error.message)
+      setLoader(false);
+      console.log('Error', error.message);
       Alert.alert(error.message);
     }
   };
@@ -139,25 +143,84 @@ export default function SignUpPatient({navigation}) {
           />
           <Text style={styles.text}>Create a new account</Text>
           <Text style={styles.subText}>
-          Please fill in the information below to create your new account.
+            Please fill in the information below to create your new account.
           </Text>
-          <Text style={styles.Label}>Name</Text>
-          <TextInput
-            textColor="rgba(26, 69, 99, 1)"
-            theme={{
-              colors: {
-                text: 'rgba(28, 107, 164, 1)',
-                primary: 'rgba(28, 107, 164, 1)',
-              },
-            }}
-            underlineColor="transparent"
-            style={styles.TextInput}
-            outlineStyle={styles.border}
-            onChangeText={handleChange('name')}
-            onBlur={handleBlur('name')}
-            value={values.name}
-          />
-          <ErrorMessage error={errors['name']} visible={touched['name']} />
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: '100%',
+              marginHorizontal: 10,
+            }}>
+            <View style={{width: '47%'}}>
+              <Text style={styles.Label}>First Name</Text>
+              <TextInput
+                textColor="rgba(26, 69, 99, 1)"
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInput}
+                outlineStyle={styles.border}
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+              />
+              <ErrorMessage error={errors['name']} visible={touched['name']} />
+            </View>
+
+            <View style={{width: '47%'}}>
+              <Text style={styles.Label}>Last Name</Text>
+              <TextInput
+                textColor="rgba(26, 69, 99, 1)"
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInput}
+                outlineStyle={styles.border}
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+              />
+              <ErrorMessage error={errors['name']} visible={touched['name']} />
+            </View>
+          </View>
+          <View></View>
+          <Text style={styles.Label}>Date of birth</Text>
+          <View style={styles.formContainer}>
+            <TextInput
+              textColor="rgba(26, 69, 99, 1)"
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              value={dob}
+              onFocus={showDatepicker}
+              onBlur={() => setShow(false)}
+              underlineColor="transparent"
+              style={styles.input}
+              underlineColorAndroid="transparent"
+            />
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={'date'}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+          </View>
 
           <Text style={styles.Label}>E-mail</Text>
           <TextInput
@@ -271,53 +334,21 @@ export default function SignUpPatient({navigation}) {
             error={errors['cpassword']}
             visible={touched['cpassword']}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              alignSelf: 'center',
-              marginTop: 10,
-              // marginLeft: '10%',
-              marginBottom: '4%',
-            }}>
-            <Text
-              style={{
-                color: 'black',
-                marginTop: 10,
-                fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-              }}>
-              Accept terms and conditions
-            </Text>
-            <TouchableOpacity onPress={handleToggle}>
-              <View
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 12,
-                  borderWidth: 2,
-                  borderColor: checked ? 'rgba(13, 255, 110, 1)' : 'white',
-                  backgroundColor: checked ? 'rgba(13, 255, 110, 1)' : 'transparent',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: 15,
-                  marginTop: 8,
-                }}>
-                {checked && (
-                  <Icon name="check" size={18} color="white" />
-                )}
-                {/* You can change the color and size of the check icon */}
-              </View>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={handleSubmit} style={styles.btnShape}>
-            <Text style={styles.btnText}>Register</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('PatientForm2');
+            }}
+            style={styles.btnShape}>
+            <Text style={styles.btnText}>Next</Text>
           </TouchableOpacity>
 
           <View style={styles.bottomLine}>
             <Text style={styles.text4}>Already have an account!</Text>
-            <TouchableOpacity onPress={()=>{
-                navigation.navigate("LogInPatient")
-            }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('LogInPatient');
+              }}>
               <Text style={styles.text5}>Login</Text>
             </TouchableOpacity>
           </View>
@@ -327,6 +358,25 @@ export default function SignUpPatient({navigation}) {
   );
 }
 const styles = StyleSheet.create({
+  input: {
+    alignSelf: 'center',
+    width: '105%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    borderRadius: 4,
+    height: 47,
+    paddingLeft: 5,
+    paddingTop: 5,
+    marginTop: 5,
+    // color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    borderBlockColor: 'white',
+  },
+
+  formContainer: {
+    paddingHorizontal: 30,
+  },
   prefixBox: {
     backgroundColor: '#0060F7',
     paddingVertical: 5,
@@ -376,7 +426,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 5,
     borderRadius: 4,
-    height: 47,
+    height: 42,
     paddingLeft: 5,
     paddingTop: 5,
     marginTop: 5,
@@ -413,11 +463,11 @@ const styles = StyleSheet.create({
   },
   btnShape: {
     height: 47,
-    width: '80%',
+    width: '87%',
     alignSelf: 'center',
     borderRadius: 4,
     backgroundColor: colors.btnclr,
-    marginTop: -10,
+    marginTop: 20,
   },
   btnText: {
     alignSelf: 'center',

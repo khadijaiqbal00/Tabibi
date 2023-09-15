@@ -11,16 +11,12 @@ import React, {useState} from 'react';
 import {Chip, IconButton, TextInput} from 'react-native-paper';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import * as Animatable from 'react-native-animatable';
 import {colors} from '../../Global/globalstyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ErrorMessage from '../../Components/ErrorMessage';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Loader from '../../Components/Loader';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 export default function DocSignUp({navigation}) {
   const [loader, setLoader] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -112,6 +108,21 @@ export default function DocSignUp({navigation}) {
       Alert.alert(error.message);
     }
   };
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+  const [dob, setDob] = useState('');
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    setDob(currentDate.toISOString().split('T')[0]);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
   return (
     <Formik
     initialValues={{ email: '', Password: '', name: '',  PhoneNumber: '', cpassword: '',  }}
@@ -139,23 +150,82 @@ export default function DocSignUp({navigation}) {
             Veuillez remplir les informations ci-dessous pour créer votre
             nouveau compte.
           </Text>
-          <Text style={styles.Label}>Name</Text>
-          <TextInput
-            textColor="rgba(26, 69, 99, 1)"
-            theme={{
-              colors: {
-                text: 'rgba(28, 107, 164, 1)',
-                primary: 'rgba(28, 107, 164, 1)',
-              },
-            }}
-            underlineColor="transparent"
-            style={styles.TextInput}
-            outlineStyle={styles.border}
-            onChangeText={handleChange('name')}
-            onBlur={handleBlur('name')}
-            value={values.name}
-          />
-          <ErrorMessage error={errors['name']} visible={touched['name']} />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: '100%',
+              marginHorizontal: 10,
+            }}>
+            <View style={{width: '47%'}}>
+              <Text style={styles.Label}>First Name</Text>
+              <TextInput
+                textColor="rgba(26, 69, 99, 1)"
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInput}
+                outlineStyle={styles.border}
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+              />
+              <ErrorMessage error={errors['name']} visible={touched['name']} />
+            </View>
+
+            <View style={{width: '47%'}}>
+              <Text style={styles.Label}>Last Name</Text>
+              <TextInput
+                textColor="rgba(26, 69, 99, 1)"
+                theme={{
+                  colors: {
+                    text: 'rgba(28, 107, 164, 1)',
+                    primary: 'rgba(28, 107, 164, 1)',
+                  },
+                }}
+                underlineColor="transparent"
+                style={styles.TextInput}
+                outlineStyle={styles.border}
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+              />
+              <ErrorMessage error={errors['name']} visible={touched['name']} />
+            </View>
+          </View>
+
+          <Text style={styles.Label}>Date of birth</Text>
+          <View style={styles.formContainer}>
+            <TextInput
+              textColor="rgba(26, 69, 99, 1)"
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              value={dob}
+              onFocus={showDatepicker}
+              onBlur={() => setShow(false)}
+              underlineColor="transparent"
+              style={styles.input}
+              underlineColorAndroid="transparent"
+            />
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={'date'}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+          </View>
+
 
           <Text style={styles.Label}>E-mail</Text>
           <TextInput
@@ -262,48 +332,13 @@ export default function DocSignUp({navigation}) {
             // onChangeText={setPassC}
           />
           <ErrorMessage error={errors['cpassword']} visible={touched['cpassword']} />
-          <View
-            style={{
-              flexDirection: 'row',
-              alignSelf: 'center',
-              marginTop: 10,
-              marginLeft: '10%',
-              marginBottom: '4%',
-            }}>
-            <Text
-              style={{
-                color: 'black',
-                marginTop: 10,
-                fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-              }}>
-              Accept terms and conditions
-            </Text>
-            <TouchableOpacity onPress={handleToggle}>
-              <View
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 12,
-                  borderWidth: 2,
-                  borderColor: 'white',
-                  backgroundColor: checked ? 'white' : 'transparent',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: 5,
-                  marginTop: 8,
-                }}>
-                {checked && (
-                  <Icon name="check" size={18} color="rgba(193, 193, 193, 1)" />
-                )}
-                {/* You can change the color and size of the check icon */}
-              </View>
-            </TouchableOpacity>
-          </View>
+      
           <TouchableOpacity
-           onPress={handleSubmit}
+            onPress={() => {
+              navigation.navigate('DoctorForm2');
+            }}
             style={styles.btnShape}>
-            <Text style={styles.btnText}>Signup</Text>
+            <Text style={styles.btnText}>Next</Text>
           </TouchableOpacity>
 
           <View style={styles.bottomLine}>
@@ -318,6 +353,25 @@ export default function DocSignUp({navigation}) {
   );
 }
 const styles = StyleSheet.create({
+  input: {
+    alignSelf: 'center',
+    width: '105%',
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    borderRadius: 4,
+    height: 47,
+    paddingLeft: 5,
+    paddingTop: 5,
+    marginTop: 5,
+    // color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    borderBlockColor: 'white',
+  },
+
+  formContainer: {
+    paddingHorizontal: 30,
+  },
   prefixBox: {
     backgroundColor: '#0060F7',
     paddingVertical: 5,
@@ -404,11 +458,11 @@ const styles = StyleSheet.create({
   },
   btnShape: {
     height: 47,
-    width: '80%',
+    width: '87%',
     alignSelf: 'center',
     borderRadius: 4,
     backgroundColor: colors.btnclr,
-    marginTop: -10,
+    marginTop: 10,
   },
   btnText: {
     alignSelf: 'center',

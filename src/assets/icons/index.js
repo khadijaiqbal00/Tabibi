@@ -29,7 +29,14 @@ export {default as Star} from './star.svg';
 export {default as Tick} from './tick.svg';
 export {default as DotsA} from './dotssss.svg';
 export {default as Phone} from './phone.svg';
-export {default as LoginCheck2} from './LoginCheck2.svg'
+export {default as LoginCheck2} from './LoginCheck2.svg';
+export {default as Camera} from './Camera.svg';
+export {default as Gallery} from './Gallery.svg';
+export {default as ProfileImage} from './Pimage.svg';
+export {default as CrossIcon} from './cross.svg';
+export {default as Done} from './Done.svg';
+
+
 
 
 

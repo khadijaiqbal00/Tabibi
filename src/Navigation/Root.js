@@ -17,6 +17,7 @@ import VerifyCode from '../Screens/Doctor/VerifyCode';
 import ResetPassword from '../Screens/Doctor/ResetPassword';
 import LogInPatient from '../Screens/Patient/LogInPatient';
 import SignUpPatient from '../Screens/Patient/SignUpPatient';
+import PatientForm2 from '../Screens/Patient/PatientForm2';
 import HomePatient from '../Screens/Patient/HomePatient';
 import TabNavigationPatient from './TabNavigationPatient';
 
@@ -26,6 +27,12 @@ import VerifyCodePatient from '../Screens/Patient/VerifyCodePatient';
 import CreatePasswordPatient from '../Screens/Patient/CreatePasswordPatient';
 import LoginSuccessPatient from '../Screens/Patient/LoginSuccessPatient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PatientForm3 from '../Screens/Patient/PatientForm3';
+import PatientForm4 from '../Screens/Patient/PatientForm4';
+import DoctorForm2 from '../Screens/Doctor/DoctorForm2';
+import DoctorForm4 from '../Screens/Doctor/DoctorForm4';
+import DoctorForm3 from '../Screens/Doctor/DoctorForm3';
+import DoctorForm5 from '../Screens/Doctor/DoctorForm5';
 const Stack = createNativeStackNavigator();
 
 const Root = ({navigation}) => {
@@ -72,6 +79,30 @@ const Root = ({navigation}) => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name="PatientForm2"
+          component={PatientForm2}
+          options={{
+            headerShown: false,
+          }}
+        />
+        
+        <Stack.Screen
+          name="PatientForm3"
+          component={PatientForm3}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="PatientForm4"
+          component={PatientForm4}
+          options={{
+            headerShown: false,
+          }}
+        />
+            
+
 
         <Stack.Screen
           name="DocLogin"
@@ -84,6 +115,34 @@ const Root = ({navigation}) => {
         <Stack.Screen
           name="DocSignUp"
           component={DocSignUp}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="DoctorForm2"
+          component={DoctorForm2}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="DoctorForm3"
+          component={DoctorForm3}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="DoctorForm4"
+          component={DoctorForm4}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="DoctorForm5"
+          component={DoctorForm5}
           options={{
             headerShown: false,
           }}
