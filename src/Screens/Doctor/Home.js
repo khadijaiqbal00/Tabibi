@@ -181,6 +181,7 @@ const Home = ({navigation}) => {
             <ProfileComponent title="Language Selection" svg={Language} />
             <ProfileComponent title="Pivacy Policy" svg={Compass} />
             <ProfileComponent title="Terms of use" svg={Compass} />
+            <ProfileComponent title="Feedback" svg={Compass} />
           </View>
           <View
             style={{

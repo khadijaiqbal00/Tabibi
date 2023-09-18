@@ -36,6 +36,7 @@ import {
   Doctor2,
   Settings,
   Fb,
+  Feed, 
   Vector,
   Language,
   Compass,
@@ -184,11 +185,11 @@ const HomePatient = ({navigation}) => {
                 marginTop: '2%',
                 fontFamily: 'NunitoSans_10pt-Bold',
               }}>
-              Doctor Name
+              Mohammed Bed
             </Text>
           </View>
 
-          <View style={{marginTop: '15%'}}>
+          <View style={{marginTop: '10%'}}>
             <TouchableOpacity
               onPress={() => {
                 setModalVisible5(true);
@@ -199,12 +200,13 @@ const HomePatient = ({navigation}) => {
             <ProfileComponent title="Language Selection" svg={Language} />
             <ProfileComponent title="Pivacy Policy" svg={Compass} />
             <ProfileComponent title="Terms of use" svg={Compass} />
+            <ProfileComponent title="Feedback" svg={Feed} />
           </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              marginTop: '20%',
+              marginTop: '10%',
             }}>
             <Log width={25} height={25} />
             <TouchableOpacity onPress={logout}>
@@ -495,7 +497,7 @@ const HomePatient = ({navigation}) => {
                 marginTop: '2%',
                 fontFamily: 'NunitoSans_10pt-Bold',
               }}>
-              Doctor Name
+              Mohammed Bed
             </Text>
           </View>
 
@@ -918,7 +920,7 @@ const HomePatient = ({navigation}) => {
               width: 120,
               fontFamily: 'NunitoSans_10pt-Medium',
             }}>
-            Patients
+            Doctors
           </Text>
         </TouchableOpacity>
         <TouchableOpacity

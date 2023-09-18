@@ -15,7 +15,7 @@ const OnlineDoctorCard = ({image, name, designation, review, review2}) => {
             style={{
               height: 90,
               width: 95,
-              marginLeft: 20,
+              marginHorizontal: 20,
               borderRadius: 25,
               backgroundColor: 'rgba(255, 255, 255, 1)',
               marginTop: 10,

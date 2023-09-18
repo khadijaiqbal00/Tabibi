@@ -1,22 +1,40 @@
-import { StyleSheet, Text, View ,Image, TouchableOpacity} from 'react-native'
-import React,{useState} from 'react'
-import { colors } from '../../Global/globalstyles';
-import { backTransparentIcon, dotTransparentIcon, verifiedDocIcon, ratingStarIcon ,availabilityIcon} from '../../Assets/TabSvgs';
-import { SvgXml} from 'react-native-svg';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
+import React, {useState} from 'react';
+import {colors} from '../../Global/globalstyles';
+import {
+  backTransparentIcon,
+  dotTransparentIcon,
+  verifiedDocIcon,
+  ratingStarIcon,
+  availabilityIcon,
+} from '../../Assets/TabSvgs';
+import {SvgXml} from 'react-native-svg';
 
-
-export default function DoctorDetails({route,navigation}) {
-   const {Doc} = route.params;
-   const {id} = route.params;
-   console.log(">>>>>>>>>>>>>>>>>>>>>>>",Doc)
+import {Back, Emergency} from '../../Assets/icons';
+export default function DoctorDetails({route, navigation}) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [text, setText] = useState('');
+  const {Doc} = route.params;
+  const {id} = route.params;
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>', Doc);
   //  console.log("Doc>>>>>>>",Doc)
-   const image = Doc.image;
+  const image = Doc.image;
 
-   const name = Doc.name;
+  const name = Doc.name;
   //  console.log("nameeee", name)
-   const review = Doc.review;
-   const review2 = Doc.review2;
-   const designation = Doc.designation;
+  const review = Doc.review;
+  const review2 = Doc.review2;
+  const designation = Doc.designation;
   return (
     <View style={{flex: 1, backgroundColor: colors.pageBackground}}>
       <View
@@ -27,26 +45,27 @@ export default function DoctorDetails({route,navigation}) {
           width: '100%',
           backgroundColor: 'rgba(28, 107, 164, 1)',
         }}>
-        <TouchableOpacity onPress = {()=>{
-          navigation.goBack();
-        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
           <SvgXml
             xml={backTransparentIcon}
             style={{marginLeft: 20, marginTop: 20}}></SvgXml>
         </TouchableOpacity>
-        <Text
-          style={{
-            marginTop: 30,
-            textAlign: 'center',
-            color: 'white',
-            fontSize: 18,
-            fontFamily: 'NunitoSans_10pt-Medium',
-          }}>
-          Details
-        </Text>
-        <SvgXml
-          xml={dotTransparentIcon}
-          style={{marginRight: 20, marginTop: 20}}></SvgXml>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Text
+            style={{
+              marginTop: 30,
+              textAlign: 'center',
+              color: 'white',
+              fontSize: 18,
+              fontFamily: 'NunitoSans_10pt-Medium',
+              marginRight: 20,
+            }}>
+            Report
+          </Text>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -258,9 +277,10 @@ export default function DoctorDetails({route,navigation}) {
           </Text>
         </View>
       </View>
-      <TouchableOpacity onPress = {()=>{
-        navigation.navigate("Appointment1",{Doctor : Doc, id:id})
-      }}
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Appointment1', {Doctor: Doc, id: id});
+        }}
         style={{
           backgroundColor: 'rgba(28, 107, 164, 1)',
           height: 70,
@@ -281,10 +301,128 @@ export default function DoctorDetails({route,navigation}) {
           Book a consultation
         </Text>
       </TouchableOpacity>
+      <Modal
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => {
+    setModalVisible(!modalVisible);
+  }}>
+  <View style={styles.centeredView}>
+    <View style={styles.modalView}>
+      <ScrollView style={{width: '100%', marginVertical: 10}}> 
+        <View style={{flexDirection: 'row',}}>
+          <TouchableOpacity onPress={() => setModalVisible(false)} style={{width:'20%', marginleft:40}}>
+            <Back
+              width={45}
+              height={46}
+              style={{ marginTop: 18, marginLeft:20,}}
+            />
+          </TouchableOpacity>
+
+          <Text style={{color: '#5B555C', fontSize: 15, marginTop: 30, width:'80%', marginLeft:20}}>
+            Report Behaviour
+          </Text>
+        </View>
+        <View style={{height:150}}>
+        <TextInput
+          textColor="rgba(26, 69, 99, 1)"
+          theme={{
+            colors: {
+              text: 'rgba(28, 107, 164, 1)',
+              primary: 'rgba(28, 107, 164, 1)',
+            },
+          }}
+          multiline={true}
+          numberOfLines={8} 
+          placeholder="State the problem with the details"
+          onChangeText={setText}
+          value={text}
+          underlineColor="transparent"
+          style={styles.TextInput}
+          underlineColorAndroid="transparent"
+        />
+        </View>
+      
+
+
+<TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Appointment1', {Doctor: Doc, id: id});
+        }}
+        style={{
+          backgroundColor: '#1C6BA4',
+          height: 50,
+          width: '85%',
+          alignSelf: 'center',
+          borderRadius: 14,
+          marginTop: 20,
+        }}>
+        <Text
+          style={{
+            marginTop:13,
+            // marginLeft: 20,
+            color: 'white',
+            textAlign: 'center',
+            fontSize: 16,
+            fontFamily: 'NunitoSans_10pt-Medium',
+          }}>
+          Send
+        </Text>
+      </TouchableOpacity>
+      </ScrollView>
+
+    </View>
+  </View>
+</Modal>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
- 
+  modalView: {
+    // margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    // padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '80%',
+    height: '40%',
+  },
+  button: {
+    padding: 10,
+    elevation: 2,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  TextInput: {
+    alignSelf: 'center',
+    width: '87%',
+    backgroundColor: '#f5f7fa',
+    borderRadius: 5,
+    borderRadius: 4,
+
+    paddingLeft: 5,
+    paddingTop: 5,
+    marginTop: 15,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 13,
+    fontFamily: 'NunitoSans_4pt_SemiCondensed-Black',
+    fontStyle: 'italic',
+  },
 });

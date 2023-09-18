@@ -35,6 +35,12 @@ export {default as Gallery} from './Gallery.svg';
 export {default as ProfileImage} from './Pimage.svg';
 export {default as CrossIcon} from './cross.svg';
 export {default as Done} from './Done.svg';
+export {default as DownloadSvg} from './DownloadSvg.svg';
+export {default as Emergency} from './Emergency.svg';
+export {default as Feed} from './Feed.svg';
+
+
+
 
 
 

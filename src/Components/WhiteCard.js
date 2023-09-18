@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg';
 import {dotsIcon} from '../Assets/TabSvgs';
 import {activePaitentIcon} from '../Assets/TabSvgs';
 import {colors} from '../Global/globalstyles';
-import {Doc, Dotsv} from '../Assets/icons';
+import {Doc, DownloadSvg} from '../Assets/icons';
 
 const WhiteCard = ({name, image, symptom, time}) => {
   return (
@@ -53,12 +53,15 @@ const WhiteCard = ({name, image, symptom, time}) => {
           {symptom}
         </Text>
       </View>
-      <View>
-      <Dotsv
-          width={20}
-          height={20}
-          style={{marginTop: '30%', marginHorizontal: '17%'}}
+      <View style={{backgroundColor:'#1C6BA4', borderTopRightRadius:120, borderBottomEndRadius:20 , width:40, borderTopEndRadius:20, marginLeft:15, }}>
+    
+        <DownloadSvg
+          width={25}
+          height={25}
+          style={{marginTop: 35, marginHorizontal: '17%'}}
         />
+
+     
       </View>
     </View>
   );

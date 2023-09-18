@@ -9,38 +9,25 @@ import Appointment2 from '../Screens/Patient/Appointment2';
 import Appointment1 from '../Screens/Patient/Appointment1';
 import DoctorDetails from '../Screens/Doctor/DoctorDetails';
 import TextMessagePatient from '../Screens/Patient/TextMessagePatient';
+import PatientAccSett from '../Screens/Patient/PatientAccSett';
 const Stack = createNativeStackNavigator();
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 export default function HomeStackPatient({route,
   navigation}) {
-  // React.useLayoutEffect(() => {
-    
-  //       const routeName = getFocusedRouteNameFromRoute(route);
-
-  //       if (routeName === 'Appointment2' || routeName === 'Appointment1') {
-  //         navigation.setOptions({tabBarStyle: {display: 'none'}});
-  //         navigation.getParent()?.setOptions({headerShown: false});
-  //         navigation
-  //           .getParent()
-  //           ?.getParent()
-  //           ?.setOptions({tabBarStyle: {display: 'none'}});
-  //       } else {
-  //         navigation.setOptions({
-  //           tabBarStyle: {display: 'flex'},
-  //         });
-  //         navigation.getParent()?.setOptions({headerShown: true});
-  //         navigation
-  //           .getParent()
-  //           ?.getParent()
-  //           ?.setOptions({tabBarStyle: {display: 'flex'}});
-  //       }
-  //     }, [navigation, route]);
   return (
     <Stack.Navigator initialRouteName="HomePatient">
       <Stack.Screen
         name="HomePatient"
         component={HomePatient}
+        options={{
+          headerShown: false,
+        }}
+      />
+    
+      <Stack.Screen
+        name="PatientAccSett"
+        component={PatientAccSett}
         options={{
           headerShown: false,
         }}
