@@ -17,6 +17,7 @@ import {
   CrossIcon,
   Cameraicon,
   Go,
+  BackButton,
 } from '../../Assets/icons';
 
 import ImageCropPicker from 'react-native-image-crop-picker';
@@ -70,6 +71,11 @@ const HomePatient = ({navigation}) => {
   const [modalVisible5, setModalVisible5] = useState(false);
   const [modalVisible6, setModalVisible6] = useState(false);
   const [modalVisible7, setModalVisible7] = useState(false);
+  const [modalVisible8, setModalVisible8] = useState(false);
+  const [modalVisible9, setModalVisible9] = useState(false);
+  const [modalVisible10, setModalVisible10] = useState(false);
+
+
 
   const [List2, setList2] = useState([{}]);
   const [List3, setList3] = useState([{}]);
@@ -261,9 +267,26 @@ const HomePatient = ({navigation}) => {
               <ProfileComponent title="Payment Method" svg={Vector} />
             </TouchableOpacity>
 
-            <ProfileComponent title="Language Selection" svg={Language} />
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible8(true);
+              }}>
+              <ProfileComponent title="Language Selection" svg={Language} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible9(true);
+              }}>
             <ProfileComponent title="Pivacy Policy" svg={Compass} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible10(true);
+              }}>
             <ProfileComponent title="Terms of use" svg={Compass} />
+            </TouchableOpacity>
             <ProfileComponent title="Feedback" svg={Feed} />
           </View>
           <View
@@ -931,12 +954,25 @@ const HomePatient = ({navigation}) => {
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
-                  +1
-                </Text>
-                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  textAlign: 'center',
+                }}>
+                +1
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
                 Consultation credit
-                </Text>
+              </Text>
               <View
                 style={{
                   backgroundColor: 'white',
@@ -946,10 +982,17 @@ const HomePatient = ({navigation}) => {
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
-                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
                   5€
-                  </Text>
-                </View>
+                </Text>
+              </View>
             </View>
             <View
               style={{
@@ -960,12 +1003,25 @@ const HomePatient = ({navigation}) => {
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
-                  +2
-                </Text>
-                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  textAlign: 'center',
+                }}>
+                +2
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
                 Consultation credit
-                </Text>
+              </Text>
               <View
                 style={{
                   backgroundColor: 'white',
@@ -975,10 +1031,17 @@ const HomePatient = ({navigation}) => {
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
-                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
                   10€
-                  </Text>
-                </View>
+                </Text>
+              </View>
             </View>
           </View>
           <View
@@ -992,12 +1055,25 @@ const HomePatient = ({navigation}) => {
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
-                  +3
-                </Text>
-                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  textAlign: 'center',
+                }}>
+                +3
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
                 Consultation credit
-                </Text>
+              </Text>
               <View
                 style={{
                   backgroundColor: 'white',
@@ -1007,10 +1083,17 @@ const HomePatient = ({navigation}) => {
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
-                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
                   15€
-                  </Text>
-                </View>
+                </Text>
+              </View>
             </View>
             <View
               style={{
@@ -1021,12 +1104,25 @@ const HomePatient = ({navigation}) => {
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
-                  +5
-                </Text>
-                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  textAlign: 'center',
+                }}>
+                +5
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
                 Consultation credit
-                </Text>
+              </Text>
               <View
                 style={{
                   backgroundColor: 'white',
@@ -1036,27 +1132,30 @@ const HomePatient = ({navigation}) => {
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
-                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
                   10€
-                  </Text>
-                </View>
+                </Text>
+              </View>
             </View>
           </View>
-<View style={{marginTop:50, }}>
-<TouchableOpacity
-            onPress={() => {
-                  setModalVisible7(true);
-                
+          <View style={{marginTop: 50}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible7(true);
               }}
               style={styles.btnShape1}>
               <Text style={styles.btnText1}>Payment Method</Text>
             </TouchableOpacity>
-</View>
-         
+          </View>
         </View>
       </Modal>
-
-
 
       <Modal animationType="fade" transparent={false} visible={modalVisible7}>
         <View style={{flex: 0.13, backgroundColor: colors.pageBackground2}}>
@@ -1082,8 +1181,8 @@ const HomePatient = ({navigation}) => {
               Payment Method
             </Text>
           </View>
-<View style={{marginTop:100, }}>
-<TouchableOpacity
+          <View style={{marginTop: 100}}>
+            <TouchableOpacity
               onPress={() => {
                 setModalVisible6(true);
               }}>
@@ -1097,16 +1196,128 @@ const HomePatient = ({navigation}) => {
               <PaymentComponent title="VISA / MASTERCARD" svg={Go} />
             </TouchableOpacity>
 
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="CIB" svg={Go} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="EDAHABIA" svg={Go} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
-</View>
-         
-         
+      <Modal animationType="fade" transparent={false} visible={modalVisible8}>
+        <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible8(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Language Selection
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 30,
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              English
+            </Text>
+          </View>
+        </View>
+      </Modal>
 
-          
-
+      <Modal animationType="fade" transparent={false} visible={modalVisible9}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible9(false);
+              }}>
+              <BackButton
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                marginTop:'10%', 
+                color: 'black',
+                fontSize: 17,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Privacy Policy
+            </Text>
+          </View>
          
         </View>
       </Modal>
+
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible10}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible10(false);
+              }}>
+              <BackButton
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                marginTop:'10%', 
+                color: 'black',
+                fontSize: 17,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Terms of Use
+            </Text>
+          </View>
+         
+        </View>
+      </Modal>
+
       <Modal
         visible={isBloodTypeModalVisible}
         animationType="slide"
@@ -1804,13 +2015,13 @@ const styles = StyleSheet.create({
   },
   btnShape1: {
     height: 52,
-    
+
     width: '90%',
     alignSelf: 'center',
     marginTop: '10%',
     borderRadius: 12,
     backgroundColor: 'white',
-    elevation:10,
+    elevation: 10,
   },
   btnText1: {
     alignSelf: 'center',
