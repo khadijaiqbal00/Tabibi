@@ -7,6 +7,8 @@ import DoctorProfile from '../Screens/Doctor/DoctorProfile';
 import DocAccSetting from '../Screens/Doctor/DocAccSetting';
 import DoctorDetails from '../Screens/Doctor/DoctorDetails';
 import DoctorSearch from '../Screens/Patient/DoctorSearch';
+import PatientDetails from '../Screens/Doctor/PatientDetails';
+import PatientSearch from '../Screens/Doctor/PatientSearch';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,8 +44,22 @@ export default function HomeStack() {
         }}
       />
       <Stack.Screen
+        name="PatientDetails"
+        component={PatientDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="DoctorSearch"
         component={DoctorSearch}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PatientSearch"
+        component={PatientSearch}
         options={{
           headerShown: false,
         }}

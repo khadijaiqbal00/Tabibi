@@ -62,6 +62,7 @@ import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PaymentComponent from '../../Components/PaymentComponent';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomePatient = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -74,6 +75,39 @@ const HomePatient = ({navigation}) => {
   const [modalVisible8, setModalVisible8] = useState(false);
   const [modalVisible9, setModalVisible9] = useState(false);
   const [modalVisible10, setModalVisible10] = useState(false);
+
+  const [checked, setChecked] = useState(false);
+  const handleToggle = () => {
+    setChecked(!checked);
+  };
+
+  const [checked1, setChecked1] = useState(false);
+  const handleToggle1 = () => {
+    setChecked1(!checked1);
+  };
+
+  const [checked2, setChecked2] = useState(false);
+  const handleToggle2 = () => {
+    setChecked2(!checked2);
+  };
+
+  const [checked3, setChecked3] = useState(false);
+  const handleToggle3 = () => {
+    setChecked3(!checked3);
+  };
+  const [checked4, setChecked4] = useState(false);
+  const handleToggle4 = () => {
+    setChecked4(!checked4);
+  };
+  const [checked5, setChecked5] = useState(false);
+  const handleToggle5 = () => {
+    setChecked5(!checked5);
+  };
+
+  const [checked6, setChecked6] = useState(false);
+  const handleToggle6 = () => {
+    setChecked6(!checked6);
+  };
 
 
 
@@ -278,14 +312,14 @@ const HomePatient = ({navigation}) => {
               onPress={() => {
                 setModalVisible9(true);
               }}>
-            <ProfileComponent title="Pivacy Policy" svg={Compass} />
+              <ProfileComponent title="Pivacy Policy" svg={Compass} />
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => {
                 setModalVisible10(true);
               }}>
-            <ProfileComponent title="Terms of use" svg={Compass} />
+              <ProfileComponent title="Terms of use" svg={Compass} />
             </TouchableOpacity>
             <ProfileComponent title="Feedback" svg={Feed} />
           </View>
@@ -947,22 +981,45 @@ const HomePatient = ({navigation}) => {
             style={{flexDirection: 'row', marginTop: 40, marginHorizontal: 20}}>
             <View
               style={{
-                height: 170,
+                height: 150,
                 backgroundColor: '#17c3b2',
-                borderRadius: 30,
+                borderRadius: 20,
                 width: '47%',
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-              <Text
+              <TouchableOpacity onPress={handleToggle}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked ? 'black' : 'white',
+                    backgroundColor: checked ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
                 style={{
                   color: 'white',
                   fontFamily: 'Roboto-Black',
                   fontSize: 75,
+                  marginTop: -20,
                   textAlign: 'center',
                 }}>
                 +1
               </Text>
+              </TouchableOpacity>
+             
               <Text
                 style={{
                   color: 'white',
@@ -978,7 +1035,7 @@ const HomePatient = ({navigation}) => {
                   backgroundColor: 'white',
                   elevation: 10,
                   height: 50,
-                  marginTop: 10,
+                  // marginTop: -10,
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
@@ -996,22 +1053,46 @@ const HomePatient = ({navigation}) => {
             </View>
             <View
               style={{
-                height: 170,
+                height: 150,
                 backgroundColor: '#30a5d0',
-                borderRadius: 30,
+                borderRadius: 20,
                 width: '47%',
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-              <Text
+              <TouchableOpacity onPress={() => handleToggle1()}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked1 ? 'black' : 'white',
+                    backgroundColor: checked1 ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked1 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
                 style={{
                   color: 'white',
                   fontFamily: 'Roboto-Black',
                   fontSize: 75,
+                  marginTop: -20,
                   textAlign: 'center',
                 }}>
                 +2
               </Text>
+              </TouchableOpacity>
+
+             
               <Text
                 style={{
                   color: 'white',
@@ -1027,7 +1108,7 @@ const HomePatient = ({navigation}) => {
                   backgroundColor: 'white',
                   elevation: 10,
                   height: 50,
-                  marginTop: 10,
+                  // marginTop: 10,
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
@@ -1045,25 +1126,51 @@ const HomePatient = ({navigation}) => {
             </View>
           </View>
           <View
-            style={{flexDirection: 'row', marginTop: 20, marginHorizontal: 20}}>
+            style={{flexDirection: 'row', marginTop: 40, marginHorizontal: 20}}>
             <View
               style={{
-                height: 170,
+                height: 150,
                 backgroundColor: '#ff3f6d',
-                borderRadius: 30,
+                borderRadius: 20,
                 width: '47%',
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-              <Text
+
+<TouchableOpacity onPress={handleToggle2}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked2 ? 'black' : 'white',
+                    backgroundColor: checked2? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked2 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
                 style={{
                   color: 'white',
                   fontFamily: 'Roboto-Black',
                   fontSize: 75,
+                  marginTop:-20, 
                   textAlign: 'center',
                 }}>
                 +3
               </Text>
+              </TouchableOpacity>
+
+
+             
               <Text
                 style={{
                   color: 'white',
@@ -1079,7 +1186,7 @@ const HomePatient = ({navigation}) => {
                   backgroundColor: 'white',
                   elevation: 10,
                   height: 50,
-                  marginTop: 10,
+                  // marginTop: 10,
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
@@ -1097,22 +1204,45 @@ const HomePatient = ({navigation}) => {
             </View>
             <View
               style={{
-                height: 170,
+                height: 150,
                 backgroundColor: '#ffcb77',
-                borderRadius: 30,
+                borderRadius: 20,
                 width: '47%',
                 marginHorizontal: 5,
                 elevation: 10,
               }}>
-              <Text
+                  <TouchableOpacity onPress={handleToggle3}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked3 ? 'black' : 'white',
+                    backgroundColor: checked3 ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked3 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
                 style={{
                   color: 'white',
                   fontFamily: 'Roboto-Black',
                   fontSize: 75,
                   textAlign: 'center',
+                  marginTop:-20,
                 }}>
                 +5
               </Text>
+              </TouchableOpacity>
+            
               <Text
                 style={{
                   color: 'white',
@@ -1128,7 +1258,7 @@ const HomePatient = ({navigation}) => {
                   backgroundColor: 'white',
                   elevation: 10,
                   height: 50,
-                  marginTop: 10,
+                  // marginTop: 10,
                   borderBottomRightRadius: 30,
                   borderBottomLeftRadius: 30,
                 }}>
@@ -1145,7 +1275,7 @@ const HomePatient = ({navigation}) => {
               </View>
             </View>
           </View>
-          <View style={{marginTop: 50}}>
+          <View style={{marginTop: 70}}>
             <TouchableOpacity
               onPress={() => {
                 setModalVisible7(true);
@@ -1232,6 +1362,7 @@ const HomePatient = ({navigation}) => {
                 fontSize: 19,
                 marginTop: 14,
                 fontFamily: 'NunitoSans_7pt-Black',
+                marginBottom:20, 
               }}>
               Language Selection
             </Text>
@@ -1244,6 +1375,8 @@ const HomePatient = ({navigation}) => {
               borderRadius: 30,
               alignSelf: 'center',
               marginTop: 30,
+              flexDirection:'row',
+              justifyContent:'space-between'
             }}>
             <Text
               style={{
@@ -1255,6 +1388,113 @@ const HomePatient = ({navigation}) => {
               }}>
               English
             </Text>
+            <TouchableOpacity onPress={handleToggle4}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked4 ? 'green' : 'black',
+                    backgroundColor: checked4 ? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked4 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 10,
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              French
+            </Text>
+            <TouchableOpacity onPress={handleToggle5}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked5 ? 'green' : 'black',
+                    backgroundColor: checked5 ? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked5 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 10,
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              Arabic
+            </Text>
+            <TouchableOpacity onPress={handleToggle6}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked6 ? 'green' : 'black',
+                    backgroundColor: checked6? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked6 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -1275,7 +1515,7 @@ const HomePatient = ({navigation}) => {
             </TouchableOpacity>
             <Text
               style={{
-                marginTop:'10%', 
+                marginTop: '10%',
                 color: 'black',
                 fontSize: 17,
                 marginTop: 14,
@@ -1284,10 +1524,8 @@ const HomePatient = ({navigation}) => {
               Privacy Policy
             </Text>
           </View>
-         
         </View>
       </Modal>
-
 
       <Modal animationType="fade" transparent={false} visible={modalVisible10}>
         <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -1305,7 +1543,7 @@ const HomePatient = ({navigation}) => {
             </TouchableOpacity>
             <Text
               style={{
-                marginTop:'10%', 
+                marginTop: '10%',
                 color: 'black',
                 fontSize: 17,
                 marginTop: 14,
@@ -1314,7 +1552,6 @@ const HomePatient = ({navigation}) => {
               Terms of Use
             </Text>
           </View>
-         
         </View>
       </Modal>
 
@@ -1441,7 +1678,7 @@ const HomePatient = ({navigation}) => {
                   fontSize: 16,
                   fontFamily: 'NunitoSans_10pt-Light',
                 }}>
-                Name Patient
+                Rouiba, Alger
               </Text>
             </View>
           </View>
@@ -1460,7 +1697,7 @@ const HomePatient = ({navigation}) => {
             </Text>
 
             <FlatList
-              horizontal
+              // horizontal
               alwaysBounceVertical
               alwaysBounceHorizontal
               keyboardShouldPersistTaps="handled"
@@ -1468,7 +1705,7 @@ const HomePatient = ({navigation}) => {
               data={List2}
               keyExtractor={item => item.id}
               renderItem={({item}) => (
-                <TouchableOpacity>
+               
                   <PharmacyCard
                     id={item.id}
                     image={item.image}
@@ -1477,105 +1714,15 @@ const HomePatient = ({navigation}) => {
                     review={item.review}
                     total_reviews={item.total_reviews}
                   />
-                </TouchableOpacity>
+          
+
+
               )}
             />
           </View>
 
-          <Text
-            style={{
-              fontFamily: 'NunitoSans_10pt-Bold',
-              alignSelf: 'center',
-              fontSize: 24,
-              color: 'rgba(14, 16, 18, 1)',
-              marginTop: 7,
-            }}>
-            Send Prescription
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'NunitoSans_10pt-Light',
-              textAlign: 'center',
-              marginTop: 10,
-              width: '75%',
-              alignSelf: 'center',
-
-              fontSize: 14,
-              color: 'rgba(74, 84, 94, 1)',
-            }}>
-            We will show the pharmacies that have all the medicines you are
-            looking for
-          </Text>
-          <View
-            style={{
-              marginTop: 40,
-              width: '75%',
-              alignSelf: 'center',
-              height: 170,
-              fontSize: 14,
-              borderRadius: 24,
-              backgroundColor: 'rgba(255, 255, 255, 1)',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '75%',
-                marginLeft: 35,
-                marginTop: 5,
-              }}>
-              <View
-                style={{
-                  marginTop: 30,
-                  width: 80,
-                  height: 80,
-                  fontSize: 14,
-                  borderRadius: 24,
-                  backgroundColor: 'rgba(107, 134, 179, 0.25)',
-                }}>
-                <SvgXml
-                  xml={fileIcon}
-                  style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
-              </View>
-
-              <View
-                style={{
-                  marginTop: 30,
-                  width: 80,
-                  height: 80,
-                  fontSize: 14,
-                  borderRadius: 24,
-                  backgroundColor: 'rgba(107, 134, 179, 0.25)',
-                }}>
-                <SvgXml
-                  xml={sendZipIcon}
-                  style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '65%',
-                marginLeft: 40,
-                marginTop: 5,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'NunitoSans_10pt-Light',
-                  color: 'rgba(14, 16, 18, 1)',
-                }}>
-                Share Link
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'NunitoSans_10pt-Light',
-                  color: 'rgba(14, 16, 18, 1)',
-                }}>
-                Send
-              </Text>
-            </View>
-          </View>
+        
+         
         </View>
       </Modal>
       <View style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 80}}>
@@ -1870,6 +2017,8 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 14,
     fontFamily: 'NunitoSans_10pt-Medium',
+    borderTopLeftRadius:18, 
+    borderTopRightRadius:18, 
   },
   View1: {
     alignSelf: 'center',

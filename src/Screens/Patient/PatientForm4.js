@@ -93,7 +93,7 @@ export default function PatientForm4({navigation}) {
                 {checked && (
                   <Icon name="check" size={18} color="rgba(193, 193, 193, 1)" />
                 )}
-                {/* You can change the color and size of the check icon */}
+                
               </View>
             </TouchableOpacity>
           </View>

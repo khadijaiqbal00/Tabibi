@@ -263,7 +263,8 @@ export default function DocLogIn({navigation}) {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                      onPress={handleSubmit}
+                      // onPress={handleSubmit}
+                      onPress={()=> navigation.navigate('TabNavigation')}
                       style={styles.btnShape}>
                       <Text style={styles.btnText}>Login</Text>
                     </TouchableOpacity>

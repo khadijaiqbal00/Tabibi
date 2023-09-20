@@ -46,8 +46,9 @@ export default function DoctorForm2({navigation}) {
 
   const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
   const [selectedBloodType, setSelectedBloodType] = useState('');
-  const [bloodTypeTextInputValue, setBloodTypeTextInputValue] =
-    useState('Select Medical Speciality');
+  const [bloodTypeTextInputValue, setBloodTypeTextInputValue] = useState(
+    'Select Medical Speciality',
+  );
 
   const openBloodTypeModal = () => {
     setIsBloodTypeModalVisible(true);
@@ -61,23 +62,32 @@ export default function DoctorForm2({navigation}) {
     setIsBloodTypeModalVisible(false);
   };
 
-  const bloodTypes = ['Cardiology', 'Dermatology', 'Neurology', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  const bloodTypes = [
+    'Cardiology',
+    'Dermatology',
+    'Neurology',
+    'B-',
+    'AB+',
+    'AB-',
+    'O+',
+    'O-',
+  ];
   const [hours, setHours] = useState(0);
   const [endHours, setEndHours] = useState(0);
   const increaseHours = () => {
-    setHours((prevHours) => (prevHours < 23 ? prevHours + 1 : prevHours));
+    setHours(prevHours => (prevHours < 23 ? prevHours + 1 : prevHours));
   };
-  
+
   const decreaseHours = () => {
-    setHours((prevHours) => (prevHours > 0 ? prevHours - 1 : prevHours));
+    setHours(prevHours => (prevHours > 0 ? prevHours - 1 : prevHours));
   };
 
   const increaseHours1 = () => {
-    setEndHours((prevHours) => (prevHours < 23 ? prevHours + 1 : prevHours));
+    setEndHours(prevHours => (prevHours < 23 ? prevHours + 1 : prevHours));
   };
-  
+
   const decreaseHours1 = () => {
-    setEndHours((prevHours) => (prevHours > 0 ? prevHours - 1 : prevHours));
+    setEndHours(prevHours => (prevHours > 0 ? prevHours - 1 : prevHours));
   };
 
   const onSubmitValue = async => {};
@@ -93,9 +103,7 @@ export default function DoctorForm2({navigation}) {
       <Text style={styles.subText}>
         Please fill in the information below to create your new account.
       </Text>
-      <View style={{marginTop:10}}>
-
-      </View>
+      <View style={{marginTop: 10}}></View>
       <Text style={styles.Label}>Medical Speciality</Text>
       <View
         style={{
@@ -125,7 +133,6 @@ export default function DoctorForm2({navigation}) {
         />
       </View>
 
-
       <Text style={styles.Label}>years of Experience</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -135,12 +142,11 @@ export default function DoctorForm2({navigation}) {
             primary: 'rgba(28, 107, 164, 1)',
           },
         }}
-       
         underlineColor="transparent"
         style={styles.TextInput}
         underlineColorAndroid="transparent"
       />
-      
+
       <Text style={styles.Label}>Office / Hospital Address</Text>
       <TextInput
         textColor="rgba(26, 69, 99, 1)"
@@ -150,13 +156,10 @@ export default function DoctorForm2({navigation}) {
             primary: 'rgba(28, 107, 164, 1)',
           },
         }}
-       
         underlineColor="transparent"
         style={styles.TextInput}
         underlineColorAndroid="transparent"
       />
-
-
 
       <Text style={styles.Label}>Gender</Text>
       <View
@@ -187,36 +190,35 @@ export default function DoctorForm2({navigation}) {
         />
       </View>
       <Text style={styles.Label}>Availability Hours</Text>
-      <View style={{flexDirection:'row', justifyContent:'center', marginTop:10,}}>
-      <View style={styles.box}>
-  <TouchableOpacity onPress={increaseHours} style={styles.arrow}>
-    <Text style={styles.arrowText}>↑</Text>
-  </TouchableOpacity>
+      <View
+        style={{flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
+        <View style={styles.box}>
+          <TouchableOpacity onPress={increaseHours} style={styles.arrow}>
+            <Text style={styles.arrowText}>↑</Text>
+          </TouchableOpacity>
 
-  <Text style={styles.hoursText}>{hours.toString().padStart(2, '0')}:00</Text>
+          <Text style={styles.hoursText}>
+            {hours.toString().padStart(2, '0')}:00
+          </Text>
 
-  <TouchableOpacity onPress={decreaseHours} style={styles.arrow}>
-    <Text style={styles.arrowText}>↓</Text>
-  </TouchableOpacity>
-</View>
-<View style={styles.box}>
-  <TouchableOpacity onPress={increaseHours1} style={styles.arrow}>
-    <Text style={styles.arrowText}>↑</Text>
-  </TouchableOpacity>
+          <TouchableOpacity onPress={decreaseHours} style={styles.arrow}>
+            <Text style={styles.arrowText}>↓</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.box}>
+          <TouchableOpacity onPress={increaseHours1} style={styles.arrow}>
+            <Text style={styles.arrowText}>↑</Text>
+          </TouchableOpacity>
 
-  <Text style={styles.hoursText}>{endHours.toString().padStart(2, '0')}:00</Text>
+          <Text style={styles.hoursText}>
+            {endHours.toString().padStart(2, '0')}:00
+          </Text>
 
-  <TouchableOpacity onPress={decreaseHours1} style={styles.arrow}>
-    <Text style={styles.arrowText}>↓</Text>
-  </TouchableOpacity>
-</View>
+          <TouchableOpacity onPress={decreaseHours1} style={styles.arrow}>
+            <Text style={styles.arrowText}>↓</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      
-     
-    
-
-     
-      
 
       <Modal
         visible={isModalVisible}
@@ -243,7 +245,7 @@ export default function DoctorForm2({navigation}) {
           </View>
         </View>
       </Modal>
-     
+
       <Modal
         visible={isBloodTypeModalVisible}
         animationType="slide"
@@ -317,8 +319,6 @@ export default function DoctorForm2({navigation}) {
                 <View style={styles.radioButtonSelected} />
               )}
             </TouchableOpacity>
-            
-            
           </View>
         </View>
       </Modal>
@@ -344,26 +344,26 @@ export default function DoctorForm2({navigation}) {
   );
 }
 const styles = StyleSheet.create({
-    box: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'white',
-       marginHorizontal:10,
-       backgroundColor:'white',
-      },
-      arrow: {
-        padding: 5,
-      },
-      arrowText: {
-        fontSize: 18,
-      },
-      hoursText: {
-        color:'#1A4563',
-        fontSize: 17,
-        padding: 10,
-      },
+  box: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    marginHorizontal: 10,
+    backgroundColor: 'white',
+  },
+  arrow: {
+    padding: 5,
+  },
+  arrowText: {
+    fontSize: 18,
+  },
+  hoursText: {
+    color: '#1A4563',
+    fontSize: 17,
+    padding: 10,
+  },
   line: {
     height: 1,
     width: '100%',
@@ -385,7 +385,7 @@ const styles = StyleSheet.create({
     width: '95%',
     borderRadius: 10,
   },
-   button: {
+  button: {
     backgroundColor: 'white',
     padding: 20,
     marginHorizontal: 10,

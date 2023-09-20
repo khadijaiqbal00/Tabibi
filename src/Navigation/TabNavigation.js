@@ -32,7 +32,7 @@ export default function TabNavigation() {
 
   return (
     <Tab.Navigator
-      initialRouteName="ScheduleStack"
+      initialRouteName="HomeStack"
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}
@@ -71,7 +71,7 @@ export default function TabNavigation() {
         options={({route}) => ({
           tabBarStyle: (route => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-            console.log('heloooooooooooooo', routeName);
+            // console.log('heloooooooooooooo', routeName);
             if (
               routeName === 'VoiceCall' ||
               routeName === 'VideoCall1' ||

@@ -11,6 +11,7 @@ import {
   Modal,
   TouchableHighlight,
 } from 'react-native';
+import ImageCropPicker from 'react-native-image-crop-picker';
 import React, {useState, useEffect} from 'react';
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
@@ -30,7 +31,7 @@ import PharmacyCard from '../../Components/PharmacyCard';
 import {fileIcon} from '../../Assets/TabSvgs';
 import {sendZipIcon} from '../../Assets/TabSvgs';
 import {Back, DoctorImg, Star, Clock} from '../../Assets/icons';
-
+import PaymentComponent from '../../Components/PaymentComponent';
 import {
   Back2,
   Doctor2,
@@ -39,7 +40,12 @@ import {
   Vector,
   Language,
   Compass,
+  ProfileImage,
   Log,
+  CrossIcon,
+  Cameraicon,
+  Go,
+  BackButton,
 } from '../../Assets/icons';
 import ProfileComponent from '../../Components/ProfileComponent';
 import PatientCard from '../../Components/PatientCard';
@@ -47,6 +53,7 @@ import {DoctorData} from '../../Global/Data';
 import DoctorCard from '../../Components/DoctorCard';
 import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 import firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,6 +61,66 @@ const Home = ({navigation}) => {
   const [modalVisible3, setModalVisible3] = useState(false);
   const [modalVisible4, setModalVisible4] = useState(false);
   const [modalVisible5, setModalVisible5] = useState(false);
+
+  const [modalVisible6, setModalVisible6] = useState(false);
+  const [modalVisible7, setModalVisible7] = useState(false);
+  const [modalVisible8, setModalVisible8] = useState(false);
+  const [modalVisible9, setModalVisible9] = useState(false);
+  const [modalVisible10, setModalVisible10] = useState(false);
+
+  const [checked, setChecked] = useState(false);
+  const handleToggle = () => {
+    setChecked(!checked);
+  };
+
+  const [checked1, setChecked1] = useState(false);
+  const handleToggle1 = () => {
+    setChecked1(!checked1);
+  };
+
+  const [checked2, setChecked2] = useState(false);
+  const handleToggle2 = () => {
+    setChecked2(!checked2);
+  };
+
+  const [checked3, setChecked3] = useState(false);
+  const handleToggle3 = () => {
+    setChecked3(!checked3);
+  };
+  const [checked4, setChecked4] = useState(false);
+  const handleToggle4 = () => {
+    setChecked4(!checked4);
+  };
+  const [checked5, setChecked5] = useState(false);
+  const handleToggle5 = () => {
+    setChecked5(!checked5);
+  };
+
+  const [checked6, setChecked6] = useState(false);
+  const handleToggle6 = () => {
+    setChecked6(!checked6);
+  };
+
+  const [hours, setHours] = useState(0);
+  const [endHours, setEndHours] = useState(0);
+  const increaseHours = () => {
+    setHours(prevHours => (prevHours < 23 ? prevHours + 1 : prevHours));
+  };
+
+  const decreaseHours = () => {
+    setHours(prevHours => (prevHours > 0 ? prevHours - 1 : prevHours));
+  };
+
+  const increaseHours1 = () => {
+    setEndHours(prevHours => (prevHours < 23 ? prevHours + 1 : prevHours));
+  };
+
+  const decreaseHours1 = () => {
+    setEndHours(prevHours => (prevHours > 0 ? prevHours - 1 : prevHours));
+  };
+
+
+
   const [List2, setList2] = useState([{}]);
   const [List3, setList3] = useState([{}]);
   const [init, setInit] = useState();
@@ -62,7 +129,38 @@ const Home = ({navigation}) => {
   const [List, setList] = useState([{}]);
    const [List4, setList4] = useState([{}]);
 
-  
+   const [image, setImage] = useState(null);
+
+  const chooseImage = () => {
+    ImageCropPicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        console.log(image);
+        const source = {uri: image.path};
+        setImage(source);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const openCamera = () => {
+    ImageCropPicker.openCamera({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        const source = {uri: image.path};
+        setImage(source);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     
   const AppointmentDataFireStore = firestore()
@@ -170,24 +268,46 @@ const Home = ({navigation}) => {
             </Text>
           </View>
 
-          <View style={{marginTop: '15%'}}>
+          <View style={{marginTop: '5%'}}>
             <TouchableOpacity
               onPress={() => {
                 setModalVisible5(true);
               }}>
               <ProfileComponent title="Account Settings" svg={Settings} />
             </TouchableOpacity>
-            <ProfileComponent title="Payment Method" svg={Vector} />
-            <ProfileComponent title="Language Selection" svg={Language} />
-            <ProfileComponent title="Pivacy Policy" svg={Compass} />
-            <ProfileComponent title="Terms of use" svg={Compass} />
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <ProfileComponent title="Payment Method" svg={Vector} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible8(true);
+              }}>
+              <ProfileComponent title="Language Selection" svg={Language} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible9(true);
+              }}>
+              <ProfileComponent title="Pivacy Policy" svg={Compass} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible10(true);
+              }}>
+              <ProfileComponent title="Terms of use" svg={Compass} />
+            </TouchableOpacity>
             <ProfileComponent title="Feedback" svg={Compass} />
           </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
-              marginTop: '20%',
+              marginTop: '10%',
             }}>
             <Log width={25} height={25} />
             <Text
@@ -351,7 +471,7 @@ const Home = ({navigation}) => {
                 fontFamily: 'NunitoSans_10pt-Bold',
                 marginTop: '6%',
               }}>
-              Doctors
+              Patients
             </Text>
           </View>
           <View style={{marginTop: '6%'}}>
@@ -460,95 +580,94 @@ const Home = ({navigation}) => {
             />
           </TouchableOpacity>
 
-          <View style={{alignItems: 'center'}}>
-            <Doctor2
-              width={80}
-              height={80}
-              style={{
-                marginTop: -30,
-              }}
-            />
-
-            <Text
-              style={{
-                fontSize: 16,
-                color: colors.white,
-                marginTop: '2%',
-                fontFamily: 'NunitoSans_10pt-Bold',
-              }}>
-              Doctor Name
-            </Text>
-          </View>
-
-          <View style={{marginTop: '15%', marginHorizontal: '5%'}}>
-            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <Text
+          {image ? (
+            <View style={styles.profileImageContainer}>
+              <Image source={image} style={styles.image} />
+              <Cameraicon
+                size={20}
+                onPress={openCamera}
                 style={{
-                  color: 'white',
-                  fontSize: 14,
-                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                  marginTop: 7,
-                  marginRight: 8,
-                }}>
-                Full Name :
-              </Text>
-              <TextInput
-                theme={{
-                  colors: {
-                    text: 'rgba(28, 107, 164, 1)',
-                    primary: 'rgba(28, 107, 164, 1)',
-                  },
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: -20,
                 }}
-                underlineColor="transparent"
-                style={styles.TextInputSetting}></TextInput>
+              />
+              <CrossIcon
+                size={20}
+                onPress={() => setImage(null)}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: 70,
+                }}
+              />
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                marginTop: '4%',
-              }}>
+          ) : (
+            <View style={styles.profileImageContainer}>
+              <ProfileImage width={130} height={130} />
+              <Cameraicon
+                size={20}
+                onPress={openCamera}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: -20,
+                }}
+              />
+              <CrossIcon
+                size={20}
+                onPress={() => setImage(null)}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: 70,
+                }}
+              />
+            </View>
+          )}
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 20,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
               <Text
                 style={{
                   color: 'white',
                   fontSize: 14,
-                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                  marginTop: 7,
-                  marginRight: 8,
+                  fontFamily: 'NunitoSans_7pt-Black',
                 }}>
-                Address :
+                First name
               </Text>
-              <TextInput
-                theme={{
-                  colors: {
-                    text: 'rgba(28, 107, 164, 1)',
-                    primary: 'rgba(28, 107, 164, 1)',
-                  },
-                }}
-                underlineColor="transparent"
-                style={styles.TextInputSetting}></TextInput>
+            </View>
+
+            <View style={{width: '50%', marginLeft: 10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                  fontWeight: '400',
+                }}>
+                Last name
+              </Text>
             </View>
           </View>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'start',
-              marginTop: '4%',
-              marginHorizontal: '5%',
+              justifyContent: 'space-around',
+              marginHorizontal: 10,
             }}>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                marginTop: 7,
-                marginRight: 8,
-              }}>
-              Bio :
-            </Text>
             <TextInput
-              multiline={true}
-              numberOfLines={4}
               theme={{
                 colors: {
                   text: 'rgba(28, 107, 164, 1)',
@@ -556,93 +675,845 @@ const Home = ({navigation}) => {
                 },
               }}
               underlineColor="transparent"
-              style={styles.TextInputSetting2}></TextInput>
+              style={styles.TextInputSetting}></TextInput>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
           </View>
 
-          <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                marginTop: 7,
-                marginRight: 8,
-              }}>
-              Verify that you are a Doctor :
-            </Text>
-            <View
-              style={{
-                height: '35%',
-                width: '80%',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                alignSelf: 'center',
-                borderRadius: 10,
-                marginTop: 10,
-              }}></View>
-
-            <View style={styles.bottomLine}>
-              <TouchableOpacity
+          <View
+            style={{
+              // flexDirection: 'row',
+              // justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 5,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
+              <Text
                 style={{
-                  backgroundColor: 'white',
-                  width: '35%',
-                  height: '80%',
-                  borderRadius: 20,
-                  ...Platform.select({
-                    ios: {
-                      shadowColor: '#000',
-                      shadowOffset: {width: 0, height: 2},
-                      shadowOpacity: 0.6,
-                      shadowRadius: 2,
-                    },
-                    android: {
-                      elevation: 4,
-                    },
-                  }),
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
                 }}>
-                <Text
-                  style={{
-                    color: '#00CA20',
-                    textAlign: 'center',
-                    fontSize: 14,
-                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                    marginTop: 7,
-                  }}>
-                  Save
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#FF0000',
-                  width: '50%',
-                  height: '80%',
-                  borderRadius: 20,
-                  ...Platform.select({
-                    ios: {
-                      shadowColor: '#000',
-                      shadowOffset: {width: 0, height: 2},
-                      shadowOpacity: 0.6,
-                      shadowRadius: 2,
-                    },
-                    android: {
-                      elevation: 4,
-                    },
-                  }),
-                }}>
-                <Text
-                  style={{
-                    color: 'white',
-                    textAlign: 'center',
-                    fontSize: 14,
-                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                    marginTop: 7,
-                  }}>
-                  Delete Account
-                </Text>
-              </TouchableOpacity>
+                Your Speciality
+              </Text>
             </View>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSettings}></TextInput>
+          </View>
+
+          <View
+            style={{
+              // flexDirection: 'row',
+              // justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 5,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                }}>
+                Office Address
+              </Text>
+            </View>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSettings}></TextInput>
+          </View>
+
+          <View
+            style={{
+              // flexDirection: 'row',
+              // justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 5,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                }}>
+                Phone Number
+              </Text>
+            </View>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSettings}></TextInput>
+          </View>
+
+          <Text style={styles.Label}>Availability Hours</Text>
+      <View
+        style={{flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
+        <View style={styles.box}>
+          <TouchableOpacity onPress={increaseHours} style={styles.arrow}>
+            <Text style={styles.arrowText}>↑</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.hoursText}>
+            {hours.toString().padStart(2, '0')}:00
+          </Text>
+
+          <TouchableOpacity onPress={decreaseHours} style={styles.arrow}>
+            <Text style={styles.arrowText}>↓</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.box}>
+          <TouchableOpacity onPress={increaseHours1} style={styles.arrow}>
+            <Text style={styles.arrowText}>↑</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.hoursText}>
+            {endHours.toString().padStart(2, '0')}:00
+          </Text>
+
+          <TouchableOpacity onPress={decreaseHours1} style={styles.arrow}>
+            <Text style={styles.arrowText}>↓</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+         
+
+         
+          
+
+     
+          <View style={styles.bottomLine}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'white',
+                width: '35%',
+                height: '45%',
+                borderRadius: 20,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000',
+                    shadowOffset: {width: 0, height: 2},
+                    shadowOpacity: 0.6,
+                    shadowRadius: 2,
+                  },
+                  android: {
+                    elevation: 4,
+                  },
+                }),
+              }}>
+              <Text
+                style={{
+                  color: '#00CA20',
+                  textAlign: 'center',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
+                }}>
+                Save{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#FF0000',
+                width: '50%',
+                height: '45%',
+                borderRadius: 20,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000',
+                    shadowOffset: {width: 0, height: 2},
+                    shadowOpacity: 0.6,
+                    shadowRadius: 2,
+                  },
+                  android: {
+                    elevation: 4,
+                  },
+                }),
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  textAlign: 'center',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
+                }}>
+                Delete Account{' '}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
+
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible6}>
+        <View style={{flex: 0.17, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Get more consultations
+            </Text>
+          </View>
+          <View
+            style={{
+              width: '80%',
+              backgroundColor: 'white',
+              borderRadius: 20,
+              elevation: 10,
+              marginTop: 30,
+              height: '50%',
+              alignSelf: 'center',
+            }}>
+            <View style={{flexDirection: 'row', margin: 20}}>
+              <Text
+                style={{
+                  color: '#28608F',
+                  fontSize: 23,
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                }}>
+                2
+              </Text>
+              <Text
+                style={{
+                  color: 'black',
+                  fontSize: 17,
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                  marginTop: 5,
+                  marginLeft: 20,
+                }}>
+                Remaining consultations
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{flexDirection: 'row', marginTop: 40, marginHorizontal: 20}}>
+            <View
+              style={{
+                height: 150,
+                backgroundColor: '#17c3b2',
+                borderRadius: 20,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+              <TouchableOpacity onPress={handleToggle}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked ? 'black' : 'white',
+                    backgroundColor: checked ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  marginTop: -20,
+                  textAlign: 'center',
+                }}>
+                +1
+              </Text>
+              </TouchableOpacity>
+             
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
+                Consultation credit
+              </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  // marginTop: -10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
+                  5€
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                height: 150,
+                backgroundColor: '#30a5d0',
+                borderRadius: 20,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+              <TouchableOpacity onPress={() => handleToggle1()}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked1 ? 'black' : 'white',
+                    backgroundColor: checked1 ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked1 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  marginTop: -20,
+                  textAlign: 'center',
+                }}>
+                +2
+              </Text>
+              </TouchableOpacity>
+
+             
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
+                Consultation credit
+              </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  // marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
+                  10€
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            style={{flexDirection: 'row', marginTop: 40, marginHorizontal: 20}}>
+            <View
+              style={{
+                height: 150,
+                backgroundColor: '#ff3f6d',
+                borderRadius: 20,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+
+<TouchableOpacity onPress={handleToggle2}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked2 ? 'black' : 'white',
+                    backgroundColor: checked2? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked2 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  marginTop:-20, 
+                  textAlign: 'center',
+                }}>
+                +3
+              </Text>
+              </TouchableOpacity>
+
+
+             
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
+                Consultation credit
+              </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  // marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
+                  15€
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                height: 150,
+                backgroundColor: '#ffcb77',
+                borderRadius: 20,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+                  <TouchableOpacity onPress={handleToggle3}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked3 ? 'black' : 'white',
+                    backgroundColor: checked3 ? 'transparent' : 'transparent',
+                    marginLeft: 120,
+                    marginTop: 8,
+                  }}>
+                  {checked3 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="black"
+                    />
+                  )}
+                </View>
+                <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Black',
+                  fontSize: 75,
+                  textAlign: 'center',
+                  marginTop:-20,
+                }}>
+                +5
+              </Text>
+              </TouchableOpacity>
+            
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'Roboto-Medium',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  marginTop: -10,
+                }}>
+                Consultation credit
+              </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  // marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'black',
+                    fontFamily: 'NunitoSans_10pt-Bold',
+                    textAlign: 'center',
+                    marginTop: 10,
+                  }}>
+                  10€
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={{marginTop: 70}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible7(true);
+              }}
+              style={styles.btnShape1}>
+              <Text style={styles.btnText1}>Payment Method</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible7}>
+        <View style={{flex: 0.13, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible7(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Payment Method
+            </Text>
+          </View>
+          <View style={{marginTop: 100}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="GOOGLE PLAY" svg={Go} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="VISA / MASTERCARD" svg={Go} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="CIB" svg={Go} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="EDAHABIA" svg={Go} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible8}>
+        <View style={{flex: 1, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible8(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+                marginBottom:20, 
+              }}>
+              Language Selection
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 30,
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              English
+            </Text>
+            <TouchableOpacity onPress={handleToggle4}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked4 ? 'green' : 'black',
+                    backgroundColor: checked4 ? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked4 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 10,
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              French
+            </Text>
+            <TouchableOpacity onPress={handleToggle5}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked5 ? 'green' : 'black',
+                    backgroundColor: checked5 ? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked5 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: '90%',
+              height: 60,
+              borderRadius: 30,
+              alignSelf: 'center',
+              marginTop: 10,
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }}>
+            <Text
+              style={{
+                fontSize: 17,
+                color: 'black',
+                fontFamily: 'NunitoSans_10pt-Black',
+                marginLeft: 30,
+                marginTop: 20,
+              }}>
+              Arabic
+            </Text>
+            <TouchableOpacity onPress={handleToggle6}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    borderWidth: 2,
+                    borderColor: checked6 ? 'green' : 'black',
+                    backgroundColor: checked6? 'green' : 'transparent',
+                    marginRight: 20,
+                    marginTop: 20,
+                  }}>
+                  {checked6 && (
+                    <Icon
+                      name="check"
+                      size={18}
+                      color="white"
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible9}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible9(false);
+              }}>
+              <BackButton
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                marginTop: '10%',
+                color: 'black',
+                fontSize: 17,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Privacy Policy
+            </Text>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible10}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible10(false);
+              }}>
+              <BackButton
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                marginTop: '10%',
+                color: 'black',
+                fontSize: 17,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Terms of Use
+            </Text>
+          </View>
+        </View>
+      </Modal>
+
 
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
         <View
@@ -682,7 +1553,7 @@ const Home = ({navigation}) => {
                   fontSize: 16,
                   fontFamily: 'NunitoSans_10pt-Light',
                 }}>
-                Name Patient
+                Rouiba, Alger
               </Text>
             </View>
           </View>
@@ -701,7 +1572,7 @@ const Home = ({navigation}) => {
             </Text>
 
             <FlatList
-              horizontal
+              // horizontal
               alwaysBounceVertical
               alwaysBounceHorizontal
               keyboardShouldPersistTaps="handled"
@@ -709,7 +1580,7 @@ const Home = ({navigation}) => {
               data={List2}
               keyExtractor={item => item.id}
               renderItem={({item}) => (
-                <TouchableOpacity>
+               
                   <PharmacyCard
                     id={item.id}
                     image={item.image}
@@ -718,107 +1589,19 @@ const Home = ({navigation}) => {
                     review={item.review}
                     total_reviews={item.total_reviews}
                   />
-                </TouchableOpacity>
+          
+
+
               )}
             />
           </View>
 
-          <Text
-            style={{
-              fontFamily: 'NunitoSans_10pt-Bold',
-              alignSelf: 'center',
-              fontSize: 24,
-              color: 'rgba(14, 16, 18, 1)',
-              marginTop: 7,
-            }}>
-            Send Prescription
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'NunitoSans_10pt-Light',
-              textAlign: 'center',
-              marginTop: 10,
-              width: '75%',
-              alignSelf: 'center',
-
-              fontSize: 14,
-              color: 'rgba(74, 84, 94, 1)',
-            }}>
-            We will show the pharmacies that have all the medicines you are
-            looking for
-          </Text>
-          <View
-            style={{
-              marginTop: 40,
-              width: '75%',
-              alignSelf: 'center',
-              height: 170,
-              fontSize: 14,
-              borderRadius: 24,
-              backgroundColor: 'rgba(255, 255, 255, 1)',
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '75%',
-                marginLeft: 35,
-                marginTop: 5,
-              }}>
-              <View
-                style={{
-                  marginTop: 30,
-                  width: 80,
-                  height: 80,
-                  fontSize: 14,
-                  borderRadius: 24,
-                  backgroundColor: 'rgba(107, 134, 179, 0.25)',
-                }}>
-                <SvgXml
-                  xml={fileIcon}
-                  style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
-              </View>
-
-              <View
-                style={{
-                  marginTop: 30,
-                  width: 80,
-                  height: 80,
-                  fontSize: 14,
-                  borderRadius: 24,
-                  backgroundColor: 'rgba(107, 134, 179, 0.25)',
-                }}>
-                <SvgXml
-                  xml={sendZipIcon}
-                  style={{marginTop: 25, marginLeft: '35%'}}></SvgXml>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '65%',
-                marginLeft: 40,
-                marginTop: 5,
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'NunitoSans_10pt-Light',
-                  color: 'rgba(14, 16, 18, 1)',
-                }}>
-                Share Link
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'NunitoSans_10pt-Light',
-                  color: 'rgba(14, 16, 18, 1)',
-                }}>
-                Send
-              </Text>
-            </View>
-          </View>
+        
+         
         </View>
       </Modal>
+
+
       <View style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 80}}>
         <View
           style={{
@@ -841,7 +1624,7 @@ const Home = ({navigation}) => {
             style={{
               backgroundColor: 'rgba(255, 255, 255, 1)',
               height: 40,
-              width: '40%',
+              width: '47%',
               marginLeft: 20,
               borderRadius: 21,
               marginTop: '7%',
@@ -855,8 +1638,30 @@ const Home = ({navigation}) => {
                 marginLeft: '15%',
                 fontFamily: 'NunitoSans_10pt-Bold',
               }}>
-              Add your Card
+              Card Added 
             </Text>
+            <TouchableOpacity onPress={handleToggle}>
+                <View
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                    borderWidth: 2,
+                    borderColor: checked ? 'green' : 'black',
+                    backgroundColor: checked ? 'transparent' : 'transparent',
+                    marginLeft: 15,
+                    marginTop: 8,
+                  }}>
+                  {checked && (
+                    <Icon
+                      name="check"
+                      size={15}
+                      color="green"
+                    />
+                  )}
+                </View>
+              
+              </TouchableOpacity>
           </TouchableOpacity>
         </View>
       </View>
@@ -884,7 +1689,7 @@ const Home = ({navigation}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("DoctorSearch")
+            navigation.navigate("PatientSearch")
           }}
           style={[styles.View1, {marginRight: '5%'}]}>
           <SvgXml
@@ -899,7 +1704,7 @@ const Home = ({navigation}) => {
               width: 120,
               fontFamily: 'NunitoSans_10pt-Medium',
             }}>
-            Doctors
+            Patients
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -1049,6 +1854,23 @@ const Home = ({navigation}) => {
 export default Home;
 
 const styles = StyleSheet.create({
+  btnShape1: {
+    height: 52,
+
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: '10%',
+    borderRadius: 12,
+    backgroundColor: 'white',
+    elevation: 10,
+  },
+  btnText1: {
+    alignSelf: 'center',
+    fontSize: 15,
+    marginTop: 13,
+    color: 'black',
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
   Container: {
     flex: 1,
     backgroundColor: colors.pageBackground,
@@ -1236,9 +2058,12 @@ const styles = StyleSheet.create({
   bottomLine: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: '13%',
+    marginTop: '18%',
     marginBottom: '10%',
     height: '10%',
+    width:'90%', 
+    justifyContent:'space-between', 
+    marginHorizontal:20, 
     // borderRadius:20,
   },
   TextInputSetting: {
@@ -1264,5 +2089,96 @@ const styles = StyleSheet.create({
     color: 'rgba(26, 69, 99, 1)',
     fontSize: 15,
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  }, TextInputSetting: {
+    alignSelf: 'center',
+    width: '47%',
+    // marginHorizontal:10,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    height: 37,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  TextInputSetting2: {
+    alignSelf: 'center',
+    width: '100%',
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    height: 97,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  image: {
+    width: 130, // adjust as necessary
+    height: 130, // adjust as necessary
+    borderRadius: 130, // half of width and height to make it a circle
+    marginTop: 20,
+    alignContent: 'center',
+    marginBottom: 30,
+  },
+  profileImageContainer: {
+    width: 130, // same as the image width
+    height: 130, // same as the image height
+    borderRadius: 130, // to make it a circle
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    // marginTop: 20,
+    paddingTop: 10,
+    marginBottom: 30,
+  },
+  TextInputSettings: {
+    alignSelf: 'center',
+    width: '100%',
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    height: 37,
+    paddingLeft: 5,
+    paddingTop: 5,
+    color: 'rgba(26, 69, 99, 1)',
+    fontSize: 15,
+    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+    marginTop:5, 
+  },
+  Label: {
+    fontSize: 15,
+    marginTop: 4,
+    width: '80%',
+    color: 'white',
+    fontWeight: '900',
+    marginLeft: '7%',
+  },
+  box: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    marginHorizontal: 10,
+    backgroundColor: 'white',
+  },
+  arrow: {
+    padding: 5,
+  },
+  arrowText: {
+    fontSize: 18,
+  },
+  hoursText: {
+    color: '#1A4563',
+    fontSize: 17,
+    padding: 10,
   },
 });
