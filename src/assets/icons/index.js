@@ -38,6 +38,10 @@ export {default as Done} from './Done.svg';
 export {default as DownloadSvg} from './DownloadSvg.svg';
 export {default as Emergency} from './Emergency.svg';
 export {default as Feed} from './Feed.svg';
+export {default as Cameraicon} from './Cameraicon.svg';
+export {default as Go} from './Go.svg';
+
+
 
 
 

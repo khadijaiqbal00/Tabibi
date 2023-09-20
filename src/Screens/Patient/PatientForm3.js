@@ -76,12 +76,10 @@ export default function PatientForm3({navigation}) {
           />
         </View>
       )}
-      <View style={{marginTop:10, marginBottom:10,}}>
-      <Text style={styles.subText}>
-        Add a Profile Picture
-      </Text>
+      <View style={{marginTop: 10, marginBottom: 10}}>
+        <Text style={styles.subText}>Add a Profile Picture</Text>
       </View>
-     
+
       <View style={{flexDirection: 'row', alignSelf: 'center'}}>
         <TouchableOpacity style={styles.button} onPress={openCamera}>
           <Camera width={40} height={40} />
@@ -91,9 +89,11 @@ export default function PatientForm3({navigation}) {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity     onPress={()=>{
-                    navigation.navigate("PatientForm4")
-                }} style={styles.btnShape}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('PatientForm4');
+        }}
+        style={styles.btnShape}>
         <Text style={styles.btnText}>Next</Text>
       </TouchableOpacity>
 
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     alignItems: 'center',
     width: '27%',
-    elevation:6, 
+    elevation: 6,
   },
   buttonText: {
     color: 'black',
@@ -161,8 +161,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
   },
-  
-  
+
   text2: {
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
     color: 'rgba(26, 69, 99, 1)',
@@ -234,5 +233,4 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginBottom: 30,
   },
- 
 });

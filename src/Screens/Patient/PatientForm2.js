@@ -75,7 +75,6 @@ export default function PatientForm2({navigation}) {
   });
   const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
-
   //  const addData = values => {
   //   delete values.Password;
   //   delete values.cpassword;
@@ -212,35 +211,33 @@ export default function PatientForm2({navigation}) {
           </View>
 
           <Text style={styles.Label}>Blood Type</Text>
-<View
-  style={{
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-  }}>
-  <TextInput
-    textColor="rgba(26, 69, 99, 1)"
-    theme={{
-      colors: {
-        text: 'rgba(28, 107, 164, 1)',
-        primary: 'rgba(28, 107, 164, 1)',
-      },
-    }}
-    value={bloodTypeTextInputValue}
-    style={[styles.TextInput, { flex: 1 }]}
-    editable={false}
-    underlineColor="transparent"
-    right={
-      <TextInput.Icon
-        style={{ marginTop: 10 }}
-        icon="menu"
-        onPress={openBloodTypeModal}
-      />
-    }
-  />
-</View>
-
-
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: 24,
+            }}>
+            <TextInput
+              textColor="rgba(26, 69, 99, 1)"
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              value={bloodTypeTextInputValue}
+              style={[styles.TextInput, {flex: 1}]}
+              editable={false}
+              underlineColor="transparent"
+              right={
+                <TextInput.Icon
+                  style={{marginTop: 10}}
+                  icon="menu"
+                  onPress={openBloodTypeModal}
+                />
+              }
+            />
+          </View>
 
           <Text style={styles.Label}>Weight</Text>
           <TextInput
@@ -321,107 +318,97 @@ export default function PatientForm2({navigation}) {
                 </ScrollView>
               </View>
             </View>
-            </Modal>
-            <Modal
-  visible={isBloodTypeModalVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={closeBloodTypeModal}>
-  <View style={styles.modalContainer}>
-    <View style={styles.modalContent}>
-      <View style={styles.radioContainer}>
-        <Text style={styles.popup}>Select Blood Type</Text>
-      </View>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('A+')}
-      >
-        <Text style={styles.popup}>A+</Text>
-        {selectedBloodType === 'A+' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('A-')}
-      >
-        <Text style={styles.popup}>A-</Text>
-        {selectedBloodType === 'A-' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('B+')}
-      >
-        <Text style={styles.popup}>B+</Text>
-        {selectedBloodType === 'B+' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('B-')}
-      >
-        <Text style={styles.popup}>B-</Text>
-        {selectedBloodType === 'B-' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('AB+')}
-      >
-        <Text style={styles.popup}>AB+</Text>
-        {selectedBloodType === 'AB+' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('AB-')}
-      >
-        <Text style={styles.popup}>AB-</Text>
-        {selectedBloodType === 'AB-' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('O+')}
-      >
-        <Text style={styles.popup}>O+</Text>
-        {selectedBloodType === 'O+' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-      <View style={styles.line} />
-      <TouchableOpacity
-        style={styles.radioContainer}
-        onPress={() => handleBloodTypeSelect('O-')}
-      >
-        <Text style={styles.popup}>O-</Text>
-        {selectedBloodType === 'O-' && (
-          <View style={styles.radioButtonSelected} />
-        )}
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
-
+          </Modal>
+          <Modal
+            visible={isBloodTypeModalVisible}
+            animationType="slide"
+            transparent={true}
+            onRequestClose={closeBloodTypeModal}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <View style={styles.radioContainer}>
+                  <Text style={styles.popup}>Select Blood Type</Text>
+                </View>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('A+')}>
+                  <Text style={styles.popup}>A+</Text>
+                  {selectedBloodType === 'A+' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('A-')}>
+                  <Text style={styles.popup}>A-</Text>
+                  {selectedBloodType === 'A-' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('B+')}>
+                  <Text style={styles.popup}>B+</Text>
+                  {selectedBloodType === 'B+' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('B-')}>
+                  <Text style={styles.popup}>B-</Text>
+                  {selectedBloodType === 'B-' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('AB+')}>
+                  <Text style={styles.popup}>AB+</Text>
+                  {selectedBloodType === 'AB+' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('AB-')}>
+                  <Text style={styles.popup}>AB-</Text>
+                  {selectedBloodType === 'AB-' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('O+')}>
+                  <Text style={styles.popup}>O+</Text>
+                  {selectedBloodType === 'O+' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+                <View style={styles.line} />
+                <TouchableOpacity
+                  style={styles.radioContainer}
+                  onPress={() => handleBloodTypeSelect('O-')}>
+                  <Text style={styles.popup}>O-</Text>
+                  {selectedBloodType === 'O-' && (
+                    <View style={styles.radioButtonSelected} />
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
 
           <TouchableOpacity
-                onPress={()=>{
-                  navigation.navigate("PatientForm3")
-              }}
-
+            onPress={() => {
+              navigation.navigate('PatientForm3');
+            }}
             style={styles.btnShape}>
             <Text style={styles.btnText}>Next</Text>
           </TouchableOpacity>

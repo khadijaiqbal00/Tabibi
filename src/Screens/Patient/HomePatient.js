@@ -4,13 +4,22 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TextInput,
   ScrollView,
   FlatList,
   Pressable,
   Modal,
   TouchableHighlight,
 } from 'react-native';
+import {
+  Camera,
+  Gallery,
+  ProfileImage,
+  CrossIcon,
+  Cameraicon,
+  Go,
+} from '../../Assets/icons';
+
+import ImageCropPicker from 'react-native-image-crop-picker';
 import React, {useState, useEffect} from 'react';
 import {colors} from '../../Global/globalstyles';
 import {SvgXml} from 'react-native-svg';
@@ -26,6 +35,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {backbgWhiteIcon} from '../../Assets/TabSvgs';
 import {locationIcon} from '../../Assets/TabSvgs';
 import {pharmacyData} from '../../Global/Data';
+import {Chip, IconButton, TextInput} from 'react-native-paper';
 import PharmacyCard from '../../Components/PharmacyCard';
 import {fileIcon} from '../../Assets/TabSvgs';
 import {sendZipIcon} from '../../Assets/TabSvgs';
@@ -36,7 +46,7 @@ import {
   Doctor2,
   Settings,
   Fb,
-  Feed, 
+  Feed,
   Vector,
   Language,
   Compass,
@@ -50,6 +60,7 @@ import OnlineDoctorCard from '../../Components/OnlineDoctorCard';
 // import { FlatList } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PaymentComponent from '../../Components/PaymentComponent';
 
 const HomePatient = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,6 +68,9 @@ const HomePatient = ({navigation}) => {
   const [modalVisible3, setModalVisible3] = useState(false);
   const [modalVisible4, setModalVisible4] = useState(false);
   const [modalVisible5, setModalVisible5] = useState(false);
+  const [modalVisible6, setModalVisible6] = useState(false);
+  const [modalVisible7, setModalVisible7] = useState(false);
+
   const [List2, setList2] = useState([{}]);
   const [List3, setList3] = useState([{}]);
   const [init, setInit] = useState();
@@ -64,11 +78,60 @@ const HomePatient = ({navigation}) => {
   const [indexCheck2, setIndexCheck2] = useState(init);
   const [List, setList] = useState([{}]);
   const [List4, setList4] = useState([{}]);
+
+  const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
+  const [selectedBloodType, setSelectedBloodType] = useState('');
+  const [bloodTypeTextInputValue, setBloodTypeTextInputValue] = useState('');
+
+  const openBloodTypeModal = () => {
+    setIsBloodTypeModalVisible(true);
+  };
+  const handleBloodTypeSelect = bloodType => {
+    setSelectedBloodType(bloodType);
+    setBloodTypeTextInputValue(bloodType);
+    closeBloodTypeModal();
+  };
+  const closeBloodTypeModal = () => {
+    setIsBloodTypeModalVisible(false);
+  };
+
+  const [image, setImage] = useState(null);
+
+  const chooseImage = () => {
+    ImageCropPicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        console.log(image);
+        const source = {uri: image.path};
+        setImage(source);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const openCamera = () => {
+    ImageCropPicker.openCamera({
+      width: 300,
+      height: 300,
+      cropping: true,
+    })
+      .then(image => {
+        const source = {uri: image.path};
+        setImage(source);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   const logout = async () => {
     try {
       // Clear user authentication data from AsyncStorage
       await AsyncStorage.removeItem('USERID');
-      navigation.navigate("LogInPatient");
+      navigation.navigate('LogInPatient');
       // You can also clear other user-related data if needed
 
       // Redirect the user to the login screen or any other appropriate screen
@@ -78,8 +141,6 @@ const HomePatient = ({navigation}) => {
       console.error('Error while logging out:', error);
     }
   };
-
- 
 
   useEffect(() => {
     const AppointmentDataFireStore = firestore()
@@ -105,7 +166,6 @@ const HomePatient = ({navigation}) => {
 
     // Return a cleanup function to unsubscribe the listener
     return () => AppointmentDataFireStore();
-
   }, []);
   useEffect(() => {
     const DoctorsDataFireStore = firestore()
@@ -127,8 +187,6 @@ const HomePatient = ({navigation}) => {
 
     // Return a cleanup function to unsubscribe the listener
     return () => DoctorsDataFireStore(); // This should be changed
-
-  
   }, []);
   useEffect(() => {
     const PharmacyDataFireStore = firestore()
@@ -196,7 +254,13 @@ const HomePatient = ({navigation}) => {
               }}>
               <ProfileComponent title="Account Settings" svg={Settings} />
             </TouchableOpacity>
-            <ProfileComponent title="Payment Method" svg={Vector} />
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <ProfileComponent title="Payment Method" svg={Vector} />
+            </TouchableOpacity>
+
             <ProfileComponent title="Language Selection" svg={Language} />
             <ProfileComponent title="Pivacy Policy" svg={Compass} />
             <ProfileComponent title="Terms of use" svg={Compass} />
@@ -481,91 +545,249 @@ const HomePatient = ({navigation}) => {
             />
           </TouchableOpacity>
 
-          <View style={{alignItems: 'center'}}>
-            <Doctor2
-              width={80}
-              height={80}
-              style={{
-                marginTop: -30,
-              }}
-            />
-
-            <Text
-              style={{
-                fontSize: 16,
-                color: colors.white,
-                marginTop: '2%',
-                fontFamily: 'NunitoSans_10pt-Bold',
-              }}>
-              Mohammed Bed
-            </Text>
-          </View>
-
-          <View style={{marginTop: '15%', marginHorizontal: '5%'}}>
-            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <Text
+          {image ? (
+            <View style={styles.profileImageContainer}>
+              <Image source={image} style={styles.image} />
+              <Cameraicon
+                size={20}
+                onPress={openCamera}
                 style={{
-                  color: 'white',
-                  fontSize: 14,
-                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                  marginTop: 7,
-                  marginRight: 8,
-                }}>
-                Full Name :
-              </Text>
-              <TextInput
-                theme={{
-                  colors: {
-                    text: 'rgba(28, 107, 164, 1)',
-                    primary: 'rgba(28, 107, 164, 1)',
-                  },
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: -20,
                 }}
-                underlineColor="transparent"
-                style={styles.TextInputSetting}></TextInput>
+              />
+              <CrossIcon
+                size={20}
+                onPress={() => setImage(null)}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: 70,
+                }}
+              />
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                marginTop: '4%',
-              }}>
+          ) : (
+            <View style={styles.profileImageContainer}>
+              <ProfileImage width={130} height={130} />
+              <Cameraicon
+                size={20}
+                onPress={openCamera}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: -20,
+                }}
+              />
+              <CrossIcon
+                size={20}
+                onPress={() => setImage(null)}
+                style={{
+                  position: 'absolute',
+                  // backgroundColor: '#1A4F75',
+                  bottom: -35,
+                  right: 70,
+                }}
+              />
+            </View>
+          )}
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 40,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
               <Text
                 style={{
                   color: 'white',
                   fontSize: 14,
-                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                  marginTop: 7,
-                  marginRight: 8,
+                  fontFamily: 'NunitoSans_7pt-Black',
                 }}>
-                Address :
+                First name
               </Text>
-              <TextInput
-                theme={{
-                  colors: {
-                    text: 'rgba(28, 107, 164, 1)',
-                    primary: 'rgba(28, 107, 164, 1)',
-                  },
-                }}
-                underlineColor="transparent"
-                style={styles.TextInputSetting}></TextInput>
+            </View>
+
+            <View style={{width: '50%', marginLeft: 10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                  fontWeight: '400',
+                }}>
+                Last name
+              </Text>
             </View>
           </View>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'start',
-              marginTop: '4%',
-              marginHorizontal: '5%',
+              justifyContent: 'space-around',
+              marginHorizontal: 10,
             }}>
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 5,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                }}>
+                Blood Type
+              </Text>
+            </View>
+
+            <View style={{width: '50%', marginLeft: 10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                  fontWeight: '400',
+                }}>
+                Age
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 10,
+            }}>
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              value={bloodTypeTextInputValue}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}
+              right={
+                <TextInput.Icon
+                  style={{marginTop: 10}}
+                  icon="menu"
+                  onPress={openBloodTypeModal}
+                />
+              }></TextInput>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 20,
+              marginTop: 5,
+              marginBottom: 3,
+            }}>
+            <View style={{width: '50%'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                }}>
+                Weight
+              </Text>
+            </View>
+
+            <View style={{width: '50%', marginLeft: 10}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_7pt-Black',
+                  fontWeight: '400',
+                }}>
+                Height
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              marginHorizontal: 10,
+            }}>
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
+
+            <TextInput
+              theme={{
+                colors: {
+                  text: 'rgba(28, 107, 164, 1)',
+                  primary: 'rgba(28, 107, 164, 1)',
+                },
+              }}
+              underlineColor="transparent"
+              style={styles.TextInputSetting}></TextInput>
+          </View>
+
+          <View style={{marginTop: 12, marginHorizontal: 15}}>
             <Text
               style={{
                 color: 'white',
                 fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                marginTop: 7,
-                marginRight: 8,
+                marginBottom: 6,
+                fontFamily: 'NunitoSans_7pt-Black',
+                fontWeight: '400',
               }}>
-              Bio :
+              Medical History
             </Text>
             <TextInput
               multiline={true}
@@ -579,92 +801,397 @@ const HomePatient = ({navigation}) => {
               underlineColor="transparent"
               style={styles.TextInputSetting2}></TextInput>
           </View>
-
-          <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
-            <Text
+          <View style={styles.bottomLine}>
+            <TouchableOpacity
               style={{
-                color: 'white',
-                fontSize: 14,
-                fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                marginTop: 7,
-                marginRight: 8,
+                backgroundColor: 'white',
+                width: '35%',
+                height: '45%',
+                borderRadius: 20,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000',
+                    shadowOffset: {width: 0, height: 2},
+                    shadowOpacity: 0.6,
+                    shadowRadius: 2,
+                  },
+                  android: {
+                    elevation: 4,
+                  },
+                }),
               }}>
-              Verify that you are a Doctor :
-            </Text>
-            <View
+              <Text
+                style={{
+                  color: '#00CA20',
+                  textAlign: 'center',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
+                }}>
+                Save{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={{
-                height: '35%',
-                width: '80%',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                alignSelf: 'center',
-                borderRadius: 10,
-                marginTop: 10,
-              }}></View>
-
-            <View style={styles.bottomLine}>
-              <TouchableOpacity
+                backgroundColor: '#FF0000',
+                width: '50%',
+                height: '45%',
+                borderRadius: 20,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000',
+                    shadowOffset: {width: 0, height: 2},
+                    shadowOpacity: 0.6,
+                    shadowRadius: 2,
+                  },
+                  android: {
+                    elevation: 4,
+                  },
+                }),
+              }}>
+              <Text
                 style={{
-                  backgroundColor: 'white',
-                  width: '35%',
-                  height: '80%',
-                  borderRadius: 20,
-                  ...Platform.select({
-                    ios: {
-                      shadowColor: '#000',
-                      shadowOffset: {width: 0, height: 2},
-                      shadowOpacity: 0.6,
-                      shadowRadius: 2,
-                    },
-                    android: {
-                      elevation: 4,
-                    },
-                  }),
+                  color: 'white',
+                  textAlign: 'center',
+                  fontSize: 14,
+                  fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+                  marginTop: 7,
                 }}>
-                <Text
-                  style={{
-                    color: '#00CA20',
-                    textAlign: 'center',
-                    fontSize: 14,
-                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                    marginTop: 7,
-                  }}>
-                  Save
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#FF0000',
-                  width: '50%',
-                  height: '80%',
-                  borderRadius: 20,
-                  ...Platform.select({
-                    ios: {
-                      shadowColor: '#000',
-                      shadowOffset: {width: 0, height: 2},
-                      shadowOpacity: 0.6,
-                      shadowRadius: 2,
-                    },
-                    android: {
-                      elevation: 4,
-                    },
-                  }),
-                }}>
-                <Text
-                  style={{
-                    color: 'white',
-                    textAlign: 'center',
-                    fontSize: 14,
-                    fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
-                    marginTop: 7,
-                  }}>
-                  Delete Account
-                </Text>
-              </TouchableOpacity>
-            </View>
+                Delete Account{' '}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
 
+      <Modal animationType="fade" transparent={false} visible={modalVisible6}>
+        <View style={{flex: 0.17, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Get more consultations
+            </Text>
+          </View>
+          <View
+            style={{
+              width: '80%',
+              backgroundColor: 'white',
+              borderRadius: 20,
+              elevation: 10,
+              marginTop: 30,
+              height: '50%',
+              alignSelf: 'center',
+            }}>
+            <View style={{flexDirection: 'row', margin: 20}}>
+              <Text
+                style={{
+                  color: '#28608F',
+                  fontSize: 23,
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                }}>
+                2
+              </Text>
+              <Text
+                style={{
+                  color: 'black',
+                  fontSize: 17,
+                  fontFamily: 'NunitoSans_10pt-Bold',
+                  marginTop: 5,
+                  marginLeft: 20,
+                }}>
+                Remaining consultations
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{flexDirection: 'row', marginTop: 40, marginHorizontal: 20}}>
+            <View
+              style={{
+                height: 170,
+                backgroundColor: '#17c3b2',
+                borderRadius: 30,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
+                  +1
+                </Text>
+                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+                Consultation credit
+                </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                  5€
+                  </Text>
+                </View>
+            </View>
+            <View
+              style={{
+                height: 170,
+                backgroundColor: '#30a5d0',
+                borderRadius: 30,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
+                  +2
+                </Text>
+                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+                Consultation credit
+                </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                  10€
+                  </Text>
+                </View>
+            </View>
+          </View>
+          <View
+            style={{flexDirection: 'row', marginTop: 20, marginHorizontal: 20}}>
+            <View
+              style={{
+                height: 170,
+                backgroundColor: '#ff3f6d',
+                borderRadius: 30,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
+                  +3
+                </Text>
+                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+                Consultation credit
+                </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                  15€
+                  </Text>
+                </View>
+            </View>
+            <View
+              style={{
+                height: 170,
+                backgroundColor: '#ffcb77',
+                borderRadius: 30,
+                width: '47%',
+                marginHorizontal: 5,
+                elevation: 10,
+              }}>
+                <Text style={{color:'white', fontFamily: 'Roboto-Black',fontSize:75, textAlign:'center',}}>
+                  +5
+                </Text>
+                <Text style={{color:'white', fontFamily: 'Roboto-Medium',fontSize:15, textAlign:'center', marginTop:-10}}>
+                Consultation credit
+                </Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  elevation: 10,
+                  height: 50,
+                  marginTop: 10,
+                  borderBottomRightRadius: 30,
+                  borderBottomLeftRadius: 30,
+                }}>
+                  <Text style={{fontSize:20, color:'black',  fontFamily: 'NunitoSans_10pt-Bold', textAlign:'center', marginTop:10,  }}>
+                  10€
+                  </Text>
+                </View>
+            </View>
+          </View>
+<View style={{marginTop:50, }}>
+<TouchableOpacity
+            onPress={() => {
+                  setModalVisible7(true);
+                
+              }}
+              style={styles.btnShape1}>
+              <Text style={styles.btnText1}>Payment Method</Text>
+            </TouchableOpacity>
+</View>
+         
+        </View>
+      </Modal>
+
+
+
+      <Modal animationType="fade" transparent={false} visible={modalVisible7}>
+        <View style={{flex: 0.13, backgroundColor: colors.pageBackground2}}>
+          <View
+            style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 10}}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible7(false);
+              }}>
+              <Back2
+                width={40}
+                height={40}
+                style={{marginTop: '10%', marginHorizontal: '5%'}}
+              />
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 19,
+                marginTop: 14,
+                fontFamily: 'NunitoSans_7pt-Black',
+              }}>
+              Payment Method
+            </Text>
+          </View>
+<View style={{marginTop:100, }}>
+<TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="GOOGLE PLAY" svg={Go} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible6(true);
+              }}>
+              <PaymentComponent title="VISA / MASTERCARD" svg={Go} />
+            </TouchableOpacity>
+
+
+</View>
+         
+         
+
+          
+
+         
+        </View>
+      </Modal>
+      <Modal
+        visible={isBloodTypeModalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeBloodTypeModal}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.radioContainer}>
+              <Text style={styles.popup}>Select Blood Type</Text>
+            </View>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('A+')}>
+              <Text style={styles.popup}>A+</Text>
+              {selectedBloodType === 'A+' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('A-')}>
+              <Text style={styles.popup}>A-</Text>
+              {selectedBloodType === 'A-' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('B+')}>
+              <Text style={styles.popup}>B+</Text>
+              {selectedBloodType === 'B+' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('B-')}>
+              <Text style={styles.popup}>B-</Text>
+              {selectedBloodType === 'B-' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('AB+')}>
+              <Text style={styles.popup}>AB+</Text>
+              {selectedBloodType === 'AB+' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('AB-')}>
+              <Text style={styles.popup}>AB-</Text>
+              {selectedBloodType === 'AB-' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('O+')}>
+              <Text style={styles.popup}>O+</Text>
+              {selectedBloodType === 'O+' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+            <View style={styles.line} />
+            <TouchableOpacity
+              style={styles.radioContainer}
+              onPress={() => handleBloodTypeSelect('O-')}>
+              <Text style={styles.popup}>O-</Text>
+              {selectedBloodType === 'O-' && (
+                <View style={styles.radioButtonSelected} />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       <Modal animationType="fade" transparent={false} visible={modalVisible}>
         <View
           style={{
@@ -1070,6 +1597,52 @@ const HomePatient = ({navigation}) => {
 export default HomePatient;
 
 const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: colors.pageBackground,
+    opacity: 1,
+    padding: 10,
+    paddingVertical: 20,
+    width: '95%',
+    borderRadius: 10,
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // marginBottom: 10,
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  radioButton: {
+    width: 20,
+    height: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#ccc',
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioButtonSelected: {
+    backgroundColor: colors.btnclr,
+  },
+  radioButtonInner: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: colors.btnclr,
+  },
+
+  popup: {color: 'black', fontSize: 19, marginHorizontal: 5},
   Container: {
     flex: 1,
     backgroundColor: colors.pageBackground,
@@ -1229,6 +1802,23 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: 'NunitoSans_10pt-Medium',
   },
+  btnShape1: {
+    height: 52,
+    
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: '10%',
+    borderRadius: 12,
+    backgroundColor: 'white',
+    elevation:10,
+  },
+  btnText1: {
+    alignSelf: 'center',
+    fontSize: 15,
+    marginTop: 13,
+    color: 'black',
+    fontFamily: 'NunitoSans_10pt-Medium',
+  },
   TextInput1: {
     alignSelf: 'center',
     width: '100%',
@@ -1258,15 +1848,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: '13%',
+    marginHorizontal: 20,
     marginBottom: '10%',
     height: '10%',
     // borderRadius:20,
   },
   TextInputSetting: {
     alignSelf: 'center',
-    width: '60%',
+    width: '47%',
+    // marginHorizontal:10,
     backgroundColor: colors.white,
-    borderRadius: 5,
+    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
     height: 37,
     paddingLeft: 5,
     paddingTop: 5,
@@ -1276,14 +1870,36 @@ const styles = StyleSheet.create({
   },
   TextInputSetting2: {
     alignSelf: 'center',
-    width: '88%',
+    width: '100%',
     backgroundColor: colors.white,
-    borderRadius: 5,
+    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
     height: 97,
     paddingLeft: 5,
     paddingTop: 5,
     color: 'rgba(26, 69, 99, 1)',
     fontSize: 15,
     fontFamily: 'NunitoSans_10pt_SemiCondensed-Black',
+  },
+  image: {
+    width: 130, // adjust as necessary
+    height: 130, // adjust as necessary
+    borderRadius: 130, // half of width and height to make it a circle
+    marginTop: 20,
+    alignContent: 'center',
+    marginBottom: 30,
+  },
+  profileImageContainer: {
+    width: 130, // same as the image width
+    height: 130, // same as the image height
+    borderRadius: 130, // to make it a circle
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    // marginTop: 20,
+    paddingTop: 10,
+    marginBottom: 30,
   },
 });
